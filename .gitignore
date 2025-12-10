@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Microsoft Office temporary files
+~$*.docx
+~$*.txt
+~$*.xlsx
+
+# Word documents (nếu không muốn commit)
+*.docx
+
+# Backup files
+*.bak
+*.tmp
