@@ -57,10 +57,39 @@ if (heroPrev && heroNext) {
 }
 
 // ===================================
-// WORKS PAGE - GALLERY
+// WORKS PAGE - FILTER
 // ===================================
-// Support both old and new gallery styles
-const galleryItems = document.querySelectorAll('.gallery-item, .gallery-item-simple');
+const filterButtons = document.querySelectorAll('.filter-btn');
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+if (filterButtons.length > 0) {
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Get filter value
+            const filterValue = button.getAttribute('data-filter');
+            
+            // Filter gallery items
+            galleryItems.forEach(item => {
+                const year = item.getAttribute('data-year');
+                const series = item.getAttribute('data-series');
+                
+                if (filterValue === 'all') {
+                    item.style.display = 'block';
+                } else if (filterValue === year || filterValue === series) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}
 
 // ===================================
 // WORKS PAGE - LIGHTBOX
@@ -86,16 +115,14 @@ function openLightbox(index) {
     updateVisibleItems();
     currentLightboxIndex = index;
     const item = visibleGalleryItems[currentLightboxIndex];
-    
-    // Support both old and new gallery layouts
-    const img = item.querySelector('img');
-    const titleEl = item.querySelector('.gallery-info h3') || item.querySelector('.gallery-overlay h3');
-    const detailsEl = item.querySelector('.artwork-details') || item.querySelector('.gallery-overlay p');
+    const img = item.querySelector('.gallery-image img');
+    const title = item.querySelector('.gallery-info h3').textContent;
+    const details = item.querySelector('.artwork-details').textContent;
     
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
-    lightboxTitle.textContent = titleEl ? titleEl.textContent : '';
-    lightboxDetails.textContent = detailsEl ? detailsEl.textContent : '';
+    lightboxTitle.textContent = title;
+    lightboxDetails.textContent = details;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -109,16 +136,14 @@ function showLightboxSlide(n) {
     updateVisibleItems();
     currentLightboxIndex = (n + visibleGalleryItems.length) % visibleGalleryItems.length;
     const item = visibleGalleryItems[currentLightboxIndex];
-    
-    // Support both old and new gallery layouts
-    const img = item.querySelector('img');
-    const titleEl = item.querySelector('.gallery-info h3') || item.querySelector('.gallery-overlay h3');
-    const detailsEl = item.querySelector('.artwork-details') || item.querySelector('.gallery-overlay p');
+    const img = item.querySelector('.gallery-image img');
+    const title = item.querySelector('.gallery-info h3').textContent;
+    const details = item.querySelector('.artwork-details').textContent;
     
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
-    lightboxTitle.textContent = titleEl ? titleEl.textContent : '';
-    lightboxDetails.textContent = detailsEl ? detailsEl.textContent : '';
+    lightboxTitle.textContent = title;
+    lightboxDetails.textContent = details;
 }
 
 // Add click event to gallery items
@@ -245,7 +270,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-const animateElements = document.querySelectorAll('.featured-item, .gallery-item, .gallery-item-simple, .exhibition-card, .timeline-item');
+const animateElements = document.querySelectorAll('.featured-item, .gallery-item, .exhibition-card, .timeline-item');
 animateElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
