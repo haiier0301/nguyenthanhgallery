@@ -455,6 +455,20 @@ p {
     margin: 0 auto 20px;
 }
 
+/* Simple Page Header (Maya Lin Style) */
+.page-header-simple {
+    padding: 140px 0 50px;
+    background: var(--bg-color);
+    text-align: center;
+    margin-top: 70px;
+}
+
+.page-header-simple h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
 /* ===================================
    ABOUT PAGE - ARTIST PROFILE
    =================================== */
@@ -669,9 +683,86 @@ p {
 }
 
 .works-gallery {
-    padding: 80px 0;
+    padding: 0;
+    margin-top: 70px;
 }
 
+/* Simple Gallery Layout (Maya Lin Style) */
+.gallery-grid-simple {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.gallery-item-simple {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 4/3;
+}
+
+.gallery-item-simple img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.gallery-item-simple:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.gallery-item-simple:hover .gallery-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+}
+
+.gallery-overlay h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.1s;
+}
+
+.gallery-item-simple:hover .gallery-overlay h3 {
+    transform: translateY(0);
+}
+
+.gallery-overlay p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.5px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.15s;
+}
+
+.gallery-item-simple:hover .gallery-overlay p {
+    transform: translateY(0);
+}
+
+/* Old Gallery Styles (kept for compatibility) */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -1198,6 +1289,11 @@ p {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 40px;
     }
+    
+    .gallery-grid-simple {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1247,6 +1343,14 @@ p {
         padding: 140px 0 60px;
     }
     
+    .page-header-simple {
+        padding: 120px 0 40px;
+    }
+    
+    .page-header-simple h1 {
+        font-size: 2.2rem;
+    }
+    
     .intro-section,
     .featured-section,
     .exhibition-highlight,
@@ -1273,6 +1377,23 @@ p {
     .gallery-grid {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+    
+    .gallery-grid-simple {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .gallery-overlay {
+        padding: 30px 20px;
+    }
+    
+    .gallery-overlay h3 {
+        font-size: 1.4rem;
+    }
+    
+    .gallery-overlay p {
+        font-size: 0.85rem;
     }
     
     .exhibition-grid {
