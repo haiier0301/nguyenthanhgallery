@@ -1,0 +1,77 @@
+IMAGES NEEDED FOR NGUYEN THANH ART GALLERY WEBSITE
+===================================================
+
+Place all images in this folder with the exact filenames listed below.
+
+HOME PAGE (index.html)
+----------------------
+✓ hero-artwork.jpg
+  - Main hero image for homepage
+  - Recommended size: 2400 x 1600px or larger
+  - High quality artwork photo
+
+ABOUT PAGE (about.html)
+-----------------------
+✓ artist-photo.jpg
+  - Portrait photo of Nguyen Thanh
+  - Recommended size: 1200 x 1600px
+  - Natural lighting, simple background
+
+ARTWORKS PAGE (artworks.html)
+------------------------------
+
+PEACE IN THE CITY SERIES (Featured):
+✓ peace-city-hero.jpg (Full width hero image)
+✓ peace-city-1.jpg (Silent Horizon, 2025)
+✓ peace-city-2.jpg (Urban Silence, 2025)
+✓ peace-city-3.jpg (Contemplation, 2025)
+✓ peace-city-4.jpg (Morning Light, 2025)
+✓ peace-city-5.jpg (Evening Calm, 2025)
+✓ peace-city-6.jpg (Tranquil Space, 2025)
+  - Recommended size: 1400 x 1000px per artwork
+
+SILENT HORIZON SERIES:
+✓ silent-horizon-hero.jpg (Series hero - smaller)
+✓ silent-horizon-1.jpg (Distant Glow, 2024)
+✓ silent-horizon-2.jpg (Horizon Line, 2024)
+✓ silent-horizon-3.jpg (Atmospheric Study, 2024)
+✓ silent-horizon-4.jpg (Dusk Reflection, 2024)
+  - Recommended size: 1200 x 900px per artwork
+
+URBAN LIGHT SERIES:
+✓ urban-light-hero.jpg (Series hero - smaller)
+✓ urban-light-1.jpg (City Pulse, 2023)
+✓ urban-light-2.jpg (Luminous Transit, 2023)
+✓ urban-light-3.jpg (Rhythm and Light, 2023)
+✓ urban-light-4.jpg (Metropolitan Dawn, 2023)
+  - Recommended size: 1200 x 900px per artwork
+
+NEWS PAGE (news.html)
+---------------------
+✓ news-spotlight-award.jpg (Red Dot Miami 2025)
+✓ news-aaf-london-2023.jpg (AAF London 2023)
+✓ news-aaf-london-2022.jpg (AAF London 2022)
+✓ news-art-business.jpg (Art Business News feature)
+✓ news-vnexpress.jpg (VnExpress 2005 feature)
+  - Recommended size: 1000 x 700px per image
+
+IMAGE PREPARATION TIPS:
+-----------------------
+1. Use high-quality JPG format (85-90% quality)
+2. Ensure proper color profile (sRGB)
+3. Crop images professionally
+4. Maintain consistent aspect ratios within each series
+5. Optimize file sizes (compress without quality loss)
+6. Keep hero images under 500KB if possible
+7. Keep artwork images under 300KB if possible
+
+NAMING CONVENTION:
+------------------
+- Use lowercase letters
+- Use hyphens (-) instead of spaces or underscores
+- Use .jpg extension (lowercase)
+- Match the exact filenames listed above
+
+Once all images are added, the website will be complete and ready to view!
+
+

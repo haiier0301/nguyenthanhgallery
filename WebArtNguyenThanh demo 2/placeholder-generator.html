@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Image Generator - Nguyen Thanh Gallery</title>
+    <style>
+        body {
+            font-family: 'Inter', 'Helvetica Neue', sans-serif;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fafaf8;
+        }
+        h1 {
+            font-weight: 300;
+            font-size: 24px;
+            margin-bottom: 40px;
+        }
+        .instruction {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+        .placeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 300;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero-placeholder {
+            aspect-ratio: 16/9;
+        }
+        .portrait-placeholder {
+            aspect-ratio: 3/4;
+        }
+        button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 13px;
+            font-weight: 300;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nguyen Thanh Gallery - Image Setup Guide</h1>
+    
+    <div class="instruction">
+        <h2>Instructions for Adding Images</h2>
+        <p>This website requires artwork photographs to be complete. Follow these steps:</p>
+        <ol>
+            <li>Take high-quality photos of all artworks (2000px+ width recommended)</li>
+            <li>Save images as JPG format with the exact filenames listed below</li>
+            <li>Place all images in the <code>images/</code> folder</li>
+            <li>Open <code>index.html</code> in your browser to view the complete website</li>
+        </ol>
+        <p><strong>Note:</strong> Until images are added, placeholder backgrounds will show where images should appear.</p>
+    </div>
+
+    <div class="instruction">
+        <h2>Required Images</h2>
+        
+        <h3>Home Page</h3>
+        <div class="placeholder-grid">
+            <div class="placeholder hero-placeholder">
+                hero-artwork.jpg<br>
+                (2400 x 1600px)
+            </div>
+        </div>
+
+        <h3>About Page</h3>
+        <div class="placeholder-grid">
+            <div class="placeholder portrait-placeholder">
+                artist-photo.jpg<br>
+                (1200 x 1600px)
+            </div>
+        </div>
+
+        <h3>Peace in the City Series (7 images)</h3>
+        <div class="placeholder-grid">
+            <div class="placeholder hero-placeholder">peace-city-hero.jpg</div>
+            <div class="placeholder">peace-city-1.jpg<br>Silent Horizon</div>
+            <div class="placeholder">peace-city-2.jpg<br>Urban Silence</div>
+            <div class="placeholder">peace-city-3.jpg<br>Contemplation</div>
+            <div class="placeholder">peace-city-4.jpg<br>Morning Light</div>
+            <div class="placeholder">peace-city-5.jpg<br>Evening Calm</div>
+            <div class="placeholder">peace-city-6.jpg<br>Tranquil Space</div>
+        </div>
+
+        <h3>Silent Horizon Series (5 images)</h3>
+        <div class="placeholder-grid">
+            <div class="placeholder">silent-horizon-hero.jpg</div>
+            <div class="placeholder">silent-horizon-1.jpg<br>Distant Glow</div>
+            <div class="placeholder">silent-horizon-2.jpg<br>Horizon Line</div>
+            <div class="placeholder">silent-horizon-3.jpg<br>Atmospheric Study</div>
+            <div class="placeholder">silent-horizon-4.jpg<br>Dusk Reflection</div>
+        </div>
+
+        <h3>Urban Light Series (5 images)</h3>
+        <div class="placeholder-grid">
+            <div class="placeholder">urban-light-hero.jpg</div>
+            <div class="placeholder">urban-light-1.jpg<br>City Pulse</div>
+            <div class="placeholder">urban-light-2.jpg<br>Luminous Transit</div>
+            <div class="placeholder">urban-light-3.jpg<br>Rhythm and Light</div>
+            <div class="placeholder">urban-light-4.jpg<br>Metropolitan Dawn</div>
+        </div>
+
+        <h3>News Page (5 images)</h3>
+        <div class="placeholder-grid">
+            <div class="placeholder">news-spotlight-award.jpg</div>
+            <div class="placeholder">news-aaf-london-2023.jpg</div>
+            <div class="placeholder">news-aaf-london-2022.jpg</div>
+            <div class="placeholder">news-art-business.jpg</div>
+            <div class="placeholder">news-vnexpress.jpg</div>
+        </div>
+
+        <h3>Total: 28 images needed</h3>
+    </div>
+
+    <div class="instruction">
+        <h2>Quick Start</h2>
+        <p>Once you have added all images to the <code>images/</code> folder:</p>
+        <button onclick="window.location.href='index.html'">View Website →</button>
+    </div>
+
+    <div class="instruction">
+        <h2>Image Specifications</h2>
+        <ul>
+            <li><strong>Format:</strong> JPG (JPEG)</li>
+            <li><strong>Quality:</strong> 85-90% compression</li>
+            <li><strong>Color Space:</strong> sRGB</li>
+            <li><strong>Hero Images:</strong> 2400 x 1600px minimum</li>
+            <li><strong>Artwork Images:</strong> 1400 x 1000px minimum</li>
+            <li><strong>News Images:</strong> 1000 x 700px minimum</li>
+            <li><strong>File Size:</strong> Keep under 500KB per image</li>
+        </ul>
+    </div>
+</body>
+</html>
+
+
