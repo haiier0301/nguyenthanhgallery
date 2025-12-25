@@ -175,11 +175,13 @@ main {
 }
 
 .page-title {
-    font-size: 26px;
-    font-weight: 400;
-    letter-spacing: 1px;
+    font-size: 27px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     margin-bottom: 10px;
     text-align: left;
+    line-height: 1.2;
+    color: #111111;
 }
 
 /* Subtitle cho tất cả trang */
@@ -192,15 +194,15 @@ main {
 
 /* About Page */
 .artist-photo {
-    max-width: 600px;
+    max-width: 70%;
     margin: 0 auto 60px;
     text-align: center;
 }
 
 .artist-photo img {
     width: 100%;
-    height: auto;
-    min-height: 700px;
+    /* height: 25vh; */
+    object-fit: cover;
     display: block;
     background: #e8e8e8;
 }
@@ -497,15 +499,16 @@ main {
 }
 
 .exhibition-section {
-    margin-bottom: 60px;
+    margin-bottom: 72px;
 }
 
 .exhibition-section h2 {
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 1px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     margin-bottom: 25px;
-    color: #000;
+    color: #111111;
+    text-transform: uppercase;
 }
 
 .exhibition-year {
@@ -513,21 +516,27 @@ main {
 }
 
 .exhibition-year h3 {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 38px;
     margin-bottom: 10px;
-    color: #000;
+    color: #666666;
+}
+
+.exhibition-year:first-child h3 {
+    margin-top: 0;
 }
 
 .exhibition-list {
     list-style: none;
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.8;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #222222;
 }
 
 .exhibition-list li {
-    margin-bottom: 8px;
+    margin-bottom: 9px;
     padding-left: 15px;
     position: relative;
 }
@@ -584,6 +593,22 @@ main {
     font-weight: 300;
     line-height: 1.7;
     color: #000;
+    margin-bottom: 15px;
+}
+
+.news-link {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+    transition: opacity 0.3s ease;
+}
+
+.news-link:hover {
+    opacity: 0.6;
 }
 
 /* Contact Page */
@@ -738,8 +763,12 @@ footer {
         min-height: 250px;
     }
     
+    .artist-photo {
+        max-width: 85%;
+    }
+    
     .artist-photo img {
-        min-height: 500px;
+        height: 22vh;
     }
     
     .artwork-item img {
@@ -892,8 +921,12 @@ footer {
         min-height: 200px;
     }
     
+    .artist-photo {
+        max-width: 90%;
+    }
+    
     .artist-photo img {
-        min-height: 400px;
+        height: 20vh;
     }
     
     img::after {
