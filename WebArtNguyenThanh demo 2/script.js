@@ -53,6 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Lightbox functionality for artwork images
     initLightbox();
 
+    // Series preview hover effect (for artworks page)
+    initSeriesPreview();
+
     // Mobile menu handling
     const createMobileMenu = () => {
         if (window.innerWidth <= 768) {
@@ -140,6 +143,41 @@ function initLightbox() {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
     }
+}
+
+// Series Preview Function (for Artworks page)
+function initSeriesPreview() {
+    const previewImage = document.getElementById('preview-image');
+    const seriesItems = document.querySelectorAll('.series-item');
+    
+    if (!previewImage || seriesItems.length === 0) {
+        return; // Exit if not on artworks page
+    }
+
+    seriesItems.forEach(item => {
+        // On hover, change preview image
+        item.addEventListener('mouseenter', function() {
+            const heroImage = this.getAttribute('data-hero-image');
+            if (heroImage) {
+                // Remove active class from all items
+                seriesItems.forEach(i => i.classList.remove('active'));
+                // Add active class to current item
+                this.classList.add('active');
+                
+                // Change preview image with fade effect
+                previewImage.style.opacity = '0.3';
+                setTimeout(() => {
+                    previewImage.src = heroImage;
+                    previewImage.style.opacity = '1';
+                }, 250);
+            }
+        });
+
+        // On click, still navigate to the series page
+        item.addEventListener('click', function(e) {
+            // Allow default link behavior
+        });
+    });
 }
 
 

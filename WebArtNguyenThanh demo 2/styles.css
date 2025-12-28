@@ -242,66 +242,106 @@ main {
 
 /* Artworks Page */
 .artworks-page {
-    max-width: 1400px;
+    max-width: 100%;
+    padding: 0;
 }
 
-/* Series List / Danh sách chủ đề */
-.series-list {
+/* Series Preview Full Screen */
+.series-preview-full {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.series-preview-full img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+/* Artworks Header Overlay - Góc trên trái */
+.artworks-header-overlay {
+    position: absolute;
+    top: 100px;
+    left: 60px;
+    z-index: 10;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.artworks-header-overlay .page-title {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.artworks-header-overlay .subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Series List Overlay - Góc trên bên phải */
+.series-list-overlay {
+    position: absolute;
+    top: 100px;
+    right: 60px;
+    z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: 20px;
+    max-width: 300px;
 }
 
-.series-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
+.series-item {
     text-decoration: none;
-    color: #000;
-    transition: opacity 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.series-card:hover {
-    opacity: 0.7;
+.series-item h2 {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.series-item:hover h2,
+.series-item.active h2 {
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    transform: translateX(-5px);
+}
+
+.series-item.active {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.8);
 }
 
 /* Featured Series - Chủ đề chính nổi bật */
 .series-card.featured {
-    grid-template-columns: 1.5fr 1fr;
-    gap: 80px;
-    margin-bottom: 40px;
-    padding-bottom: 80px;
-    border-bottom: 1px solid #e8e8e8;
-}
-
-.series-card-image {
-    width: 100%;
-}
-
-.series-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: #e8e8e8;
-    min-height: 350px;
-}
-
-/* Featured series có ảnh lớn hơn nhiều */
-.series-card.featured .series-card-image img {
-    min-height: 600px;
+    padding: 35px 0;
 }
 
 .series-card-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px 0;
 }
 
 .series-card-content h2 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     margin-bottom: 10px;
 }
 
@@ -319,7 +359,7 @@ main {
 
 /* Featured series có tiêu đề lớn hơn rất nhiều */
 .series-card.featured .series-card-content h2 {
-    font-size: 36px;
+    font-size: 32px;
     letter-spacing: 1.5px;
     margin-bottom: 15px;
 }
@@ -374,6 +414,15 @@ main {
 /* Series Detail Page */
 .series-detail-page {
     max-width: 1400px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 8px;
 }
 
 .back-link {
@@ -447,6 +496,20 @@ main {
     min-height: 400px;
 }
 
+.series-hero-large {
+    width: 100%;
+    margin: 50px 0 100px;
+}
+
+.series-hero-large img {
+    width: 100%;
+    height: 65vh;
+    object-fit: cover;
+    display: block;
+    background: #e8e8e8;
+    min-height: 500px;
+}
+
 .series-hero-small {
     max-width: 60%;
     margin-bottom: 20px;
@@ -462,8 +525,9 @@ main {
 
 .artwork-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px 100px;
+    margin-bottom: 60px;
 }
 
 .artwork-item img {
@@ -672,7 +736,7 @@ footer {
     
     .artwork-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+        gap: 40px 30px;
     }
     
     .news-item {
@@ -683,27 +747,24 @@ footer {
         max-width: 80%;
     }
     
-    .series-card {
-        grid-template-columns: 1fr;
-        gap: 30px;
+    .artworks-header-overlay {
+        top: 80px;
+        left: 40px;
     }
     
-    .series-card.featured {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding-bottom: 60px;
+    .artworks-header-overlay .page-title {
+        font-size: 28px;
     }
     
-    .series-card-image img {
-        min-height: 300px;
+    .series-list-overlay {
+        top: 80px;
+        right: 40px;
+        gap: 15px;
+        max-width: 250px;
     }
     
-    .series-card.featured .series-card-image img {
-        min-height: 450px;
-    }
-    
-    .series-card.featured .series-card-content h2 {
-        font-size: 32px;
+    .series-item h2 {
+        font-size: 16px;
     }
     
     .series-detail-page {
@@ -746,7 +807,7 @@ footer {
     
     .artwork-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 40px;
     }
     
     .series-hero-small {
@@ -761,6 +822,11 @@ footer {
     .series-hero img {
         height: 40vh;
         min-height: 250px;
+    }
+    
+    .series-hero-large img {
+        height: 45vh;
+        min-height: 300px;
     }
     
     .artist-photo {
@@ -779,21 +845,34 @@ footer {
         gap: 60px;
     }
     
-    .series-card.featured {
-        padding-bottom: 40px;
-        margin-bottom: 20px;
+    .artworks-header-overlay {
+        top: 100px;
+        left: 20px;
     }
     
-    .series-card.featured .series-card-image img {
-        min-height: 350px;
+    .artworks-header-overlay .page-title {
+        font-size: 24px;
     }
     
-    .series-card.featured .series-card-content h2 {
-        font-size: 28px;
+    .artworks-header-overlay .subtitle {
+        font-size: 14px;
     }
     
-    .series-card.featured .series-card-content .series-description {
-        font-size: 15px;
+    .series-list-overlay {
+        top: 200px;
+        right: 20px;
+        left: 20px;
+        gap: 12px;
+        max-width: none;
+    }
+    
+    .series-item {
+        padding: 10px 0;
+    }
+    
+    .series-item h2 {
+        font-size: 14px;
+        letter-spacing: 1px;
     }
     
     .back-link {
@@ -915,6 +994,11 @@ footer {
     
     .series-hero img {
         min-height: 200px;
+    }
+    
+    .series-hero-large img {
+        height: 35vh;
+        min-height: 250px;
     }
     
     .artwork-item img {
