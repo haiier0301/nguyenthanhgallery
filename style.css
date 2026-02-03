@@ -404,9 +404,9 @@ img {
 
 .artists-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 48px 80px;
-    justify-items: center;
+    justify-items: start;
 }
 
 .artist-column {
@@ -1320,6 +1320,29 @@ img {
 
 .artist-bio p:last-child {
     margin-bottom: 0;
+}
+
+.artist-bio-heading {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.artist-series {
+    margin-top: 48px;
+}
+
+.artist-series-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
 }
 
 .artist-event-label {
