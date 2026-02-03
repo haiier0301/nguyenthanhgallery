@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists - Nguyen Thanh Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="page-artists">
+    <!-- Header -->
+    <header class="header header-light">
+        <div class="header-inner">
+            <a href="index.html" class="logo">NGUYEN THANH GALLERY</a>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="artists.html" class="active">ARTISTS</a></li>
+                    <li><a href="exhibitions.html">EXHIBITIONS</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="publications.html">PUBLICATIONS</a></li>
+                    <li><a href="art-fairs.html">ART FAIRS</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="artists-main">
+        <div class="artists-container">
+            <!-- View Toggle -->
+            <div class="view-toggle">
+                <a href="#" class="view-option active" data-view="list">LIST</a>
+                <a href="#" class="view-option" data-view="thumbnails">THUMBNAILS</a>
+            </div>
+
+            <!-- Artists List View -->
+            <div class="artists-content" id="artists-list-view">
+                <!-- Main Artist List -->
+                <div class="artists-grid">
+                    <div class="artist-column">
+                        <a href="artists/artist-vu-cong-dien.html" class="artist-name">VU CONG DIEN</a>
+                    </div>
+                    <div class="artist-column">
+                        <a href="artists/artist-hoang-lam.html" class="artist-name">HOANG LAM</a>
+                    </div>
+                </div>
+                <!-- Works Available By Section -->
+                <!-- <div class="artists-section">
+                    <h2 class="artists-section-title">WORKS AVAILABLE BY</h2>
+                    <div class="artists-grid">
+                        <div class="artist-column">
+                            <a href="#" class="artist-name">FRANÇOIS ANDES</a>
+                            <a href="#" class="artist-name">NGHIA DANG</a>
+                            <a href="#" class="artist-name">CIAN DUGGAN</a>
+                            <a href="#" class="artist-name">HOANG NAM VIET</a>
+                        </div>
+                        <div class="artist-column">
+                            <a href="#" class="artist-name">NGUYEN DUC DAT</a>
+                            <a href="#" class="artist-name">CHRISTINE NGUYEN</a>
+                            <a href="#" class="artist-name">NGUYEN QUANG HUY</a>
+                            <a href="#" class="artist-name">KEEN SOUHLAL</a>
+                        </div>
+                        <div class="artist-column">
+                            <a href="#" class="artist-name">THE PROPELLER GROUP</a>
+                            <a href="#" class="artist-name">LE THUA TIEN</a>
+                            <a href="#" class="artist-name">TRUONG CONG TUNG</a>
+                            <a href="#" class="artist-name">BRUCE YONEMOTO</a>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- Thumbnails View (hidden by default) -->
+            <div class="artists-content artists-thumbnails" id="artists-thumbnails-view" style="display: none;">
+                <div class="thumbnails-grid">
+                    <!-- Placeholder thumbnails - same artists in grid format -->
+                    <a href="#" class="artist-thumb">
+                        <div class="artist-thumb-image">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=500&fit=crop" alt="NADÈGE DAVID">
+                        </div>
+                        <span class="artist-thumb-name">NADÈGE DAVID</span>
+                    </a>
+                    <a href="artists/artist-vu-cong-dien.html" class="artist-thumb">
+                        <div class="artist-thumb-image">
+                            <img src="images - artists/Vu Cong Dien/z7481523625833_43a7a5352cdf8618b04917c36d137f07.jpg" alt="VU CONG DIEN">
+                        </div>
+                        <span class="artist-thumb-name">VU CONG DIEN</span>
+                    </a>
+                    <a href="artists/artist-hoang-lam.html" class="artist-thumb">
+                        <div class="artist-thumb-image">
+                            <img src="images - artists/Hoang Lam/z7481507681916_d7518aab7ff33e7644dd4d4b1ebf0eaf.jpg" alt="HOANG LAM">
+                        </div>
+                        <span class="artist-thumb-name">HOANG LAM</span>
+                    </a>
+                    <a href="#" class="artist-thumb">
+                        <div class="artist-thumb-image">
+                            <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400&h=500&fit=crop" alt="HA MANH THANG">
+                        </div>
+                        <span class="artist-thumb-name">HA MANH THANG</span>
+                    </a>
+                    <a href="#" class="artist-thumb">
+                        <div class="artist-thumb-image">
+                            <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=400&h=500&fit=crop" alt="HOANG DUONG CAM">
+                        </div>
+                        <span class="artist-thumb-name">HOANG DUONG CAM</span>
+                    </a>
+                    <a href="#" class="artist-thumb">
+                        <div class="artist-thumb-image">
+                            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=400&h=500&fit=crop" alt="SANDRINE LLOUQUET">
+                        </div>
+                        <span class="artist-thumb-name">SANDRINE LLOUQUET</span>
+                    </a>
+                    <a href="#" class="artist-thumb">
+                        <div class="artist-thumb-image">
+                            <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?w=400&h=500&fit=crop" alt="NGO DINH BAO CHAU">
+                        </div>
+                        <span class="artist-thumb-name">NGO DINH BAO CHAU</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-contact">
+                <p>139 Dong Khoi Street, Ben Nghe Ward, District 1, Ho Chi Minh City, Vietnam</p>
+                <p><a href="tel:+84918091859">+84 918 091 859</a></p>
+                <p><a href="#" class="footer-link">MANAGE COOKIES</a></p>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="mailto:thanhart2000@yahoo.com" aria-label="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="#" aria-label="Location">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>COPYRIGHT © 2026 NGUYEN THANH GALLERY</p>
+            <p>SITE BY ARTLOGIC</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // View toggle for Artists page
+        document.querySelectorAll('.view-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const view = option.dataset.view;
+                
+                document.querySelectorAll('.view-option').forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+                
+                const listView = document.getElementById('artists-list-view');
+                const thumbView = document.getElementById('artists-thumbnails-view');
+                
+                if (view === 'list') {
+                    listView.style.display = 'block';
+                    thumbView.style.display = 'none';
+                } else {
+                    listView.style.display = 'none';
+                    thumbView.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
