@@ -374,6 +374,8 @@ img {
 .artists-main {
     padding: 100px 48px 80px;
     min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
 }
 
 .artists-container {
