@@ -25,6 +25,9 @@ body {
     color: var(--color-text-dark);
     background: var(--color-white);
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 a {
@@ -290,6 +293,7 @@ img {
 
 /* Footer */
 .footer {
+    margin-top: auto;
     padding: 48px 48px 24px;
     background: var(--color-white);
     border-top: 1px solid #eee;
