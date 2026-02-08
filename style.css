@@ -54,13 +54,13 @@ img {
     right: 0;
     z-index: 1000;
     padding: 24px 48px;
-    background: rgba(10, 10, 10, 0.9);
-    backdrop-filter: blur(10px);
-    transition: background var(--transition);
+    background: transparent;
+    transition: background var(--transition), backdrop-filter var(--transition);
 }
 
 .header.scrolled {
-    background: rgba(10, 10, 10, 0.98);
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 .header-inner {
