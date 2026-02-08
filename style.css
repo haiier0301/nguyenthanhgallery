@@ -1763,6 +1763,29 @@ img {
     }
 }
 
+/* Back Link */
+.back-link-wrap {
+    padding: 48px 0 24px;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 0;
+    border-bottom: 1px solid currentColor;
+    transition: opacity 0.2s;
+}
+
+.back-link:hover {
+    opacity: 0.6;
+}
+
 /* Responsive - Artists */
 @media (max-width: 1200px) {
     .artists-grid.artists-grid-2x5 {
