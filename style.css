@@ -1343,7 +1343,7 @@ img {
     padding: 12px;
     border: 1px solid #eee;
     cursor: pointer;
-    width: 70%;
+    /* width: 70%; */
 }
 
 .artwork-frame img {
@@ -1431,17 +1431,27 @@ img {
 }
 
 .artist-artworks .artwork-frame {
-    aspect-ratio: 4/5;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #f8f8f8;
+    cursor: pointer;
 }
 
 .artist-artworks .artwork-frame img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.artist-artworks .artwork-caption {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    text-align: left;
 }
 
 /* Artist Exhibitions Section */
@@ -1462,7 +1472,7 @@ img {
 }
 
 .artist-exhibitions .exhibition-image {
-    aspect-ratio: 4/3;
+    /* aspect-ratio: 4/3;  */
     overflow: hidden;
     cursor: pointer;
     background: #f8f8f8;
