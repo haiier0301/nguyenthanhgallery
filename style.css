@@ -408,15 +408,12 @@ img {
 
 .artists-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 48px 80px;
-    justify-items: start;
 }
 
-.artist-column {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.artists-grid.artists-grid-2x5 {
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: start;
 }
 
 .artist-name {
@@ -1768,8 +1765,9 @@ img {
 
 /* Responsive - Artists */
 @media (max-width: 1200px) {
-    .artists-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .artists-grid.artists-grid-2x5 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px 40px;
     }
 
     .thumbnails-grid {
@@ -1782,12 +1780,18 @@ img {
         padding: 80px 24px 60px;
     }
 
-    .artists-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
+    .artists-grid.artists-grid-2x5 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 32px;
     }
 
     .thumbnails-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .artists-grid.artists-grid-2x5 {
         grid-template-columns: 1fr;
     }
 }
