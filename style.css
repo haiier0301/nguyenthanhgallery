@@ -10,6 +10,8 @@
     --color-white: #ffffff;
     --color-text-dark: #1a1a1a;
     --color-text-muted: #666666;
+    --color-menu-bg: #1a1a1a;
+    --color-menu-text: #e5e5e5;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --transition: 0.3s ease;
 }
@@ -54,7 +56,7 @@ img {
     right: 0;
     z-index: 1000;
     padding: 24px 48px;
-    background-color: white;
+    background: --transition;
     transition: background var(--transition), backdrop-filter var(--transition);
     opacity: 1;
 }
@@ -73,7 +75,7 @@ img {
 }
 
 .logo {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.15em;
     color: var(--color-text-dark);
@@ -111,7 +113,7 @@ img {
 .menu-toggle span {
     width: 24px;
     height: 2px;
-    background: var(--color-white);
+    background: var(--color-text-dark);
     transition: transform var(--transition), opacity var(--transition);
 }
 
@@ -1919,6 +1921,20 @@ img {
 
     .menu-toggle {
         display: flex;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+    /* Index (transparent header): dark icon so visible on light hero */
+    .header:not(.header-light) .menu-toggle span {
+        background: var(--color-text-dark);
+    }
+
+    .header-inner .logo {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .hero-content {
@@ -1969,9 +1985,22 @@ img {
         right: 0;
         flex-direction: column;
         align-items: flex-start;
-        background: var(--color-dark);
+        background: white;
         padding: 24px;
         gap: 20px;
+    }
+
+    .header.menu-open .nav-links a {
+        color: black;
+    }
+
+    .header.menu-open .nav-links a:hover {
+        color: var(--color-white);
+        opacity: 1;
+    }
+
+    .header.menu-open .menu-toggle span {
+        background: var(--color-menu-text);
     }
 
     .header-light.menu-open .nav {
@@ -1981,6 +2010,10 @@ img {
 
     .header-light.menu-open .nav-links a {
         color: var(--color-text-dark) !important;
+    }
+
+    .header-light.menu-open .menu-toggle span {
+        background: var(--color-text-dark);
     }
 
     .header.menu-open .nav-links {
