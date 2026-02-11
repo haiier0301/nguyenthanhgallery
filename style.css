@@ -1538,6 +1538,7 @@ img {
 /* Artist Exhibitions Section */
 .artist-exhibitions {
     margin-bottom: 80px;
+    display: none;
 }
 
 .exhibitions-grid {
