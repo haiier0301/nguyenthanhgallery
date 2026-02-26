@@ -2163,6 +2163,11 @@ img {
     text-decoration: none;
     color: inherit;
     transition: transform var(--transition), opacity var(--transition);
+    cursor: pointer;
+}
+
+.series-card img {
+    cursor: pointer !important;
 }
 
 .series-card:hover {

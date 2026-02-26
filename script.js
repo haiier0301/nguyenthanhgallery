@@ -108,6 +108,10 @@ function initLightbox() {
     const images = document.querySelectorAll('.artwork-frame img, .exhibition-image img');
     if (!images.length) return;
 
+    // Filter out images inside series cards (they should navigate, not open lightbox)
+    const lightboxImages = Array.from(images).filter(img => !img.closest('.series-card'));
+    if (!lightboxImages.length) return;
+
     // Create lightbox overlay
     const overlay = document.createElement('div');
     overlay.className = 'lightbox-overlay';
@@ -148,8 +152,8 @@ function initLightbox() {
     // Prevent closing when clicking the image itself
     lightboxImg.addEventListener('click', (e) => e.stopPropagation());
 
-    // Attach click to images
-    images.forEach((img) => {
+    // Attach click to images (excluding series cards)
+    lightboxImages.forEach((img) => {
         img.style.cursor = 'pointer';
         img.addEventListener('click', (e) => {
             e.preventDefault();
