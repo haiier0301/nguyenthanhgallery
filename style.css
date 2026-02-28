@@ -99,7 +99,7 @@ img {
 }
 
 .nav-links a {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.15em;
     color: var(--color-text-dark);
@@ -137,7 +137,7 @@ img {
 /* Hero Section */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -190,7 +190,7 @@ img {
 }
 
 .home-intro-container {
-    max-width: 800px;
+    max-width: 70vw;
     margin: 0 auto;
 }
 
@@ -212,7 +212,7 @@ img {
 }
 
 .home-intro-established {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.1em;
     color: var(--color-text-muted);
@@ -220,7 +220,7 @@ img {
 }
 
 .home-intro-text p {
-    font-size: 15px;
+    font-size: 20px;
     line-height: 1.8;
     color: var(--color-text-dark);
     margin-bottom: 24px;
