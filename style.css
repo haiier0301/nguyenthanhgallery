@@ -39,6 +39,13 @@ a {
     text-decoration: none;
     color: inherit;
     transition: opacity var(--transition);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 a:hover {
@@ -596,6 +603,16 @@ img {
     margin: 56px 0;
 }
 
+@media (max-width: 1024px) {
+    .exhibitions-history-main {
+        padding: 100px 40px 80px;
+    }
+    
+    .exhibitions-history-year-group {
+        grid-template-columns: 120px minmax(0, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .exhibitions-history-main {
         padding: 80px 24px 60px;
@@ -604,6 +621,33 @@ img {
     .exhibitions-history-year-group {
         grid-template-columns: 100px minmax(0, 1fr);
         column-gap: 24px;
+    }
+    
+    .exhibitions-history-year {
+        font-size: 14px;
+    }
+    
+    .exhibition-item-title {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .exhibitions-history-main {
+        padding: 80px 20px 60px;
+    }
+    
+    .exhibitions-history-year-group {
+        grid-template-columns: 80px minmax(0, 1fr);
+        column-gap: 20px;
+    }
+    
+    .exhibitions-history-year {
+        font-size: 13px;
+    }
+    
+    .exhibition-item-title {
+        font-size: 13px;
     }
 }
 
@@ -777,6 +821,16 @@ img {
     }
 }
 
+@media (max-width: 1024px) {
+    .news-main {
+        padding: 100px 40px 80px;
+    }
+    
+    .news-container {
+        max-width: 1000px;
+    }
+}
+
 @media (max-width: 768px) {
     .news-main {
         padding: 80px 24px 60px;
@@ -806,6 +860,24 @@ img {
 
     .news-item-title {
         font-size: 16px;
+    }
+    
+    .news-item-excerpt {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-main {
+        padding: 80px 20px 60px;
+    }
+    
+    .news-tab {
+        font-size: 18px;
+    }
+    
+    .news-item-title {
+        font-size: 15px;
     }
 }
 
@@ -966,6 +1038,16 @@ img {
     }
 }
 
+@media (max-width: 1024px) {
+    .publications-main {
+        padding: 100px 40px 80px;
+    }
+    
+    .publications-title {
+        font-size: 22px;
+    }
+}
+
 @media (max-width: 768px) {
     .publications-main {
         padding: 80px 24px 60px;
@@ -987,6 +1069,28 @@ img {
 
     .publication-featured-title {
         font-size: 20px;
+    }
+    
+    .publication-title {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .publications-main {
+        padding: 80px 20px 60px;
+    }
+    
+    .publications-title {
+        font-size: 18px;
+    }
+    
+    .publication-featured-title {
+        font-size: 18px;
+    }
+    
+    .publication-title {
+        font-size: 14px;
     }
 }
 
@@ -1227,15 +1331,33 @@ img {
     }
 
     .art-fair-row {
-        gap: 40px;
+        gap: 32px;
     }
 
     .art-fair-row-image {
-        flex-basis: 50%;
+        flex-basis: 45%;
     }
     
     .art-fair-row-image a {
         width: 70%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .art-fairs-main {
+        padding: 100px 40px 80px;
+    }
+    
+    .art-fairs-title {
+        font-size: 22px;
+    }
+    
+    .art-fair-row {
+        gap: 28px;
+    }
+    
+    .art-fair-row-info {
+        gap: 12px;
     }
 }
 
@@ -1267,6 +1389,25 @@ img {
     .art-fair-row:hover {
         transform: translateY(-4px);
     }
+    
+    .art-fair-row-title {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .art-fairs-main {
+        padding: 80px 20px 60px;
+    }
+    
+    .art-fairs-title {
+        font-size: 18px;
+    }
+    
+    .art-fair-row-title {
+        font-size: 14px;
+    }
+}
 
     .art-fair-row-image {
         width: 100%;
@@ -1352,6 +1493,10 @@ img {
 
 /* Responsive - About */
 @media (max-width: 1024px) {
+    .about-main {
+        padding: 100px 40px 80px;
+    }
+    
     .about-content {
         max-width: 700px;
         padding-left: 40px;
@@ -1375,6 +1520,31 @@ img {
 
     .about-text p {
         font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+    
+    .about-section-title {
+        font-size: 16px;
+        margin: 32px 0 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-main {
+        padding: 80px 20px 60px;
+    }
+    
+    .about-title {
+        font-size: 18px;
+    }
+    
+    .about-content {
+        padding-left: 20px;
+    }
+    
+    .about-text p {
+        font-size: 13px;
     }
 }
 
@@ -1703,16 +1873,39 @@ img {
     .artist-intro-block {
         grid-template-columns: 1fr;
     }
+    
     .artist-featured-artwork{
         display: none;
     }
 
     .artworks-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .exhibitions-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .artist-detail-main {
+        padding: 100px 40px 80px;
+    }
+    
+    .artworks-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
     }
 
     .exhibitions-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .artist-section-title {
+        font-size: 16px;
     }
 }
 
@@ -1723,28 +1916,113 @@ img {
 
     .artist-name-large {
         font-size: 28px;
-        margin-bottom: 32px;
+        margin-bottom: 24px;
+    }
+    
+    .artist-series-subtitle {
+        font-size: 14px;
     }
 
     .artist-profile {
-        gap: 40px;
-        margin-bottom: 60px;
+        gap: 32px;
+        margin-bottom: 48px;
+    }
+    
+    .artist-bio p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+    
+    .artist-sub-nav {
+        gap: 16px;
+    }
+    
+    .artist-sub-nav-link {
+        font-size: 10px;
     }
 
     .artworks-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .artwork-caption {
+        font-size: 10px;
+    }
+    
+    .series-card-title {
+        font-size: 13px;
+    }
+    
+    .series-card-count {
+        font-size: 11px;
     }
 
     .artist-exhibitions .exhibitions-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .exhibition-caption {
+        font-size: 10px;
     }
 
     .footer-artist .footer-inner {
         flex-direction: column;
         gap: 16px;
         text-align: center;
+    }
+    
+    .back-link {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .artist-detail-main {
+        padding: 80px 20px 60px;
+    }
+    
+    .artist-name-large {
+        font-size: 24px;
+    }
+    
+    .artist-series-subtitle {
+        font-size: 13px;
+    }
+    
+    .artist-bio p {
+        font-size: 13px;
+    }
+    
+    .artworks-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .artwork-caption {
+        font-size: 9px;
+    }
+    
+    .series-card-title {
+        font-size: 12px;
+    }
+    
+    .series-card-count {
+        font-size: 10px;
+    }
+
+    .artist-exhibitions .exhibitions-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .exhibition-caption {
+        font-size: 9px;
+    }
+    
+    .back-link {
+        font-size: 10px;
     }
 }
 
@@ -1870,8 +2148,19 @@ img {
     .contact-content {
         grid-template-columns: 1fr;
         padding-left: 0;
+        gap: 48px;
     }
 
+    .contact-map {
+        min-height: 450px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .contact-main {
+        padding: 100px 40px 80px;
+    }
+    
     .contact-map {
         min-height: 400px;
     }
@@ -1889,7 +2178,6 @@ img {
 
     .contact-content {
         gap: 40px;
-        padding-left: 0;
     }
 
     .contact-map {
@@ -1902,6 +2190,28 @@ img {
 
     .contact-info {
         gap: 24px;
+    }
+    
+    .contact-block p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-main {
+        padding: 80px 20px 60px;
+    }
+    
+    .contact-title {
+        font-size: 18px;
+    }
+    
+    .contact-block p {
+        font-size: 13px;
+    }
+    
+    .contact-map {
+        min-height: 250px;
     }
 }
 
@@ -1931,8 +2241,20 @@ img {
 /* Responsive - Artists */
 @media (max-width: 1200px) {
     .artists-grid.artists-grid-2x5 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px 32px;
+    }
+
+    .thumbnails-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .artists-grid.artists-grid-2x5 {
         grid-template-columns: repeat(2, 1fr);
-        gap: 32px 40px;
+        gap: 24px 32px;
     }
 
     .thumbnails-grid {
@@ -1947,24 +2269,58 @@ img {
 
     .artists-grid.artists-grid-2x5 {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px 32px;
+        gap: 20px 24px;
     }
 
     .thumbnails-grid {
         grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .artist-name {
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
+    .artists-main {
+        padding: 80px 20px 60px;
+    }
+    
     .artists-grid.artists-grid-2x5 {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .artist-name {
+        font-size: 13px;
     }
 }
 
-/* Responsive */
+/* Responsive - General */
 @media (max-width: 1200px) {
     .news-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .news-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .home-intro {
+        padding: 70px 40px;
+    }
+    
+    .home-intro-container {
+        max-width: 700px;
+    }
+    
+    .featured-news {
+        padding: 70px 40px 90px;
     }
 }
 
@@ -1990,11 +2346,10 @@ img {
 
     .header-inner .logo {
         min-width: 0;
-        max-width: 200px;
+        max-width: 300px;
         white-space: normal;
         line-height: 1.3;
-        font-size: 12px;
-        text-align: center;
+        font-size: 13px;
     }
 
     .hero-content {
@@ -2008,18 +2363,38 @@ img {
     .home-intro-title {
         font-size: 24px;
     }
+    
+    .home-intro-established {
+        font-size: 11px;
+        margin-bottom: 32px;
+    }
 
     .home-intro-text p {
-        font-size: 14px;
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 20px;
     }
 
     .featured-news {
         padding: 60px 24px 80px;
     }
+    
+    .section-title {
+        font-size: 13px;
+        margin-bottom: 32px;
+    }
 
     .news-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+    
+    .news-card {
+        width: 90%;
+    }
+    
+    .news-card-title {
+        font-size: 12px;
     }
 
     .footer {
@@ -2028,6 +2403,75 @@ img {
 
     .footer-inner {
         flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer-contact {
+        text-align: center;
+    }
+    
+    .footer-contact p {
+        font-size: 13px;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .footer-bottom p {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 18px 20px;
+    }
+    
+    .home-intro {
+        padding: 50px 20px;
+    }
+    
+    .home-intro-title {
+        font-size: 20px;
+    }
+    
+    .home-intro-established {
+        font-size: 10px;
+    }
+    
+    .home-intro-text p {
+        font-size: 15px;
+    }
+    
+    .featured-news {
+        padding: 50px 20px 70px;
+    }
+    
+    .section-title {
+        font-size: 12px;
+    }
+    
+    .news-card {
+        width: 100%;
+    }
+    
+    .news-card-title {
+        font-size: 11px;
+    }
+    
+    .news-card-date {
+        font-size: 10px;
+    }
+    
+    .footer {
+        padding: 36px 20px 16px;
     }
 }
 
@@ -2045,13 +2489,19 @@ img {
         right: 0;
         flex-direction: column;
         align-items: flex-start;
-        background: white;
+        background: var(--color-menu-bg);
         padding: 24px;
         gap: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .header.menu-open .nav-links a {
-        color: black;
+        color: var(--color-menu-text);
+        font-size: 14px;
+        padding: 8px 0;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
     }
 
     .header.menu-open .nav-links a:hover {
@@ -2066,6 +2516,7 @@ img {
     .header-light.menu-open .nav {
         background: var(--color-white);
         border: 1px solid #eee;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .header-light.menu-open .nav-links a {
@@ -2075,6 +2526,14 @@ img {
     .header-light.menu-open .menu-toggle span {
         background: var(--color-text-dark);
     }
+    
+    /* Ensure menu toggle has enough touch target */
+    .menu-toggle {
+        padding: 12px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
 
     .header.menu-open .nav-links {
         display: flex;
@@ -2155,9 +2614,28 @@ img {
         margin-top: 60px;
         padding-top: 60px;
     }
-    
+
     .art-fairs-news .news-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .art-fairs-news .news-card {
+        width: 85%;
+    }
+}
+
+@media (max-width: 480px) {
+    .art-fairs-news {
+        margin-top: 50px;
+        padding-top: 50px;
+    }
+    
+    .art-fairs-news .section-title {
+        font-size: 18px;
+    }
+    
+    .art-fairs-news .news-card {
+        width: 100%;
     }
 }
 
