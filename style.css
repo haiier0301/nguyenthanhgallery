@@ -529,7 +529,7 @@ img {
 }
 
 .exhibitions-history-container {
-    max-width: 1400px;
+    max-width: calc(100vw - 35vw);
     margin: 0 auto;
 }
 
@@ -1446,7 +1446,7 @@ img {
 }
 
 .about-container {
-    max-width: 1400px;
+    max-width: calc(100vw - 35vw);
     margin: 0 auto;
 }
 
@@ -1471,7 +1471,7 @@ img {
 .about-text {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
 }
 
 .about-section-title {
@@ -1569,7 +1569,7 @@ img {
 }
 
 .artist-detail-container {
-    max-width: 1200px;
+    max-width: calc(100vw - 30vw);
     margin: 0 auto;
 }
 
@@ -1713,7 +1713,7 @@ img {
 
 /* Artist Artworks Section */
 .artist-artworks {
-    margin-bottom: 80px;
+    margin: 80px 0 80px 0;
 }
 
 .artist-section-title {
@@ -1728,7 +1728,7 @@ img {
 .artworks-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px 90px;
+    gap: 64px;
 }
 
 .artwork-item {
@@ -2047,7 +2047,7 @@ img {
 }
 
 .contact-container {
-    max-width: 1400px;
+    max-width: calc(100vw - 35vw);
     margin: 0 auto;
 }
 
@@ -2063,13 +2063,13 @@ img {
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    gap: 128px;
     align-items: start;
-    padding-left: 64px;
+    /* padding-left: 64px; */
 }
 
 .contact-map {
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/3;
     min-height: 450px;
     overflow: hidden;
 }
@@ -2158,7 +2158,7 @@ img {
     }
 
     .contact-map {
-        min-height: 450px;
+        min-height: 250px;
     }
 }
 
