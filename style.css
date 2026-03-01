@@ -1458,8 +1458,8 @@ img {
 .about-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding-left: 48px;
-    padding-right: 48px;
+    padding-left: 54px;
+    padding-right: 54px;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -1484,7 +1484,7 @@ img {
 }
 
 .about-text p {
-    font-size: 17px;
+    font-size: 18px;
     line-height: 1.8;
     color: var(--color-text-dark);
     text-align: justify;
@@ -1518,7 +1518,7 @@ img {
     }
 
     .about-text p {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.7;
         margin-bottom: 20px;
         text-align: justify;
@@ -1544,7 +1544,7 @@ img {
     }
     
     .about-text p {
-        font-size: 13px;
+        font-size: 14px;
         text-align: justify;
     }
 }
