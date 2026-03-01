@@ -1407,25 +1407,19 @@ img {
     .art-fair-row-title {
         font-size: 14px;
     }
-}
-
+    
     .art-fair-row-image {
         width: 100%;
         flex-basis: auto;
     }
     
     .art-fair-row-image a {
-        width: 70%;
+        width: 80%;
         margin: 0 auto;
-    }
-
-    .art-fair-row-title {
-        font-size: 18px;
-        line-height: 1.4;
     }
     
     .art-fairs-list {
-        gap: 0px;
+        gap: 0;
     }
 }
 
@@ -2533,8 +2527,7 @@ img {
         min-width: 44px;
         min-height: 44px;
     }
-}
-
+    
     .header.menu-open .nav-links {
         display: flex;
         flex-direction: column;
