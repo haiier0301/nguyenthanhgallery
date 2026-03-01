@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 :root {
     --color-dark: #0a0a0a;
     --color-white: #ffffff;
@@ -20,6 +26,8 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -33,6 +41,14 @@ body {
     flex-direction: column;
     min-height: 100vh;
     text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+main {
+    flex: 1;
+    width: 100%;
 }
 
 a {
@@ -42,14 +58,34 @@ a {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
 }
 
+a:focus-visible {
+    outline: 2px solid var(--color-text-dark);
+    outline-offset: 2px;
+}
+
 img {
     max-width: 100%;
     height: auto;
     display: block;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-a:hover {
-    opacity: 0.8;
+button:focus-visible {
+    outline: 2px solid var(--color-text-dark);
+    outline-offset: 2px;
+}
+
+@media (hover: hover) {
+    a:hover {
+        opacity: 0.8;
+    }
+}
+
+@media (hover: none) {
+    a:active {
+        opacity: 0.8;
+    }
 }
 
 img {
@@ -84,6 +120,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 .logo {
@@ -269,8 +306,16 @@ img {
     width: 75%;
 }
 
-.news-card:hover {
-    transform: translateY(-4px);
+@media (hover: hover) {
+    .news-card:hover {
+        transform: translateY(-4px);
+    }
+}
+
+@media (hover: none) {
+    .news-card:active {
+        transform: translateY(-2px);
+    }
 }
 
 .news-card-link {
@@ -406,6 +451,7 @@ img {
 .artists-container {
     max-width: calc(100vw - 35vw);
     margin: 0 auto;
+    width: 100%;
 }
 
 .view-toggle {
@@ -624,6 +670,8 @@ img {
 @media (max-width: 768px) {
     .exhibitions-history-main {
         padding: 130px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
 
     .exhibitions-history-year-group {
@@ -656,6 +704,25 @@ img {
     
     .exhibition-item-title {
         font-size: 13px;
+    }
+}
+
+@media (max-width: 374px) {
+    .exhibitions-history-main {
+        padding: 130px 16px 60px;
+    }
+    
+    .exhibitions-history-year-group {
+        grid-template-columns: 70px minmax(0, 1fr);
+        column-gap: 16px;
+    }
+    
+    .exhibitions-history-year {
+        font-size: 12px;
+    }
+    
+    .exhibition-item-title {
+        font-size: 12px;
     }
 }
 
@@ -842,6 +909,8 @@ img {
 @media (max-width: 768px) {
     .news-main {
         padding: 80px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
 
     .news-header {
@@ -886,6 +955,24 @@ img {
     
     .news-item-title {
         font-size: 15px;
+    }
+}
+
+@media (max-width: 374px) {
+    .news-main {
+        padding: 80px 16px 60px;
+    }
+    
+    .news-tab {
+        font-size: 16px;
+    }
+    
+    .news-item-title {
+        font-size: 14px;
+    }
+    
+    .news-item-excerpt {
+        font-size: 12px;
     }
 }
 
@@ -1062,6 +1149,8 @@ img {
 @media (max-width: 768px) {
     .publications-main {
         padding: 80px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
 
     .publications-title {
@@ -1102,6 +1191,28 @@ img {
     
     .publication-title {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 374px) {
+    .publications-main {
+        padding: 80px 16px 60px;
+    }
+    
+    .publications-title {
+        font-size: 16px;
+    }
+    
+    .publication-featured-title {
+        font-size: 16px;
+    }
+    
+    .publication-title {
+        font-size: 13px;
+    }
+    
+    .publications-grid {
+        gap: 24px;
     }
 }
 
@@ -1375,6 +1486,8 @@ img {
 @media (max-width: 768px) {
     .art-fairs-main {
         padding: 80px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
 
     .art-fairs-title {
@@ -1434,6 +1547,33 @@ img {
     }
 }
 
+@media (max-width: 374px) {
+    .art-fairs-main {
+        padding: 80px 16px 60px;
+    }
+    
+    .art-fairs-title {
+        font-size: 16px;
+    }
+    
+    .art-fair-row {
+        gap: 16px;
+    }
+    
+    .art-fair-row-title {
+        font-size: 13px;
+    }
+    
+    .art-fair-row-date,
+    .art-fair-row-location {
+        font-size: 10px;
+    }
+    
+    .art-fair-row-image a {
+        width: 90%;
+    }
+}
+
 /* ===== ABOUT PAGE ===== */
 .page-about .header {
     background: var(--color-white);
@@ -1451,6 +1591,7 @@ img {
 .about-container {
     max-width: calc(100vw - 35vw);
     margin: 0 auto;
+    width: 100%;
 }
 
 .about-title {
@@ -1513,6 +1654,12 @@ img {
 @media (max-width: 768px) {
     .about-main {
         padding: 130px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
+    }
+    
+    .about-container {
+        max-width: 100%;
     }
 
     .about-title {
@@ -1522,11 +1669,12 @@ img {
 
     .about-content {
         padding-left: 24px;
+        padding-right: 0;
         max-width: 100%;
     }
 
     .about-text p {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.7;
         margin-bottom: 20px;
         text-align: justify;
@@ -1552,8 +1700,30 @@ img {
     }
     
     .about-text p {
-        font-size: 14px;
+        font-size: 13px;
         text-align: justify;
+    }
+}
+
+@media (max-width: 374px) {
+    .about-main {
+        padding: 130px 16px 60px;
+    }
+    
+    .about-title {
+        font-size: 16px;
+    }
+    
+    .about-content {
+        padding-left: 16px;
+    }
+    
+    .about-text p {
+        font-size: 12px;
+    }
+    
+    .about-section-title {
+        font-size: 14px;
     }
 }
 
@@ -1927,6 +2097,12 @@ img {
 @media (max-width: 768px) {
     .artist-detail-main {
         padding: 80px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
+    }
+    
+    .artist-detail-container {
+        max-width: 100%;
     }
 
     .artist-name-large {
@@ -1950,6 +2126,7 @@ img {
     
     .artist-sub-nav {
         gap: 16px;
+        flex-wrap: wrap;
     }
     
     .artist-sub-nav-link {
@@ -2041,6 +2218,41 @@ img {
     }
 }
 
+@media (max-width: 374px) {
+    .artist-detail-main {
+        padding: 80px 16px 60px;
+    }
+    
+    .artist-name-large {
+        font-size: 22px;
+    }
+    
+    .artist-series-subtitle {
+        font-size: 12px;
+    }
+    
+    .artist-bio p {
+        font-size: 12px;
+        line-height: 1.65;
+    }
+    
+    .artist-sub-nav-link {
+        font-size: 9px;
+    }
+    
+    .artworks-grid {
+        gap: 20px;
+    }
+    
+    .artwork-frame {
+        margin-bottom: 8px;
+    }
+    
+    .artist-section-title {
+        font-size: 14px;
+    }
+}
+
 /* ===== CONTACT PAGE ===== */
 .page-contact .header {
     background: var(--color-white);
@@ -2058,6 +2270,7 @@ img {
 .contact-container {
     max-width: calc(100vw - 35vw);
     margin: 0 auto;
+    width: 100%;
 }
 
 .contact-title {
@@ -2185,6 +2398,12 @@ img {
 @media (max-width: 768px) {
     .contact-main {
         padding: 130px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
+    }
+    
+    .contact-container {
+        max-width: 100%;
     }
 
     .contact-title {
@@ -2231,6 +2450,32 @@ img {
     }
 }
 
+@media (max-width: 374px) {
+    .contact-main {
+        padding: 130px 16px 60px;
+    }
+    
+    .contact-title {
+        font-size: 16px;
+    }
+    
+    .contact-block h2 {
+        font-size: 11px;
+    }
+    
+    .contact-block p {
+        font-size: 12px;
+    }
+    
+    .contact-link {
+        font-size: 10px;
+    }
+    
+    .contact-map {
+        min-height: 220px;
+    }
+}
+
 /* Back Link */
 .back-link-wrap {
     padding: 48px 0 24px;
@@ -2257,16 +2502,17 @@ img {
 /* Responsive - Artists */
 @media (max-width: 1200px) {
     .artists-grid.artists-grid-2x5 {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 28px 32px;
     }
-    .artists-container{
-        max-width: calc(100vw - 30vw);
+    
+    .artists-container {
+        max-width: 90%;
     }
+    
     .thumbnails-grid {
-        padding-top: 48px;
         grid-template-columns: repeat(3, 1fr);
-        gap: 64px 32px;
+        gap: 24px;
     }
 }
 
@@ -2309,11 +2555,38 @@ img {
     
     .artists-grid.artists-grid-2x5 {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 20px;
     }
     
     .artist-name {
         font-size: 13px;
+    }
+}
+
+@media (max-width: 374px) {
+    .artists-main {
+        padding: 130px 16px 60px;
+    }
+    
+    .view-toggle {
+        gap: 16px;
+        margin-bottom: 48px;
+    }
+    
+    .view-option {
+        font-size: 15px;
+    }
+    
+    .artists-grid.artists-grid-2x5 {
+        gap: 16px;
+    }
+    
+    .artist-name {
+        font-size: 12px;
+    }
+    
+    .thumbnails-grid {
+        gap: 20px;
     }
 }
 
@@ -2347,6 +2620,8 @@ img {
 @media (max-width: 768px) {
     .header {
         padding: 20px 24px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
 
     .nav {
@@ -2366,10 +2641,10 @@ img {
 
     .header-inner .logo {
         min-width: 0;
-        max-width: 300px;
+        max-width: 200px;
         white-space: normal;
         line-height: 1.3;
-        font-size: 13px;
+        font-size: 11px;
     }
 
     .hero-content {
@@ -2419,6 +2694,9 @@ img {
 
     .footer {
         padding: 40px 24px 20px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
     }
 
     .footer-inner {
@@ -2454,6 +2732,11 @@ img {
         padding: 18px 20px;
     }
     
+    .header-inner .logo {
+        max-width: 180px;
+        font-size: 10px;
+    }
+    
     .home-intro {
         padding: 50px 20px;
     }
@@ -2467,7 +2750,7 @@ img {
     }
     
     .home-intro-text p {
-        font-size: 15px;
+        font-size: 13px;
     }
     
     .featured-news {
@@ -2475,7 +2758,7 @@ img {
     }
     
     .section-title {
-        font-size: 14px;
+        font-size: 12px;
     }
     
     .news-card {
@@ -2495,6 +2778,70 @@ img {
     }
 }
 
+/* Extra small devices (< 375px) */
+@media (max-width: 374px) {
+    .header {
+        padding: 16px 16px;
+    }
+    
+    .header-inner .logo {
+        max-width: 160px;
+        font-size: 9px;
+        line-height: 1.2;
+    }
+    
+    .menu-toggle {
+        padding: 8px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    
+    .hero-content {
+        padding: 28px 16px 40px;
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 7vw, 2.5rem);
+    }
+    
+    .home-intro {
+        padding: 40px 16px;
+    }
+    
+    .home-intro-title {
+        font-size: 18px;
+    }
+    
+    .home-intro-text p {
+        font-size: 12px;
+    }
+    
+    .featured-news {
+        padding: 40px 16px 60px;
+    }
+    
+    .section-title {
+        font-size: 11px;
+    }
+    
+    .news-card-title {
+        font-size: 10px;
+    }
+    
+    .news-card-date {
+        font-size: 9px;
+    }
+    
+    .footer {
+        padding: 32px 16px 12px;
+    }
+    
+    .footer-contact p,
+    .footer-bottom p {
+        font-size: 9px;
+    }
+}
+
 /* Mobile menu open state */
 @media (max-width: 768px) {
     .header-inner {
@@ -2511,13 +2858,15 @@ img {
         align-items: flex-start;
         background: var(--color-menu-bg);
         padding: 24px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
         gap: 20px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .header.menu-open .nav-links a {
         color: var(--color-menu-text);
-        font-size: 15px;
+        font-size: 14px;
         padding: 8px 0;
         min-height: 44px;
         display: flex;
@@ -2607,6 +2956,27 @@ img {
     cursor: default;
 }
 
+@media (max-width: 768px) {
+    .lightbox-overlay {
+        padding: 16px;
+    }
+    
+    .lightbox-content {
+        max-width: 98vw;
+        max-height: 98vh;
+    }
+    
+    .lightbox-content img {
+        max-height: 98vh;
+    }
+}
+
+@media (max-width: 374px) {
+    .lightbox-overlay {
+        padding: 12px;
+    }
+}
+
 /* Art Fairs News Section */
 .art-fairs-news {
     margin-top: 80px;
@@ -2658,6 +3028,25 @@ img {
     }
 }
 
+@media (max-width: 374px) {
+    .art-fairs-news {
+        margin-top: 40px;
+        padding-top: 40px;
+    }
+    
+    .art-fairs-news .section-title {
+        font-size: 16px;
+    }
+    
+    .art-fairs-news .news-card-title {
+        font-size: 10px;
+    }
+    
+    .art-fairs-news .news-card-date {
+        font-size: 9px;
+    }
+}
+
 /* Series Cards */
 .series-card {
     display: block;
@@ -2671,13 +3060,21 @@ img {
     cursor: pointer !important;
 }
 
-.series-card:hover {
-    transform: translateY(-4px);
-    opacity: 1;
+@media (hover: hover) {
+    .series-card:hover {
+        transform: translateY(-4px);
+        opacity: 1;
+    }
+
+    .series-card:hover .artwork-frame {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
 }
 
-.series-card:hover .artwork-frame {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+@media (hover: none) {
+    .series-card:active {
+        transform: translateY(-2px);
+    }
 }
 
 .series-card-title {
