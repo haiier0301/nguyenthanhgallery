@@ -105,11 +105,14 @@ function initNewsCards() {
  * Lightbox - click image to view full size, click outside to close
  */
 function initLightbox() {
-    const images = document.querySelectorAll('.artwork-frame img, .exhibition-image img');
+    const images = document.querySelectorAll('.artwork-frame img, .exhibition-image img, .photographic-item img');
     if (!images.length) return;
 
     // Filter out images inside series cards (they should navigate, not open lightbox)
-    const lightboxImages = Array.from(images).filter(img => !img.closest('.series-card'));
+    // Also filter out images inside video containers (photographic-item-video)
+    const lightboxImages = Array.from(images).filter(img => 
+        !img.closest('.series-card') && !img.closest('.photographic-item-video')
+    );
     if (!lightboxImages.length) return;
 
     // Create lightbox overlay
