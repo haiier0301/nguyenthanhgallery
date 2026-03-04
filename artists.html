@@ -34,15 +34,9 @@
     <!-- Main Content -->
     <main class="artists-main">
         <div class="artists-container">
-            <!-- View Toggle -->
-            <div class="view-toggle">
-                <a href="#" class="view-option active" data-view="list">LIST</a>
-                <a href="#" class="view-option" data-view="thumbnails">THUMBNAILS</a>
-            </div>
-
-            <!-- Artists List View -->
-            <div class="artists-content" id="artists-list-view">
-                <!-- Main Artist List -->
+            <!-- LIST ARTISTS Section -->
+            <section class="artists-list-section">
+                <h2 class="artists-section-heading">LIST ARTISTS</h2>
                 <div class="artists-grid artists-grid-2x5">
                     <a href="artists/artist-nguyen-thanh.html" class="artist-name">NGUYEN THANH</a>
                     <a href="artists/artist-hoang-lam.html" class="artist-name">HOANG LAM</a>
@@ -55,34 +49,11 @@
                     <a href="artists/artist-tran-ngoc-duc.html" class="artist-name">TRAN NGOC DUC</a>
                     <a href="artists/artist-duc-tho.html" class="artist-name">DUC THO</a>
                 </div>
-                <!-- Works Available By Section -->
-                <!-- <div class="artists-section">
-                    <h2 class="artists-section-title">WORKS AVAILABLE BY</h2>
-                    <div class="artists-grid">
-                        <div class="artist-column">
-                            <a href="#" class="artist-name">FRANÇOIS ANDES</a>
-                            <a href="#" class="artist-name">NGHIA DANG</a>
-                            <a href="#" class="artist-name">CIAN DUGGAN</a>
-                            <a href="#" class="artist-name">HOANG NAM VIET</a>
-                        </div>
-                        <div class="artist-column">
-                            <a href="#" class="artist-name">NGUYEN DUC DAT</a>
-                            <a href="#" class="artist-name">CHRISTINE NGUYEN</a>
-                            <a href="#" class="artist-name">NGUYEN QUANG HUY</a>
-                            <a href="#" class="artist-name">KEEN SOUHLAL</a>
-                        </div>
-                        <div class="artist-column">
-                            <a href="#" class="artist-name">THE PROPELLER GROUP</a>
-                            <a href="#" class="artist-name">LE THUA TIEN</a>
-                            <a href="#" class="artist-name">TRUONG CONG TUNG</a>
-                            <a href="#" class="artist-name">BRUCE YONEMOTO</a>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
+            </section>
 
-            <!-- Thumbnails View (hidden by default) -->
-            <div class="artists-content artists-thumbnails" id="artists-thumbnails-view" style="display: none;">
+            <!-- THUMBNAILS Section -->
+            <section class="artists-thumbnails-section">
+                <h2 class="artists-section-heading">THUMBNAILS</h2>
                 <div class="thumbnails-grid">
                     <a href="artists/artist-nguyen-thanh.html" class="artist-thumb">
                         <div class="artist-thumb-image">
@@ -145,7 +116,7 @@
                         <span class="artist-thumb-name">DUC THO</span>
                     </a>
                 </div>
-            </div>
+            </section>
         </div>
     </main>
 
@@ -173,28 +144,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // View toggle for Artists page
-        document.querySelectorAll('.view-option').forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.preventDefault();
-                const view = option.dataset.view;
-                
-                document.querySelectorAll('.view-option').forEach(o => o.classList.remove('active'));
-                option.classList.add('active');
-                
-                const listView = document.getElementById('artists-list-view');
-                const thumbView = document.getElementById('artists-thumbnails-view');
-                
-                if (view === 'list') {
-                    listView.style.display = 'block';
-                    thumbView.style.display = 'none';
-                } else {
-                    listView.style.display = 'none';
-                    thumbView.style.display = 'block';
-                }
-            });
-        });
-    </script>
 </body>
 </html>

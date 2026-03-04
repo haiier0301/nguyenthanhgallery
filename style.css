@@ -454,6 +454,26 @@ img {
     width: 100%;
 }
 
+.artists-list-section {
+    margin-bottom: 120px;
+}
+
+.artists-thumbnails-section {
+    margin-top: 120px;
+    padding-top: 80px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.artists-section-heading {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-dark);
+    text-align: center;
+    margin-bottom: 64px;
+}
+
 .view-toggle {
     display: flex;
     justify-content: center;
@@ -2562,20 +2582,53 @@ img {
 }
 
 @media (max-width: 1024px) {
+    .artists-list-section {
+        margin-bottom: 100px;
+    }
+    
+    .artists-thumbnails-section {
+        margin-top: 100px;
+        padding-top: 70px;
+    }
+    
+    .artists-section-heading {
+        font-size: 17px;
+        margin-bottom: 56px;
+    }
+    
     .artists-grid.artists-grid-2x5 {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 64px 32px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 32px;
     }
 
     .thumbnails-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 64px 32px;
     }
 }
 
 @media (max-width: 768px) {
     .artists-main {
         padding: 150px 24px 60px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
+    }
+    
+    .artists-container {
+        max-width: 100%;
+    }
+    
+    .artists-list-section {
+        margin-bottom: 80px;
+    }
+    
+    .artists-thumbnails-section {
+        margin-top: 80px;
+        padding-top: 60px;
+    }
+    
+    .artists-section-heading {
+        font-size: 16px;
+        margin-bottom: 48px;
     }
 
     .artists-grid.artists-grid-2x5 {
@@ -2598,6 +2651,20 @@ img {
         padding: 130px 20px 60px;
     }
     
+    .artists-list-section {
+        margin-bottom: 60px;
+    }
+    
+    .artists-thumbnails-section {
+        margin-top: 60px;
+        padding-top: 50px;
+    }
+    
+    .artists-section-heading {
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+    
     .artists-grid.artists-grid-2x5 {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -2613,13 +2680,18 @@ img {
         padding: 130px 16px 60px;
     }
     
-    .view-toggle {
-        gap: 16px;
-        margin-bottom: 48px;
+    .artists-list-section {
+        margin-bottom: 50px;
     }
     
-    .view-option {
-        font-size: 15px;
+    .artists-thumbnails-section {
+        margin-top: 50px;
+        padding-top: 40px;
+    }
+    
+    .artists-section-heading {
+        font-size: 13px;
+        margin-bottom: 32px;
     }
     
     .artists-grid.artists-grid-2x5 {
