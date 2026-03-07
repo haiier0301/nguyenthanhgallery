@@ -2069,7 +2069,7 @@ img {
 .artworks-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 64px;
+    gap: 128px;
 }
 
 .artwork-item {
