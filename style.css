@@ -366,7 +366,8 @@ img {
 }
 
 .footer-inner {
-    max-width: 1400px;
+    max-width: 1300px;
+
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -377,7 +378,8 @@ img {
 }
 
 .footer-contact p {
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 16px;
     color: var(--color-text-dark);
     margin-bottom: 4px;
 }
@@ -403,7 +405,7 @@ img {
 }
 
 .footer-bottom {
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto;
     padding-top: 24px;
     border-top: 1px solid #eee;
@@ -411,6 +413,7 @@ img {
 
 .footer-bottom p {
     font-size: 11px;
+    /* max-width: 1300px; */
     color: var(--color-text-muted);
     letter-spacing: 0.05em;
     margin-bottom: 4px;
