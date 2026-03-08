@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initNewsCards();
     initLightbox();
+    initVideoAutoplay();
 });
 
 /**
@@ -164,5 +165,33 @@ function initLightbox() {
             const alt = img.alt || '';
             openLightbox(src, alt);
         });
+    });
+}
+
+/**
+ * Video autoplay on scroll
+ */
+function initVideoAutoplay() {
+    const videos = document.querySelectorAll('.photographic-item-video video');
+    if (!videos.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                video.play().catch(err => {
+                    console.log('Video autoplay prevented:', err);
+                });
+            } else {
+                video.pause();
+            }
+        });
+    }, {
+        threshold: 0.5,
+        rootMargin: '0px'
+    });
+
+    videos.forEach(video => {
+        observer.observe(video);
     });
 }
