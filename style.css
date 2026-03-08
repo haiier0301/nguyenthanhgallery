@@ -445,7 +445,7 @@ img {
 
 /* Artists Main Content */
 .artists-main {
-    padding: 150px 48px 80px;
+    padding: calc(100vh - 80vh) 48px 80px;
     min-height: calc(100vh - 200px);
     display: flex;
     align-items: center;
@@ -458,7 +458,7 @@ img {
 }
 
 .artists-list-section {
-    margin-bottom: 120px;
+    margin: calc(100vh - 95vh) 0px;
 }
 
 .artists-thumbnails-section {
@@ -596,12 +596,12 @@ img {
 }
 
 .exhibitions-history-main {
-    padding: 150px 48px 80px;
+    padding: calc(100vh - 95vh) 48px 80px;
 }
 
 .exhibitions-history-container {
     max-width: calc(100vw - 35vw);
-    margin: 0 auto;
+    margin: calc(100vh - 85vh) auto;
 }
 
 .exhibitions-history-header {
@@ -730,10 +730,6 @@ img {
     display: block;
 }
 
-.photographic-item video::-webkit-media-controls-panel {
-    /* background: rgba(0, 0, 0, 0.8); */
-}
-
 @media (hover: hover) {
     .photographic-item:hover img {
         transform: scale(1.05);
@@ -746,12 +742,16 @@ img {
 
 @media (max-width: 1024px) {
     .exhibitions-history-main {
-        padding: 150px 40px 80px;
+        padding: calc(100vh - 80vh) 40px 80px;
     }
     
     .page-title {
         font-size: 28px;
         margin-bottom: 56px;
+    }
+    
+    .exhibitions-photographic {
+        margin-bottom: 60px;
     }
     
     .exhibitions-history-year-group {
@@ -781,14 +781,18 @@ img {
 
 @media (max-width: 768px) {
     .exhibitions-history-main {
-        padding: 130px 24px 60px;
+        padding: calc(100vh - 80vh) 24px 60px;
         padding-left: max(24px, env(safe-area-inset-left));
         padding-right: max(24px, env(safe-area-inset-right));
     }
     
     .page-title {
-        font-size: 28px;
+        font-size: 24px;
         margin-bottom: 48px;
+    }
+    
+    .exhibitions-photographic {
+        margin-bottom: 60px;
     }
 
     .exhibitions-history-year-group {
@@ -820,12 +824,18 @@ img {
 
 @media (max-width: 480px) {
     .exhibitions-history-main {
-        padding: 130px 20px 60px;
+        padding: calc(100vh - 85vh) 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .page-title {
-        font-size: 22px;
+        font-size: 20px;
         margin-bottom: 40px;
+    }
+    
+    .exhibitions-photographic {
+        margin-bottom: 50px;
     }
     
     .exhibitions-history-year-group {
@@ -856,31 +866,37 @@ img {
 
 @media (max-width: 374px) {
     .exhibitions-history-main {
-        padding: 130px 16px 60px;
+        padding: calc(100vh - 80vh) 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
-    
+
     .page-title {
-        font-size: 22px;
+        font-size: 18px;
         margin-bottom: 32px;
     }
     
+    .exhibitions-photographic {
+        margin-bottom: 40px;
+    }
+
     .exhibitions-history-year-group {
         grid-template-columns: 100px minmax(0, 1fr);
         column-gap: 16px;
     }
-    
+
     .exhibitions-history-year {
         font-size: 16px;
     }
-    
+
     .exhibitions-history-items li {
         font-size: 18px;
     }
-    
+
     .exhibitions-note {
         font-size: 16px;
     }
-    
+
     .exhibitions-history-heading {
         font-size: 14px;
     }
@@ -1111,6 +1127,8 @@ img {
 @media (max-width: 480px) {
     .news-main {
         padding: 80px 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .news-tab {
@@ -1125,6 +1143,8 @@ img {
 @media (max-width: 374px) {
     .news-main {
         padding: 80px 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .news-tab {
@@ -1343,6 +1363,8 @@ img {
 @media (max-width: 480px) {
     .publications-main {
         padding: 80px 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .publications-title {
@@ -1361,6 +1383,8 @@ img {
 @media (max-width: 374px) {
     .publications-main {
         padding: 80px 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .publications-title {
@@ -1483,7 +1507,7 @@ img {
     display: flex;
     align-items: center;
     gap: 0px;
-    padding: 100px 0 100px 0;
+    padding: 80px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
     transition: transform 0.3s ease;
 }
@@ -1686,6 +1710,8 @@ img {
 @media (max-width: 480px) {
     .art-fairs-main {
         padding: 80px 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .art-fairs-title {
@@ -1714,6 +1740,8 @@ img {
 @media (max-width: 374px) {
     .art-fairs-main {
         padding: 80px 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .art-fairs-title {
@@ -1749,12 +1777,12 @@ img {
 }
 
 .about-main {
-    padding: 150px 48px 80px;
+    padding: calc(100vh - 95vh) 48px 80px;
 }
 
 .about-container {
     max-width: calc(100vw - 35vw);
-    margin: 0 auto;
+    margin: calc(100vh - 85vh) auto;
     width: 100%;
 }
 
@@ -1806,7 +1834,7 @@ img {
 /* Responsive - About */
 @media (max-width: 1024px) {
     .about-main {
-        padding: 150px 40px 80px;
+        padding: calc(100vh - 80vh) 40px 80px;
     }
     
     .about-content {
@@ -1817,7 +1845,7 @@ img {
 
 @media (max-width: 768px) {
     .about-main {
-        padding: 130px 24px 60px;
+        padding: calc(100vh - 80vh) 24px 60px;
         padding-left: max(24px, env(safe-area-inset-left));
         padding-right: max(24px, env(safe-area-inset-right));
     }
@@ -1852,7 +1880,9 @@ img {
 
 @media (max-width: 480px) {
     .about-main {
-        padding: 130px 20px 60px;
+        padding: calc(100vh - 85vh) 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .about-title {
@@ -1871,7 +1901,9 @@ img {
 
 @media (max-width: 374px) {
     .about-main {
-        padding: 130px 16px 60px;
+        padding: calc(100vh - 80vh) 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .about-title {
@@ -2340,6 +2372,8 @@ img {
 @media (max-width: 480px) {
     .artist-detail-main {
         padding: 130px 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .artist-name-large {
@@ -2388,6 +2422,8 @@ img {
 @media (max-width: 374px) {
     .artist-detail-main {
         padding: 130px 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .artist-name-large {
@@ -2431,7 +2467,7 @@ img {
 }
 
 .contact-main {
-    padding: 150px 48px 120px;
+    padding: calc(100vh - 80vh) 48px 120px;
 }
 
 .contact-container {
@@ -2554,7 +2590,7 @@ img {
 
 @media (max-width: 1024px) {
     .contact-main {
-        padding: 150px 40px 80px;
+        padding: calc(100vh - 80vh) 40px 80px;
     }
     
     .contact-map {
@@ -2564,7 +2600,7 @@ img {
 
 @media (max-width: 768px) {
     .contact-main {
-        padding: 130px 24px 60px;
+        padding: calc(100vh - 80vh) 24px 60px;
         padding-left: max(24px, env(safe-area-inset-left));
         padding-right: max(24px, env(safe-area-inset-right));
     }
@@ -2601,7 +2637,9 @@ img {
 
 @media (max-width: 480px) {
     .contact-main {
-        padding: 130px 20px 60px;
+        padding: calc(100vh - 75vh) 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .contact-title {
@@ -2619,7 +2657,9 @@ img {
 
 @media (max-width: 374px) {
     .contact-main {
-        padding: 130px 16px 60px;
+        padding: calc(100vh - 80vh) 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .contact-title {
@@ -2685,7 +2725,7 @@ img {
 
 @media (max-width: 1024px) {
     .artists-list-section {
-        margin-bottom: 100px;
+        margin: calc(100vh - 95vh) 0px;
     }
     
     .artists-thumbnails-section {
@@ -2710,7 +2750,7 @@ img {
 
 @media (max-width: 768px) {
     .artists-main {
-        padding: 150px 24px 60px;
+        padding: calc(100vh - 80vh) 24px 60px;
         padding-left: max(24px, env(safe-area-inset-left));
         padding-right: max(24px, env(safe-area-inset-right));
     }
@@ -2720,7 +2760,7 @@ img {
     }
     
     .artists-list-section {
-        margin-bottom: 80px;
+        margin: calc(100vh - 95vh) 0px;
     }
     
     .artists-thumbnails-section {
@@ -2750,11 +2790,13 @@ img {
 
 @media (max-width: 480px) {
     .artists-main {
-        padding: 130px 20px 60px;
+        padding: calc(100vh - 80vh) 20px 60px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .artists-list-section {
-        margin-bottom: 60px;
+        margin: calc(100vh - 95vh) 0px;
     }
     
     .artists-thumbnails-section {
@@ -2779,11 +2821,13 @@ img {
 
 @media (max-width: 374px) {
     .artists-main {
-        padding: 130px 16px 60px;
+        padding: calc(100vh - 80vh) 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .artists-list-section {
-        margin-bottom: 50px;
+        margin: calc(100vh - 95vh) 0px;
     }
     
     .artists-thumbnails-section {
@@ -2868,16 +2912,20 @@ img {
 
     .hero-content {
         padding: 32px 24px 48px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
 
     .home-intro {
         padding: 60px 24px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
 
     .home-intro-title {
         font-size: 24px;
     }
-    
+
     .home-intro-established {
         font-size: 11px;
         margin-bottom: 32px;
@@ -2891,6 +2939,8 @@ img {
 
     .featured-news {
         padding: 60px 24px 80px;
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
     }
     
     .section-title {
@@ -2949,8 +2999,10 @@ img {
 @media (max-width: 480px) {
     .header {
         padding: 18px 20px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
-    
+
     .header-inner .logo {
         max-width: 180px;
         font-size: 10px;
@@ -2958,22 +3010,26 @@ img {
     
     .home-intro {
         padding: 50px 20px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
-    
+
     .home-intro-title {
         font-size: 20px;
     }
-    
+
     .home-intro-established {
         font-size: 10px;
     }
-    
+
     .home-intro-text p {
         font-size: 13px;
     }
-    
+
     .featured-news {
         padding: 50px 20px 70px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
     }
     
     .section-title {
@@ -2994,6 +3050,9 @@ img {
     
     .footer {
         padding: 36px 20px 16px;
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
     }
 }
 
@@ -3001,8 +3060,10 @@ img {
 @media (max-width: 374px) {
     .header {
         padding: 16px 16px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
-    
+
     .header-inner .logo {
         max-width: 160px;
         font-size: 9px;
@@ -3017,6 +3078,8 @@ img {
     
     .hero-content {
         padding: 28px 16px 40px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
     
     .hero-title {
@@ -3025,18 +3088,23 @@ img {
     
     .home-intro {
         padding: 40px 16px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
     }
-    
+
     .home-intro-title {
         font-size: 18px;
     }
-    
+
     .home-intro-text p {
         font-size: 12px;
     }
-    
+
     .featured-news {
         padding: 40px 16px 60px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+        padding-bottom: max(60px, env(safe-area-inset-bottom));
     }
     
     .section-title {
@@ -3053,8 +3121,11 @@ img {
     
     .footer {
         padding: 32px 16px 12px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
     }
-    
+
     .footer-contact p,
     .footer-bottom p {
         font-size: 9px;
@@ -3221,7 +3292,8 @@ img {
 
 @media (max-width: 1024px) {
     .art-fairs-media {
-        margin-top: 100px;
+        margin-top: 60px;
+        padding-top: 60px;
         margin-bottom: 60px;
     }
     
@@ -3232,7 +3304,8 @@ img {
 
 @media (max-width: 768px) {
     .art-fairs-media {
-        margin-top: 80px;
+        margin-top: 60px;
+        padding-top: 60px;
         margin-bottom: 60px;
     }
     
@@ -3252,7 +3325,8 @@ img {
 
 @media (max-width: 480px) {
     .art-fairs-media {
-        margin-top: 60px;
+        margin-top: 50px;
+        padding-top: 50px;
         margin-bottom: 50px;
     }
     
@@ -3272,7 +3346,8 @@ img {
 
 @media (max-width: 374px) {
     .art-fairs-media {
-        margin-top: 50px;
+        margin-top: 40px;
+        padding-top: 40px;
         margin-bottom: 40px;
     }
     
