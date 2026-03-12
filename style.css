@@ -2115,6 +2115,45 @@ img {
     margin-bottom: 40px;
 }
 
+/* Upcoming Project Section */
+.artist-upcoming-project {
+    margin-bottom: 80px;
+}
+
+.upcoming-project-box {
+    background: linear-gradient(135deg, rgba(240, 248, 245, 0.6) 0%, rgba(245, 250, 248, 0.8) 100%);
+    border-left: 4px solid #2d5f3f;
+    padding: 40px 48px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.upcoming-project-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #2d5f3f;
+    margin: 0 0 16px 0;
+}
+
+.upcoming-project-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-text-dark);
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+}
+
+.upcoming-project-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .serial-coming-soon {
     font-size: 18px;
     font-weight: 700;
@@ -2311,6 +2350,18 @@ img {
     .artist-section-title {
         font-size: 16px;
     }
+
+    .upcoming-project-box {
+        padding: 32px 40px;
+    }
+
+    .upcoming-project-title {
+        font-size: 24px;
+    }
+
+    .upcoming-project-description {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2341,6 +2392,18 @@ img {
     .artist-bio p {
         font-size: 15px;
         line-height: 1.7;
+    }
+
+    .upcoming-project-box {
+        padding: 28px 24px;
+    }
+
+    .upcoming-project-title {
+        font-size: 20px;
+    }
+
+    .upcoming-project-description {
+        font-size: 14px;
     }
     
     .artist-sub-nav {
@@ -2398,6 +2461,19 @@ img {
     
     .artist-name-large {
         font-size: 20px;
+    }
+
+    .upcoming-project-box {
+        padding: 24px 20px;
+    }
+
+    .upcoming-project-title {
+        font-size: 18px;
+    }
+
+    .upcoming-project-description {
+        font-size: 13px;
+        line-height: 1.7;
     }
     
     .artist-series-subtitle {
@@ -2473,6 +2549,19 @@ img {
     
     .artist-section-title {
         font-size: 14px;
+    }
+
+    .upcoming-project-box {
+        padding: 20px 16px;
+    }
+
+    .upcoming-project-title {
+        font-size: 16px;
+    }
+
+    .upcoming-project-description {
+        font-size: 12px;
+        line-height: 1.6;
     }
 }
 
