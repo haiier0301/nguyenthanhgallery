@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Connection Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #252526;
+            border-radius: 4px;
+        }
+        .success {
+            color: #4caf50;
+        }
+        .error {
+            color: #f44336;
+        }
+        .warning {
+            color: #ff9800;
+        }
+        pre {
+            background: #1e1e1e;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            background: #0e639c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1177bb;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 CMS Connection & Path Test</h1>
+    <p>This page tests if the CMS can access data files correctly.</p>
+
+    <div class="test-section">
+        <h2>📍 Current Location</h2>
+        <pre id="locationInfo">Loading...</pre>
+    </div>
+
+    <div class="test-section">
+        <h2>📁 File Paths</h2>
+        <pre id="pathsInfo">Loading...</pre>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Test Results</h2>
+        <button onclick="runTests()">▶ Run All Tests</button>
+        <button onclick="location.reload()">🔄 Reload</button>
+        <div id="testResults" style="margin-top: 20px;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>💡 Solutions</h2>
+        <div id="solutions"></div>
+    </div>
+
+    <script>
+        // Display location info
+        document.getElementById('locationInfo').textContent = 
+            'Protocol: ' + window.location.protocol + '\n' +
+            'Host: ' + window.location.host + '\n' +
+            'Pathname: ' + window.location.pathname + '\n' +
+            'Full URL: ' + window.location.href;
+
+        // Display expected paths
+        const basePath = window.location.pathname.split('/').slice(0, -1).join('/');
+        document.getElementById('pathsInfo').textContent = 
+            'Base Path: ' + basePath + '\n' +
+            'Artists JSON: ' + basePath + '/data/artists.json\n' +
+            'Artworks JSON: ' + basePath + '/data/artworks.json\n' +
+            'Exhibitions JSON: ' + basePath + '/data/exhibitions.json';
+
+        async function runTests() {
+            const results = document.getElementById('testResults');
+            const solutions = document.getElementById('solutions');
+            results.innerHTML = '<p>Running tests...</p>';
+            solutions.innerHTML = '';
+            
+            let allPassed = true;
+            let errors = [];
+
+            // Test 1: Artists JSON
+            results.innerHTML += '<h3>Test 1: Loading data/artists.json</h3>';
+            try {
+                const response = await fetch('data/artists.json');
+                results.innerHTML += `<p>Status: ${response.status} ${response.statusText}</p>`;
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                results.innerHTML += `<p class="success">✓ Success! Loaded ${data.length} artists</p>`;
+                results.innerHTML += `<pre>${JSON.stringify(data[0], null, 2).substring(0, 300)}...</pre>`;
+            } catch (error) {
+                allPassed = false;
+                errors.push('artists.json');
+                results.innerHTML += `<p class="error">✗ Failed: ${error.message}</p>`;
+            }
+
+            // Test 2: Artworks JSON
+            results.innerHTML += '<h3>Test 2: Loading data/artworks.json</h3>';
+            try {
+                const response = await fetch('data/artworks.json');
+                results.innerHTML += `<p>Status: ${response.status} ${response.statusText}</p>`;
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                results.innerHTML += `<p class="success">✓ Success! Loaded ${data.length} artworks</p>`;
+            } catch (error) {
+                allPassed = false;
+                errors.push('artworks.json');
+                results.innerHTML += `<p class="error">✗ Failed: ${error.message}</p>`;
+            }
+
+            // Test 3: Exhibitions JSON
+            results.innerHTML += '<h3>Test 3: Loading data/exhibitions.json</h3>';
+            try {
+                const response = await fetch('data/exhibitions.json');
+                results.innerHTML += `<p>Status: ${response.status} ${response.statusText}</p>`;
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                results.innerHTML += `<p class="success">✓ Success! Loaded ${data.length} exhibitions</p>`;
+            } catch (error) {
+                allPassed = false;
+                errors.push('exhibitions.json');
+                results.innerHTML += `<p class="error">✗ Failed: ${error.message}</p>`;
+            }
+
+            // Test 4: PHP Save API
+            results.innerHTML += '<h3>Test 4: Checking PHP API</h3>';
+            try {
+                const response = await fetch('api/save.php');
+                results.innerHTML += `<p>Status: ${response.status} ${response.statusText}</p>`;
+                if (response.status === 405) {
+                    results.innerHTML += `<p class="success">✓ PHP API exists (405 = Method Not Allowed for GET, which is expected)</p>`;
+                } else if (response.status === 404) {
+                    results.innerHTML += `<p class="warning">⚠ PHP API not found - Save functionality won't work</p>`;
+                }
+            } catch (error) {
+                results.innerHTML += `<p class="warning">⚠ PHP API test failed: ${error.message}</p>`;
+            }
+
+            // Summary
+            results.innerHTML += '<hr style="margin: 20px 0;">';
+            if (allPassed) {
+                results.innerHTML += '<h3 class="success">✓ All Tests Passed!</h3>';
+                results.innerHTML += '<p>CMS should work correctly. If you still see issues, check browser console.</p>';
+            } else {
+                results.innerHTML += '<h3 class="error">✗ Some Tests Failed</h3>';
+                results.innerHTML += '<p>Failed to load: ' + errors.join(', ') + '</p>';
+                
+                // Show solutions
+                solutions.innerHTML = '<h3 class="warning">🔧 Possible Solutions:</h3>';
+                solutions.innerHTML += '<ol style="line-height: 2;">';
+                solutions.innerHTML += '<li><strong>Files not uploaded:</strong> Make sure you uploaded the entire <code>cms/data/</code> folder to your server via FTP/SFTP</li>';
+                solutions.innerHTML += '<li><strong>Wrong permissions:</strong> Set folder permissions: <code>chmod 755 cms/data/</code></li>';
+                solutions.innerHTML += '<li><strong>Wrong location:</strong> Verify files are at: <code>/public_html/cms/data/*.json</code></li>';
+                solutions.innerHTML += '<li><strong>CORS issue:</strong> Add to .htaccess: <code>Header set Access-Control-Allow-Origin "*"</code></li>';
+                solutions.innerHTML += '<li><strong>JSON syntax error:</strong> Validate JSON files at jsonlint.com</li>';
+                solutions.innerHTML += '</ol>';
+                
+                solutions.innerHTML += '<h4>Quick Fix Commands (via SSH):</h4>';
+                solutions.innerHTML += '<pre style="background: #1e1e1e; padding: 12px; border-radius: 4px;">';
+                solutions.innerHTML += '# Check if files exist\n';
+                solutions.innerHTML += 'ls -la cms/data/\n\n';
+                solutions.innerHTML += '# Set correct permissions\n';
+                solutions.innerHTML += 'chmod 755 cms/data/\n';
+                solutions.innerHTML += 'chmod 644 cms/data/*.json\n\n';
+                solutions.innerHTML += '# Test file access\n';
+                solutions.innerHTML += 'curl https://gallerynguyenthanh.com/cms/data/artists.json';
+                solutions.innerHTML += '</pre>';
+            }
+        }
+
+        // Auto-run tests on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(runTests, 1000);
+        });
+    </script>
+</body>
+</html>

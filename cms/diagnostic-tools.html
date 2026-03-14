@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>CMS Diagnostic Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #2d5f3f;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 32px;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        
+        .tool-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d5f3f;
+            margin-bottom: 8px;
+        }
+        
+        .tool-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .tool-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2d5f3f;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .tool-btn:hover {
+            background: #1a3a28;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+        
+        .alert-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 CMS Diagnostic Tools</h1>
+        <p class="subtitle">Tools to help diagnose and fix CMS issues</p>
+        
+        <div class="alert">
+            <div class="alert-title">⚠️ Seeing "Loading artists..." that never finishes?</div>
+            <p>Your JSON data files might be missing or inaccessible. Use the tools below to diagnose.</p>
+        </div>
+        
+        <div class="tool-grid">
+            <!-- Tool 1: PHP Health Check -->
+            <div class="tool-card">
+                <div class="tool-icon">🏥</div>
+                <div class="tool-title">Server Health Check</div>
+                <p class="tool-desc">PHP-based check that verifies if data files exist on the server, checks permissions, and validates JSON syntax.</p>
+                <a href="check.php" class="tool-btn" target="_blank">Run PHP Check</a>
+            </div>
+            
+            <!-- Tool 2: JavaScript Connection Test -->
+            <div class="tool-card">
+                <div class="tool-icon">🔍</div>
+                <div class="tool-title">Connection Test</div>
+                <p class="tool-desc">JavaScript-based test that attempts to load JSON files the same way the CMS does. Shows detailed error messages.</p>
+                <a href="test-connection.html" class="tool-btn" target="_blank">Run JS Test</a>
+            </div>
+            
+            <!-- Tool 3: Direct File Access -->
+            <div class="tool-card">
+                <div class="tool-icon">📁</div>
+                <div class="tool-title">Direct File Access</div>
+                <p class="tool-desc">Try accessing JSON files directly to see if they're accessible via HTTP.</p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <a href="data/artists.json" class="tool-btn" target="_blank" style="font-size: 12px;">artists.json</a>
+                    <a href="data/artworks.json" class="tool-btn" target="_blank" style="font-size: 12px;">artworks.json</a>
+                    <a href="data/exhibitions.json" class="tool-btn" target="_blank" style="font-size: 12px;">exhibitions.json</a>
+                </div>
+            </div>
+            
+            <!-- Tool 4: Troubleshooting Guide -->
+            <div class="tool-card">
+                <div class="tool-icon">📖</div>
+                <div class="tool-title">Full Troubleshooting</div>
+                <p class="tool-desc">Complete guide with step-by-step solutions for all common CMS issues and 404 errors.</p>
+                <a href="TROUBLESHOOTING-404.md" class="tool-btn" target="_blank">Read Guide</a>
+            </div>
+            
+            <!-- Tool 5: Quick Fix Guide -->
+            <div class="tool-card">
+                <div class="tool-icon">⚡</div>
+                <div class="tool-title">Quick Fix (3 min)</div>
+                <p class="tool-desc">Fast solution guide that gets your CMS working in 3 minutes or less.</p>
+                <a href="FIX-404-NOW.md" class="tool-btn" target="_blank">Fix Now</a>
+            </div>
+            
+            <!-- Tool 6: Back to CMS -->
+            <div class="tool-card">
+                <div class="tool-icon">🏠</div>
+                <div class="tool-title">Return to CMS</div>
+                <p class="tool-desc">Go back to the main CMS interface after fixing issues.</p>
+                <a href="dashboard.html" class="tool-btn">Dashboard</a>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; padding: 24px; background: white; border-radius: 8px;">
+            <h2 style="color: #2d5f3f; margin-bottom: 16px;">🎯 Most Likely Cause</h2>
+            <p style="margin-bottom: 12px;">Based on your 404 errors, the <code>cms/data/</code> folder was not uploaded to the server.</p>
+            
+            <h3 style="color: #2d5f3f; margin-top: 24px; margin-bottom: 12px;">✅ Quick Fix:</h3>
+            <ol style="line-height: 2;">
+                <li><strong>Connect to server via FTP</strong></li>
+                <li><strong>Navigate to:</strong> <code>/public_html/cms/</code></li>
+                <li><strong>Upload folder:</strong> <code>data/</code> (with 3 JSON files inside)</li>
+                <li><strong>Reload CMS page</strong></li>
+            </ol>
+            
+            <p style="margin-top: 16px; padding: 12px; background: #e8f5e9; border-radius: 4px;">
+                <strong>Note:</strong> You need to upload the entire <code>data</code> folder, not just individual files.
+            </p>
+        </div>
+        
+        <div style="margin-top: 32px; text-align: center; color: #666;">
+            <p>Need help? Check <a href="DEPLOYMENT.md" style="color: #2d5f3f;">DEPLOYMENT.md</a> for server setup</p>
+        </div>
+    </div>
+</body>
+</html>

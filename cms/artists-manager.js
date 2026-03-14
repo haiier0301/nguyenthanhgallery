@@ -14,11 +14,21 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function loadArtists() {
     try {
+        console.log('Loading artists from data/artists.json...');
         artistsData = await loadJSON('data/artists.json');
+        console.log('Artists loaded:', artistsData.length);
         renderArtistsTable();
     } catch (error) {
         console.error('Error loading artists:', error);
-        showNotification('Error loading artists', 'error');
+        document.getElementById('artistsTableBody').innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align: center; padding: 40px; color: #f44336;">
+                    <strong>Error loading artists</strong><br>
+                    <small>Check console for details. Make sure data/artists.json exists.</small><br>
+                    <small>Error: ${error.message}</small>
+                </td>
+            </tr>
+        `;
     }
 }
 

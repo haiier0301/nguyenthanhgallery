@@ -16,13 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function loadArtworks() {
     try {
+        console.log('Loading artworks...');
         artworksData = await loadJSON('data/artworks.json');
         artistsData = await loadJSON('data/artists.json');
+        console.log('Loaded:', artworksData.length, 'artworks,', artistsData.length, 'artists');
         renderArtworksTable();
         populateFilters();
     } catch (error) {
         console.error('Error loading artworks:', error);
-        showNotification('Error loading artworks', 'error');
+        document.getElementById('artworksTableBody').innerHTML = `
+            <tr>
+                <td colspan="8" style="text-align: center; padding: 40px; color: #f44336;">
+                    <strong>Error loading data</strong><br>
+                    <small>${error.message}</small>
+                </td>
+            </tr>
+        `;
     }
 }
 

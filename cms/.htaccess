@@ -16,11 +16,29 @@ Options -Indexes
     Deny from all
 </FilesMatch>
 
-# Protect data directory
+# Allow JSON file access in data directory
 <DirectoryMatch "data">
     Order allow,deny
     Allow from all
 </DirectoryMatch>
+
+# Enable JSON MIME type
+<IfModule mod_mime.c>
+    AddType application/json .json
+</IfModule>
+
+# Allow JSON files to be accessed
+<FilesMatch "\.(json)$">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Allow from all
+    </IfModule>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+</FilesMatch>
 
 # Protect backup files
 <FilesMatch "\.(bak|backup|old|orig|save)$">

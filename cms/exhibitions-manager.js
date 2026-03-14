@@ -13,11 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function loadExhibitions() {
     try {
+        console.log('Loading exhibitions...');
         exhibitionsData = await loadJSON('data/exhibitions.json');
+        console.log('Exhibitions loaded:', exhibitionsData.length);
         renderExhibitionsTable();
     } catch (error) {
         console.error('Error loading exhibitions:', error);
-        showNotification('Error loading exhibitions', 'error');
+        document.getElementById('exhibitionsTableBody').innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 40px; color: #f44336;">
+                    <strong>Error loading exhibitions</strong><br>
+                    <small>${error.message}</small>
+                </td>
+            </tr>
+        `;
     }
 }
 

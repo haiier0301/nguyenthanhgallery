@@ -135,12 +135,30 @@ async function loadDashboardStats() {
  */
 async function loadJSON(path) {
     try {
+        console.log('[CMS] Attempting to load:', path);
         const response = await fetch(path);
-        if (!response.ok) throw new Error('Failed to load data');
-        return await response.json();
+        console.log('[CMS] Response status:', response.status, response.statusText);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText} - Failed to load ${path}`);
+        }
+        
+        const data = await response.json();
+        console.log('[CMS] Data loaded successfully:', data.length, 'records');
+        return data;
     } catch (error) {
-        console.error('Error loading JSON:', error);
-        return [];
+        console.error('[CMS] Error loading JSON from', path, ':', error);
+        console.error('[CMS] Full error:', error.message);
+        
+        // Check if it's a CORS error
+        if (error.message.includes('Failed to fetch')) {
+            console.error('[CMS] This might be a CORS or file access issue. Make sure:');
+            console.error('[CMS] 1. The file exists at:', path);
+            console.error('[CMS] 2. The server allows JSON file access');
+            console.error('[CMS] 3. Check browser console for CORS errors');
+        }
+        
+        throw error;
     }
 }
 
