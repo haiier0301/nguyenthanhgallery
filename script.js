@@ -120,15 +120,43 @@ function initLightbox() {
     const overlay = document.createElement('div');
     overlay.className = 'lightbox-overlay';
     overlay.setAttribute('aria-hidden', 'true');
-    overlay.innerHTML = '<div class="lightbox-backdrop"></div><div class="lightbox-content"><img src="" alt=""></div>';
+    overlay.innerHTML = `
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <img src="" alt="">
+            <div class="lightbox-caption">
+                <p class="lightbox-caption-title"></p>
+                <p class="lightbox-caption-medium"></p>
+            </div>
+        </div>
+    `;
     document.body.appendChild(overlay);
 
     const backdrop = overlay.querySelector('.lightbox-backdrop');
     const lightboxImg = overlay.querySelector('.lightbox-content img');
+    const lightboxCaptionTitle = overlay.querySelector('.lightbox-caption-title');
+    const lightboxCaptionMedium = overlay.querySelector('.lightbox-caption-medium');
 
-    function openLightbox(src, alt) {
+    function openLightbox(src, alt, caption, size) {
         lightboxImg.src = src;
         lightboxImg.alt = alt || '';
+        
+        // Parse and display caption
+        if (caption) {
+            lightboxCaptionTitle.textContent = caption.split(' - ')[0] || '';
+            const medium = caption.split(' - ')[1] || '';
+            
+            // Include size if available (currently hidden by CSS)
+            if (size) {
+                lightboxCaptionMedium.innerHTML = `${medium.toUpperCase()}<span class="lightbox-size">${size}</span>`;
+            } else {
+                lightboxCaptionMedium.textContent = medium.toUpperCase();
+            }
+        } else {
+            lightboxCaptionTitle.textContent = '';
+            lightboxCaptionMedium.textContent = '';
+        }
+        
         overlay.classList.add('active');
         overlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -163,7 +191,29 @@ function initLightbox() {
             e.preventDefault();
             const src = img.src || img.getAttribute('src');
             const alt = img.alt || '';
-            openLightbox(src, alt);
+            
+            // Get caption and size from adjacent elements
+            const artworkItem = img.closest('.artwork-item, .exhibition-item');
+            let caption = '';
+            let size = '';
+            
+            if (artworkItem) {
+                const captionEl = artworkItem.querySelector('.artwork-caption, .exhibition-caption');
+                if (captionEl) {
+                    // Get visible text only (excludes hidden size span)
+                    const captionClone = captionEl.cloneNode(true);
+                    const sizeSpan = captionClone.querySelector('.artwork-size');
+                    if (sizeSpan) {
+                        size = sizeSpan.textContent.trim();
+                        sizeSpan.remove();
+                    }
+                    caption = captionClone.textContent.trim();
+                } else {
+                    caption = '';
+                }
+            }
+            
+            openLightbox(src, alt, caption, size);
         });
     });
 }
