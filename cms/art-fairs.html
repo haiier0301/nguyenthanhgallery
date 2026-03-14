@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>Art Fairs - CMS</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="cms-dashboard">
+        <!-- Sidebar -->
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>NGUYEN THANH GALLERY</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav>
+                <ul class="cms-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="artists.html">Artists</a></li>
+                    <li><a href="artworks.html">Artworks</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="art-fairs.html" class="active">Art Fairs</a></li>
+                    <li><a href="media.html">Media Library</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cms-logout">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1>Art Fairs & Media</h1>
+                <p>Manage art fair content, photographic exhibitions, and media coverage</p>
+            </div>
+
+            <div class="cms-actions">
+                <button class="btn-secondary" onclick="window.open('../art-fairs.html', '_blank')">View Art Fairs Page</button>
+            </div>
+
+            <!-- Info Section -->
+            <div style="background: white; padding: 24px; border-radius: 8px; margin-top: 24px;">
+                <h2 style="margin-bottom: 16px; font-size: 18px;">Content Locations</h2>
+                
+                <div style="display: grid; gap: 16px;">
+                    <div style="padding: 16px; background: #f5f5f5; border-radius: 4px;">
+                        <strong>Photographic Exhibition Images</strong>
+                        <p style="margin-top: 8px; color: var(--color-text-light);">Location: <code>/images/art-fair/</code></p>
+                        <p style="margin-top: 4px; color: var(--color-text-light);">Page: <code>art-fairs.html</code></p>
+                    </div>
+                    
+                    <div style="padding: 16px; background: #f5f5f5; border-radius: 4px;">
+                        <strong>Video Content</strong>
+                        <p style="margin-top: 8px; color: var(--color-text-light);">File: <code>7582043678369.mp4</code></p>
+                        <p style="margin-top: 4px; color: var(--color-text-light);">Auto-play on scroll enabled</p>
+                    </div>
+                    
+                    <div style="padding: 16px; background: #f5f5f5; border-radius: 4px;">
+                        <strong>News Integration</strong>
+                        <p style="margin-top: 8px; color: var(--color-text-light);">VTV9 Article: "Tranh Việt mang thông điệp hòa bình ra thế giới"</p>
+                        <p style="margin-top: 4px; color: var(--color-text-light);">Embedded in exhibitions section</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 16px;">Quick Actions</h3>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-secondary" onclick="window.location.href='media.html'">Upload New Media</button>
+                    <button class="btn-secondary" onclick="editArtFairsPage()">Edit Art Fairs Page</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin-script.js"></script>
+    <script>
+        function editArtFairsPage() {
+            showNotification('Open art-fairs.html in your code editor to make changes');
+        }
+    </script>
+</body>
+</html>

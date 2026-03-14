@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Integration Example</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .example-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .code-block {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-block pre {
+            margin: 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="example-section">
+        <h1>CMS Integration Examples</h1>
+        <p>This page demonstrates how to integrate CMS data into your pages.</p>
+
+        <!-- Example 1: Load Artists List -->
+        <section style="margin-top: 40px;">
+            <h2>Example 1: Load Artists List</h2>
+            <div class="code-block">
+                <pre>&lt;script src="cms/integration.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Load all artists
+  loadArtistsFromCMS();
+&lt;/script&gt;</pre>
+            </div>
+            
+            <h3>Result:</h3>
+            <div class="artist-list-grid" id="artistsList">
+                <p>Loading artists...</p>
+            </div>
+        </section>
+
+        <!-- Example 2: Load Specific Artist Artworks -->
+        <section style="margin-top: 40px;">
+            <h2>Example 2: Load Artworks for Nguyen Thanh (2002 Series)</h2>
+            <div class="code-block">
+                <pre>&lt;script&gt;
+  // Load artworks for specific artist and series
+  loadArtworksByCMS('nguyen-thanh', '2002');
+&lt;/script&gt;</pre>
+            </div>
+            
+            <h3>Result:</h3>
+            <div class="artworks-grid" id="artworksList">
+                <p>Loading artworks...</p>
+            </div>
+        </section>
+
+        <!-- Example 3: Load Exhibitions -->
+        <section style="margin-top: 40px;">
+            <h2>Example 3: Load Exhibition History</h2>
+            <div class="code-block">
+                <pre>&lt;script&gt;
+  // Load all exhibitions
+  loadExhibitionsFromCMS().then(exhibitions => {
+    exhibitions.forEach(ex => {
+      console.log(ex.year, ex.title, ex.location);
+    });
+  });
+  
+  // Load only awards
+  loadExhibitionsFromCMS('award').then(awards => {
+    // Display awards
+  });
+&lt;/script&gt;</pre>
+            </div>
+            
+            <h3>Result:</h3>
+            <div id="exhibitionsList">
+                <p>Check console for exhibition data</p>
+            </div>
+        </section>
+
+        <!-- Example 4: Dynamic Artist Page -->
+        <section style="margin-top: 40px;">
+            <h2>Example 4: Auto-populate Artist Page</h2>
+            <div class="code-block">
+                <pre>&lt;!-- In artist page HTML --&gt;
+&lt;div class="artist-intro-block"&gt;
+  &lt;h1 class="artist-name-large"&gt;&lt;/h1&gt;
+  &lt;div class="artist-bio"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="artworks-grid"&gt;&lt;/div&gt;
+
+&lt;script src="../cms/integration.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Auto-load based on page URL
+  initCMSIntegration();
+  
+  // Or manually specify
+  loadArtistProfileFromCMS('nguyen-thanh');
+  loadArtworksByCMS('nguyen-thanh');
+&lt;/script&gt;</pre>
+            </div>
+        </section>
+
+        <!-- Implementation Guide -->
+        <section style="margin-top: 60px; padding: 24px; background: #f0f8f5; border-radius: 8px;">
+            <h2>Implementation Steps</h2>
+            
+            <ol style="line-height: 2;">
+                <li><strong>Add integration script</strong> to your HTML pages:
+                    <div class="code-block">
+                        <pre>&lt;script src="cms/integration.js"&gt;&lt;/script&gt;</pre>
+                    </div>
+                </li>
+                
+                <li><strong>Call load functions</strong> where needed:
+                    <div class="code-block">
+                        <pre>loadArtistsFromCMS();      // For artists page
+loadArtworksByCMS(artistId); // For artist detail page
+loadExhibitionsFromCMS();    // For exhibitions page</pre>
+                    </div>
+                </li>
+                
+                <li><strong>Ensure HTML structure</strong> matches expected selectors:
+                    <ul style="margin-top: 12px;">
+                        <li><code>.artist-list-grid</code> for artist names</li>
+                        <li><code>.artist-thumbnails</code> for artist thumbnails</li>
+                        <li><code>.artworks-grid</code> for artworks</li>
+                        <li><code>.artist-name-large</code> for artist name</li>
+                        <li><code>.artist-bio</code> for biography</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Test with CMS data</strong>:
+                    <ul style="margin-top: 12px;">
+                        <li>Add/edit content in CMS</li>
+                        <li>Refresh front-end page</li>
+                        <li>Verify content updates</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Benefits -->
+        <section style="margin-top: 40px;">
+            <h2>Benefits of CMS Integration</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h3 style="color: #2d5f3f; margin-bottom: 12px;">✓ Easy Updates</h3>
+                    <p style="font-size: 14px; color: #666;">Update content through user-friendly interface without touching code</p>
+                </div>
+                
+                <div style="padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h3 style="color: #2d5f3f; margin-bottom: 12px;">✓ Consistency</h3>
+                    <p style="font-size: 14px; color: #666;">Single source of truth for all content across pages</p>
+                </div>
+                
+                <div style="padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h3 style="color: #2d5f3f; margin-bottom: 12px;">✓ Scalability</h3>
+                    <p style="font-size: 14px; color: #666;">Easily add hundreds of artists and artworks</p>
+                </div>
+                
+                <div style="padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h3 style="color: #2d5f3f; margin-bottom: 12px;">✓ Version Control</h3>
+                    <p style="font-size: 14px; color: #666;">Automatic backups preserve content history</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Load CMS Integration -->
+    <script src="integration.js"></script>
+    <script>
+        // Example: Load artists on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            const artists = await loadArtistsFromCMS();
+            console.log('Loaded artists:', artists);
+            
+            const exhibitions = await loadExhibitionsFromCMS();
+            console.log('Loaded exhibitions:', exhibitions);
+        });
+    </script>
+</body>
+</html>

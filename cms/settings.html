@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>Settings - CMS</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="cms-dashboard">
+        <!-- Sidebar -->
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>NGUYEN THANH GALLERY</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav>
+                <ul class="cms-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="artists.html">Artists</a></li>
+                    <li><a href="artworks.html">Artworks</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="art-fairs.html">Art Fairs</a></li>
+                    <li><a href="media.html">Media Library</a></li>
+                    <li><a href="settings.html" class="active">Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cms-logout">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1>Settings</h1>
+                <p>Configure CMS and website settings</p>
+            </div>
+
+            <!-- General Settings -->
+            <div class="cms-section" style="background: white; padding: 24px; border-radius: 8px; margin-bottom: 24px;">
+                <h2 style="margin-bottom: 16px; font-size: 18px;">General Settings</h2>
+                
+                <form id="settingsForm">
+                    <div class="form-group">
+                        <label for="siteName">Gallery Name</label>
+                        <input type="text" id="siteName" value="NGUYEN THANH GALLERIE">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactEmail">Contact Email</label>
+                        <input type="email" id="contactEmail" value="nguyenthanhgallerie@gmail.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone1">Phone 1</label>
+                        <input type="tel" id="contactPhone1" value="+84 (028) 3823 8754">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone2">Phone 2</label>
+                        <input type="tel" id="contactPhone2" value="+84 (0) 919 268 888">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactAddress">Address</label>
+                        <textarea id="contactAddress" rows="3">139 Dong Khoi Street, Sai Gon Ward, Ho Chi Minh City, Vietnam</textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Save Settings</button>
+                </form>
+            </div>
+
+            <!-- Account Security -->
+            <div class="cms-section" style="background: white; padding: 24px; border-radius: 8px; margin-bottom: 24px;">
+                <h2 style="margin-bottom: 16px; font-size: 18px;">Change Password</h2>
+                
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" required minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" required minlength="6">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Update Password</button>
+                </form>
+            </div>
+
+            <!-- Data Management -->
+            <div class="cms-section" style="background: white; padding: 24px; border-radius: 8px;">
+                <h2 style="margin-bottom: 16px; font-size: 18px;">Data Management</h2>
+                
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button class="btn-secondary" onclick="exportData()">Export All Data</button>
+                    <button class="btn-secondary" onclick="document.getElementById('importInput').click()">Import Data</button>
+                    <button class="btn-danger" onclick="clearCache()">Clear Cache</button>
+                </div>
+                
+                <input type="file" id="importInput" accept=".json" style="display: none;">
+                
+                <div style="margin-top: 24px; padding: 16px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                    <strong>Note:</strong> Always backup your data before making major changes.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin-script.js"></script>
+    <script>
+        // Settings form handler
+        document.getElementById('settingsForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showNotification('Settings saved successfully');
+        });
+
+        // Password form handler
+        document.getElementById('passwordForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+            
+            if (newPass !== confirmPass) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+            
+            showNotification('Password updated successfully');
+            e.target.reset();
+        });
+
+        // Export data
+        function exportData() {
+            const data = {
+                artists: JSON.parse(localStorage.getItem('cms_artists.json') || '[]'),
+                artworks: JSON.parse(localStorage.getItem('cms_artworks.json') || '[]'),
+                exhibitions: JSON.parse(localStorage.getItem('cms_exhibitions.json') || '[]')
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `cms-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            
+            showNotification('Data exported successfully');
+        }
+
+        // Clear cache
+        function clearCache() {
+            if (!confirm('Are you sure? This will clear browser cache.')) return;
+            localStorage.clear();
+            showNotification('Cache cleared');
+        }
+    </script>
+</body>
+</html>

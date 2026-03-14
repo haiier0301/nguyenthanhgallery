@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>Artists Management - CMS</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="cms-dashboard">
+        <!-- Sidebar -->
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>NGUYEN THANH GALLERY</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav>
+                <ul class="cms-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="artists.html" class="active">Artists</a></li>
+                    <li><a href="artworks.html">Artworks</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="art-fairs.html">Art Fairs</a></li>
+                    <li><a href="media.html">Media Library</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cms-logout">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1>Artists Management</h1>
+                <p>Manage artist profiles, biographies, and artworks</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="cms-actions">
+                <button class="btn-primary" onclick="openAddArtistModal()">+ Add New Artist</button>
+                <button class="btn-secondary" onclick="loadArtists()">Refresh</button>
+            </div>
+
+            <!-- Artists Table -->
+            <div class="cms-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Born</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="artistsTableBody">
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 40px;">Loading artists...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Artist Modal -->
+    <div class="modal" id="artistModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Artist</h2>
+                <button class="modal-close" onclick="hideModal('artistModal')">&times;</button>
+            </div>
+            <form id="artistForm">
+                <div class="modal-body">
+                    <input type="hidden" id="artistId" name="id">
+                    
+                    <div class="form-group">
+                        <label for="artistName">Artist Name *</label>
+                        <input type="text" id="artistName" name="name" required placeholder="e.g., Nguyen Thanh">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artistNameDisplay">Display Name *</label>
+                        <input type="text" id="artistNameDisplay" name="nameDisplay" required placeholder="e.g., NGUYEN THANH">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artistCode">Artist Code *</label>
+                        <input type="text" id="artistCode" name="code" required placeholder="e.g., NT" maxlength="10">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artistBorn">Birth Date</label>
+                        <input type="date" id="artistBorn" name="born">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artistBirthPlace">Birth Place</label>
+                        <input type="text" id="artistBirthPlace" name="birthPlace" placeholder="e.g., Hanoi, Vietnam">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artistBio">Biography *</label>
+                        <textarea id="artistBio" name="bio" rows="6" required placeholder="Artist biography..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artistFeaturedImage">Featured Image Path</label>
+                        <input type="text" id="artistFeaturedImage" name="featuredImage" placeholder="../images/artists/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artistThumbnail">Thumbnail Image Path</label>
+                        <input type="text" id="artistThumbnail" name="thumbnailImage" placeholder="images/artists/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="artistFeatured" name="featured"> Featured Artist
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="artistHasSeries" name="hasSeries"> Has Series Pages
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="hideModal('artistModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Artist</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+    <script src="artists-manager.js"></script>
+</body>
+</html>

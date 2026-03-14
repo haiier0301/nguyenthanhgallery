@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>Artworks Management - CMS</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="cms-dashboard">
+        <!-- Sidebar -->
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>NGUYEN THANH GALLERY</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav>
+                <ul class="cms-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="artists.html">Artists</a></li>
+                    <li><a href="artworks.html" class="active">Artworks</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="art-fairs.html">Art Fairs</a></li>
+                    <li><a href="media.html">Media Library</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cms-logout">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1>Artworks Management</h1>
+                <p>Manage artwork catalog, images, and details</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="cms-filters" style="margin-bottom: 24px; display: flex; gap: 12px;">
+                <select id="filterArtist" class="form-control" onchange="filterArtworks()">
+                    <option value="">All Artists</option>
+                </select>
+                <select id="filterYear" class="form-control" onchange="filterArtworks()">
+                    <option value="">All Years</option>
+                </select>
+            </div>
+
+            <!-- Actions -->
+            <div class="cms-actions">
+                <button class="btn-primary" onclick="openAddArtworkModal()">+ Add New Artwork</button>
+                <button class="btn-secondary" onclick="loadArtworks()">Refresh</button>
+            </div>
+
+            <!-- Artworks Table -->
+            <div class="cms-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Code</th>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            <th>Medium</th>
+                            <th>Size</th>
+                            <th>Year</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="artworksTableBody">
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 40px;">Loading artworks...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Artwork Modal -->
+    <div class="modal" id="artworkModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Artwork</h2>
+                <button class="modal-close" onclick="hideModal('artworkModal')">&times;</button>
+            </div>
+            <form id="artworkForm">
+                <div class="modal-body">
+                    <input type="hidden" id="artworkId" name="id">
+                    
+                    <div class="form-group">
+                        <label for="artworkArtist">Artist *</label>
+                        <select id="artworkArtist" name="artistId" required>
+                            <option value="">Select Artist</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artworkCode">Artwork Code *</label>
+                        <input type="text" id="artworkCode" name="code" required placeholder="e.g., NT1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artworkTitle">Title</label>
+                        <input type="text" id="artworkTitle" name="title" placeholder="Artwork title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artworkMedium">Medium *</label>
+                        <input type="text" id="artworkMedium" name="medium" required placeholder="e.g., oil on canvas">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artworkSize">Size (WxH cm)</label>
+                        <input type="text" id="artworkSize" name="size" placeholder="e.g., 100x120cm">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artworkYear">Year</label>
+                        <input type="number" id="artworkYear" name="year" placeholder="2024" min="1900" max="2100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artworkSeries">Series Year (for Nguyen Thanh)</label>
+                        <input type="text" id="artworkSeries" name="seriesYear" placeholder="e.g., 2002">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="artworkImage">Image Path *</label>
+                        <input type="text" id="artworkImage" name="imagePath" required placeholder="../images/artists/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="artworkAvailable" name="available" checked> Available
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="hideModal('artworkModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Artwork</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+    <script src="artworks-manager.js"></script>
+</body>
+</html>

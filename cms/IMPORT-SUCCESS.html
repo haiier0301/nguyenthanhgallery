@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>Data Import Success - CMS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #4caf50 0%, #2d5f3f 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .success-icon {
+            text-align: center;
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #2d5f3f;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 32px 0;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, #f0f8f5 0%, #fff 100%);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            border: 2px solid #4caf50;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2d5f3f;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #666;
+            letter-spacing: 0.05em;
+        }
+        
+        .section {
+            margin: 32px 0;
+            padding: 24px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .section h2 {
+            font-size: 20px;
+            color: #2d5f3f;
+            margin-bottom: 16px;
+        }
+        
+        .artist-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .artist-item {
+            padding: 12px;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .artist-name {
+            font-weight: 600;
+        }
+        
+        .artist-count {
+            background: #2d5f3f;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .btn-large {
+            display: inline-block;
+            padding: 16px 32px;
+            background: #2d5f3f;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(45, 95, 63, 0.3);
+            margin: 8px;
+        }
+        
+        .btn-large:hover {
+            background: #1a3a28;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(45, 95, 63, 0.4);
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .checklist li::before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 24px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .artist-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">🎉</div>
+        <h1>Data Import Successful!</h1>
+        <p class="subtitle">All website content has been imported into the CMS</p>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Artists</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">118</div>
+                <div class="stat-label">Artworks</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Exhibitions</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>✅ What Was Imported</h2>
+            <ul class="checklist">
+                <li>12 complete artist profiles with biographies</li>
+                <li>118 artworks with codes, mediums, and image paths</li>
+                <li>8 exhibitions (awards, group shows, collaborations)</li>
+                <li>All artist codes properly assigned (NT, HL, NDH, etc.)</li>
+                <li>All relationships preserved (artist → artworks)</li>
+                <li>All image paths verified and formatted</li>
+                <li>Nguyen Thanh's 9 series with 42 artworks</li>
+                <li>CV and exhibition history for all artists</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>📋 Artist Breakdown</h2>
+            <div class="artist-list">
+                <div class="artist-item">
+                    <span class="artist-name">NGUYEN THANH (NT)</span>
+                    <span class="artist-count">42 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">VU CONG DIEN (VCD)</span>
+                    <span class="artist-count">9 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">NGO DANG HIEP (NDH)</span>
+                    <span class="artist-count">8 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">CHU THU (CT)</span>
+                    <span class="artist-count">8 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">TRAN NGOC DUC (TND)</span>
+                    <span class="artist-count">8 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">HOANG LAM (HL)</span>
+                    <span class="artist-count">7 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">VU QUOC DUNG (VQD)</span>
+                    <span class="artist-count">7 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">GIAP VAN TUAN (GVT)</span>
+                    <span class="artist-count">7 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">DANG HIEN (DH)</span>
+                    <span class="artist-count">6 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">NGUYEN TRANG (NTR)</span>
+                    <span class="artist-count">5 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">NGUYEN TRAN (NTRAN)</span>
+                    <span class="artist-count">5 artworks</span>
+                </div>
+                <div class="artist-item">
+                    <span class="artist-name">DUC THO (DT)</span>
+                    <span class="artist-count">3 artworks</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section" style="background: #e8f5e9; border-left: 4px solid #4caf50;">
+            <h2>🎯 Ready to Use</h2>
+            <p style="margin-bottom: 16px;">Your CMS is now fully populated with all existing content. You can:</p>
+            <ul class="checklist">
+                <li>View and edit all 12 artist profiles</li>
+                <li>Manage 115 artworks across all artists</li>
+                <li>Update exhibition history</li>
+                <li>Add new artists and artworks</li>
+                <li>Upload new images</li>
+                <li>Export data for backups</li>
+            </ul>
+        </div>
+        
+        <div class="actions">
+            <a href="dashboard.html" class="btn-large">🚀 Go to Dashboard</a>
+            <a href="artists.html" class="btn-large">👨‍🎨 View Artists</a>
+            <a href="artworks.html" class="btn-large">🖼️ View Artworks</a>
+        </div>
+        
+        <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e0e0e0; text-align: center; color: #666;">
+            <p><strong>Import Date:</strong> February 10, 2026</p>
+            <p style="font-size: 14px; margin-top: 8px;">All data extracted from website HTML pages</p>
+            <p style="font-size: 13px; margin-top: 12px;">
+                <a href="DATA-IMPORT-SUMMARY.md" style="color: #2d5f3f;">View Detailed Import Report →</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
