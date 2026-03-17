@@ -183,5 +183,20 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- CMS Integration - Auto-load exhibitions from CMS -->
+    <script src="cms/integration.js"></script>
+    <script>
+        // Load exhibitions when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Exhibitions Page] Starting CMS integration...');
+            loadExhibitionsFromCMS()
+                .then(exhibitions => {
+                    console.log('[Exhibitions Page] Successfully loaded', exhibitions.length, 'exhibitions from CMS');
+                })
+                .catch(error => {
+                    console.error('[Exhibitions Page] Failed to load exhibitions:', error);
+                });
+        });
+    </script>
 </body>
 </html>

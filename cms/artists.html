@@ -44,7 +44,11 @@
             <div class="cms-actions">
                 <button class="btn-primary" onclick="openAddArtistModal()">+ Add New Artist</button>
                 <button class="btn-secondary" onclick="loadArtists()">Refresh</button>
+                <button class="btn-secondary" onclick="generateArtistPages()" style="background: #4caf50; color: white;">🔄 Generate Artist Pages</button>
             </div>
+            
+            <!-- Generation Status -->
+            <div id="generation-status" style="display: none; margin: 16px 0; padding: 16px; border-radius: 8px;"></div>
 
             <!-- Artists Table -->
             <div class="cms-table">

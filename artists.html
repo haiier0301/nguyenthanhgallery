@@ -163,5 +163,20 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- CMS Integration - Auto-load artists from CMS -->
+    <script src="cms/integration.js"></script>
+    <script>
+        // Load artists when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Artists Page] Starting CMS integration...');
+            loadArtistsFromCMS()
+                .then(artists => {
+                    console.log('[Artists Page] Successfully loaded', artists.length, 'artists from CMS');
+                })
+                .catch(error => {
+                    console.error('[Artists Page] Failed to load artists:', error);
+                });
+        });
+    </script>
 </body>
 </html>
