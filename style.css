@@ -3348,7 +3348,7 @@ img {
 }
 
 .lightbox-content img {
-    max-width: calc(95vw - 300px);
+    max-width: calc(95vw - 700px);
     max-height: 95vh;
     width: auto;
     height: auto;
