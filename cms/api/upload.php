@@ -9,6 +9,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+require_once __DIR__ . '/_auth.php';
+$currentUser = require_cms_auth();
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
@@ -23,7 +26,29 @@ if (!isset($_FILES['file'])) {
 }
 
 $file = $_FILES['file'];
-$folder = $_POST['folder'] ?? 'uploads';
+
+// Build folder: artistId+seriesYear → artists/Name/Year; artistName only → artists/Name; else use folder param
+$folder = $_POST['folder'] ?? null;
+if ($folder === null && !empty($_POST['artistName'])) {
+    $name = preg_replace('/[^a-zA-Z0-9\s\-]/', '', trim($_POST['artistName']));
+    $folder = $name !== '' ? 'artists/' . $name : 'artists/Other';
+} elseif ($folder === null && !empty($_POST['artistId']) && !empty($_POST['seriesYear'])) {
+    $artistsPath = __DIR__ . '/../data/artists.json';
+    if (is_file($artistsPath)) {
+        $artists = json_decode(file_get_contents($artistsPath), true) ?: [];
+        foreach ($artists as $a) {
+            if (($a['id'] ?? '') === $_POST['artistId']) {
+                $name = $a['name'] ?? $a['nameDisplay'] ?? 'Artist';
+                $folder = 'artists/' . $name . '/' . preg_replace('/[^0-9]/', '', $_POST['seriesYear']);
+                break;
+            }
+        }
+    }
+    if ($folder === null) {
+        $folder = 'artists/Other/' . preg_replace('/[^0-9]/', '', $_POST['seriesYear'] ?: date('Y'));
+    }
+}
+$folder = $folder ?? 'uploads';
 
 // Validate file type
 $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
@@ -67,17 +92,23 @@ if (!move_uploaded_file($file['tmp_name'], $uploadDir . $fileName)) {
     exit;
 }
 
-// Return success with file info
-$relativePath = '../images/' . $folder . '/' . $fileName;
+// Path for JSON / MVC (no leading ../): images/artists/Name/Year/file.jpg
+$pathForJson = 'images/' . $folder . '/' . $fileName;
+// Path for CMS img src (from cms/): ../images/...
+$pathForCms = '../images/' . $folder . '/' . $fileName;
 
 echo json_encode([
     'success' => true,
     'message' => 'File uploaded successfully',
+    'path' => $pathForJson,
+    'pathCms' => $pathForCms,
     'file' => [
         'name' => $fileName,
-        'path' => $relativePath,
+        'path' => $pathForJson,
+        'pathCms' => $pathForCms,
         'size' => $file['size'],
         'type' => $file['type']
     ]
 ]);
+logActivity('CMS_UPLOAD', "User {$currentUser} uploaded {$pathForJson}");
 ?>

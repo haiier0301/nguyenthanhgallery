@@ -1,13 +1,16 @@
 <?php
 /**
  * CMS API - Save Data Endpoint
- * Handles saving JSON data for artists, artworks, exhibitions
+ * Handles saving JSON data for artists, artworks, exhibitions, art fairs, media
  */
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
+
+require_once __DIR__ . '/_auth.php';
+$currentUser = require_cms_auth();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -29,7 +32,7 @@ $file = $data['file'];
 $content = $data['content'];
 
 // Validate file path (security check)
-$allowedFiles = ['artists.json', 'artworks.json', 'exhibitions.json'];
+$allowedFiles = ['artists.json', 'artworks.json', 'exhibitions.json', 'art-fairs.json', 'media.json'];
 if (!in_array($file, $allowedFiles)) {
     http_response_code(403);
     echo json_encode(['error' => 'Invalid file']);
@@ -65,4 +68,5 @@ echo json_encode([
     'file' => $file,
     'timestamp' => date('Y-m-d H:i:s')
 ]);
+logActivity('CMS_SAVE', "User {$currentUser} saved {$file}");
 ?>

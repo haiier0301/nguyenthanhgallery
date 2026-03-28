@@ -3,16 +3,10 @@
  * Admin Script
  */
 
-// Default admin credentials (should be changed in production)
-const ADMIN_CREDENTIALS = {
-    username: 'admin',
-    password: 'admin123'
-};
+const AUTH_TTL_MS = 8 * 60 * 60 * 1000;
 
-// Check authentication on page load
 document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname.split('/').pop();
-    
     if (currentPage === 'index.html' || currentPage === '') {
         initLogin();
     } else {
@@ -21,36 +15,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/**
- * Initialize login form
- */
-function initLogin() {
+async function initLogin() {
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
-    
-    // Check if already logged in
-    if (isAuthenticated()) {
+    if (!loginForm || !loginError) return;
+
+    if (await verifyServerSession()) {
         window.location.href = 'dashboard.html';
         return;
     }
-    
-    loginForm.addEventListener('submit', (e) => {
+
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const username = document.getElementById('username').value;
+        const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
-        
-        if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-            // Set authentication
+
+        try {
+            const response = await fetch('api/auth.php?action=login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const result = await response.json();
+            if (!response.ok || !result.success) {
+                throw new Error(result.error || 'Invalid username or password');
+            }
+
             sessionStorage.setItem('cms_authenticated', 'true');
-            sessionStorage.setItem('cms_user', username);
-            sessionStorage.setItem('cms_login_time', Date.now());
-            
+            sessionStorage.setItem('cms_user', result.user || username);
+            sessionStorage.setItem('cms_login_time', Date.now().toString());
             window.location.href = 'dashboard.html';
-        } else {
-            loginError.textContent = 'Invalid username or password';
+        } catch (error) {
+            loginError.textContent = error.message || 'Login failed';
             loginError.style.display = 'block';
-            
             setTimeout(() => {
                 loginError.style.display = 'none';
             }, 3000);
@@ -58,174 +55,161 @@ function initLogin() {
     });
 }
 
-/**
- * Check if user is authenticated
- */
 function isAuthenticated() {
     const authenticated = sessionStorage.getItem('cms_authenticated');
-    const loginTime = sessionStorage.getItem('cms_login_time');
-    
-    if (!authenticated || !loginTime) return false;
-    
-    // Session expires after 8 hours
-    const eightHours = 8 * 60 * 60 * 1000;
-    if (Date.now() - parseInt(loginTime) > eightHours) {
+    const loginTime = Number(sessionStorage.getItem('cms_login_time') || 0);
+    if (authenticated !== 'true' || loginTime <= 0) return false;
+    if ((Date.now() - loginTime) > AUTH_TTL_MS) {
         sessionStorage.clear();
         return false;
     }
-    
-    return authenticated === 'true';
+    return true;
 }
 
-/**
- * Check authentication for protected pages
- */
-function checkAuth() {
+async function verifyServerSession() {
+    try {
+        const response = await fetch('api/auth.php?action=status');
+        if (!response.ok) return false;
+        const result = await response.json();
+        return Boolean(result.authenticated);
+    } catch (error) {
+        console.error('Unable to verify server session:', error);
+        return false;
+    }
+}
+
+async function checkAuth() {
     if (!isAuthenticated()) {
+        window.location.href = 'index.html';
+        return;
+    }
+    const serverOk = await verifyServerSession();
+    if (!serverOk) {
+        sessionStorage.clear();
         window.location.href = 'index.html';
     }
 }
 
-/**
- * Logout function
- */
-function logout() {
-    sessionStorage.clear();
-    window.location.href = 'index.html';
+async function logout() {
+    try {
+        await fetch('api/auth.php?action=logout', { method: 'POST' });
+    } catch (error) {
+        console.warn('Server logout failed:', error);
+    } finally {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+    }
 }
 
-/**
- * Initialize dashboard
- */
 function initDashboard() {
-    // Add logout button handler
     const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', logout);
-    }
-    
-    // Load dashboard stats
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
     loadDashboardStats();
 }
 
-/**
- * Load dashboard statistics
- */
 async function loadDashboardStats() {
     try {
-        const artists = await loadJSON('data/artists.json');
-        const artworks = await loadJSON('data/artworks.json');
-        const exhibitions = await loadJSON('data/exhibitions.json');
-        
-        // Update stat cards if they exist
+        const artists = await loadJSONSafe('data/artists.json');
+        const artworks = await loadJSONSafe('data/artworks.json');
+        const exhibitions = await loadJSONSafe('data/exhibitions.json');
+        const artFairs = await loadJSONSafe('data/art-fairs.json');
+
         const artistCount = document.getElementById('artistCount');
         const artworkCount = document.getElementById('artworkCount');
         const exhibitionCount = document.getElementById('exhibitionCount');
-        
-        if (artistCount) artistCount.textContent = artists.length;
-        if (artworkCount) artworkCount.textContent = artworks.length;
-        if (exhibitionCount) exhibitionCount.textContent = exhibitions.length;
+        const artFairCount = document.getElementById('artFairCount');
+
+        if (artistCount) artistCount.textContent = Array.isArray(artists) ? artists.length : 0;
+        if (artworkCount) artworkCount.textContent = Array.isArray(artworks) ? artworks.length : 0;
+        if (exhibitionCount) exhibitionCount.textContent = Array.isArray(exhibitions) ? exhibitions.length : 0;
+        if (artFairCount) artFairCount.textContent = Array.isArray(artFairs) ? artFairs.length : 0;
     } catch (error) {
         console.error('Error loading stats:', error);
     }
 }
 
-/**
- * Load JSON data
- */
 async function loadJSON(path) {
+    const response = await fetch(path);
+    if (response.status === 401) {
+        await handleUnauthorized();
+        throw new Error('Unauthorized');
+    }
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText} - Failed to load ${path}`);
+    }
+    return response.json();
+}
+
+async function loadJSONSafe(path) {
     try {
-        console.log('[CMS] Attempting to load:', path);
-        const response = await fetch(path);
-        console.log('[CMS] Response status:', response.status, response.statusText);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText} - Failed to load ${path}`);
-        }
-        
-        const data = await response.json();
-        console.log('[CMS] Data loaded successfully:', data.length, 'records');
-        return data;
+        return await loadJSON(path);
     } catch (error) {
-        console.error('[CMS] Error loading JSON from', path, ':', error);
-        console.error('[CMS] Full error:', error.message);
-        
-        // Check if it's a CORS error
-        if (error.message.includes('Failed to fetch')) {
-            console.error('[CMS] This might be a CORS or file access issue. Make sure:');
-            console.error('[CMS] 1. The file exists at:', path);
-            console.error('[CMS] 2. The server allows JSON file access');
-            console.error('[CMS] 3. Check browser console for CORS errors');
-        }
-        
-        throw error;
+        console.warn(`Failed to load ${path}:`, error);
+        return [];
     }
 }
 
-/**
- * Save JSON data
- */
 async function saveJSON(path, data) {
+    const fileName = path.split('/').pop();
+    const response = await fetch('api/save.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ file: fileName, content: data })
+    });
+    if (response.status === 401) {
+        await handleUnauthorized();
+        throw new Error('Session expired');
+    }
+    const result = await response.json();
+    if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to save data');
+    }
+
+    const key = path.replace('data/', 'cms_');
+    localStorage.setItem(key, JSON.stringify(data));
+    return true;
+}
+
+async function regenerateLegacyPages() {
     try {
-        // Use PHP backend API
-        const fileName = path.split('/').pop();
-        const response = await fetch('api/save.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                file: fileName,
-                content: data
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error('Failed to save data');
+        const response = await fetch('api/generate-pages.php?action=generate-all');
+        if (response.status === 401) {
+            await handleUnauthorized();
+            return;
         }
-        
         const result = await response.json();
-        console.log('Data saved:', result);
-        
-        // Also save to localStorage as backup
-        const key = path.replace('data/', 'cms_');
-        localStorage.setItem(key, JSON.stringify(data));
-        
-        return true;
+        if (!response.ok || !result.success) {
+            throw new Error(result.error || 'Failed to generate pages');
+        }
+        showNotification(`Generated ${result.files?.length || 0} page(s) successfully`);
     } catch (error) {
-        console.error('Error saving data:', error);
-        // Fallback to localStorage only
-        const key = path.replace('data/', 'cms_');
-        localStorage.setItem(key, JSON.stringify(data));
-        return true;
+        console.error(error);
+        showNotification(error.message || 'Generate pages failed', 'error');
     }
 }
 
-/**
- * Show modal
- */
+async function handleUnauthorized() {
+    sessionStorage.clear();
+    showNotification('Session expired. Please login again.', 'error');
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 800);
+}
+
 function showModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+    if (!modal) return;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
-/**
- * Hide modal
- */
 function hideModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
 }
 
-/**
- * Show notification
- */
 function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
@@ -243,18 +227,13 @@ function showNotification(message, type = 'success') {
         font-size: 14px;
         animation: slideIn 0.3s ease;
     `;
-    
     document.body.appendChild(notification);
-    
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-/**
- * Format date
- */
 function formatDate(dateString) {
     if (!dateString) return '';
     const date = new Date(dateString);

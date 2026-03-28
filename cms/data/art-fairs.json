@@ -1,0 +1,29 @@
+[
+    {
+        "id": "art-fair-red-dot-miami-2025",
+        "year": 2025,
+        "title": "Red Dot Miami Art Fair",
+        "location": "Miami, USA",
+        "link": "https:\/\/redwoodartgroup.com\/rave\/nguyen-thanh-gallery-703\/",
+        "imagePath": "images\/assets\/NGUYEN-THANH-1536x1104.jpg",
+        "description": "International presentation of Nguyen Thanh Gallery artists."
+    },
+    {
+        "id": "art-fair-london-impression-2024",
+        "year": 2024,
+        "title": "Vietnamese paintings make a strong impression at the International Art Fair in London",
+        "location": "London, United Kingdom",
+        "link": "https:\/\/thethaovanhoa.vn\/tranh-viet-nam-gay-an-tuong-tai-hoi-cho-nghe-thuat-quoc-te-o-london-anh-20240513110140559.htm",
+        "imagePath": "images\/assets\/vnapotaltranhvietnamgayantuongtaihoichonghethuatquocteolondon7372666-1715572630566447290321.webp",
+        "description": "Press highlight and international exposure in London."
+    },
+    {
+        "id": "art-fair-affordable-london-2024",
+        "year": 2024,
+        "title": "Affordable Art Fair London",
+        "location": "London, United Kingdom",
+        "link": "https:\/\/www.facebook.com\/share\/p\/1Ct2PBWcZo\/",
+        "imagePath": "images\/assets\/art-fairs .jpg",
+        "description": "Participation in Affordable Art Fair London."
+    }
+]

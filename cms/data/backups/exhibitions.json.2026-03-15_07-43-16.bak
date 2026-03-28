@@ -1,0 +1,74 @@
+[
+    {
+        "id": "exhibition-2025-miami",
+        "type": "award",
+        "year": "2025",
+        "title": "Spotlight Award — Red Dot Miami Art Fair",
+        "location": "Miami, Florida, USA",
+        "description": "Recognition award at prestigious international art fair"
+    },
+    {
+        "id": "exhibition-2024-france",
+        "type": "art-fair",
+        "year": "2024",
+        "title": "Promenarts Gallery Collaboration",
+        "location": "France",
+        "description": "Ongoing gallery collaboration (since 2024)"
+    },
+    {
+        "id": "exhibition-2021-montreal",
+        "type": "group",
+        "year": "2021",
+        "title": "Collaborative Exhibition",
+        "location": "Montreal, Canada",
+        "description": ""
+    },
+    {
+        "id": "exhibition-2018-red-cross",
+        "type": "group",
+        "year": "2018",
+        "title": "Charity Exhibition with the Ho Chi Minh City Red Cross",
+        "location": "Ho Chi Minh City, Vietnam",
+        "description": "Fundraising exhibition for humanitarian causes"
+    },
+    {
+        "id": "exhibition-2016-grand",
+        "type": "group",
+        "year": "2016",
+        "title": "Group exhibition at the Grand Hotel",
+        "location": "Saigon, Vietnam",
+        "description": ""
+    },
+    {
+        "id": "exhibition-2014-continental",
+        "type": "group",
+        "year": "2014",
+        "title": "Group exhibition at the Continental Hotel",
+        "location": "Saigon, Vietnam",
+        "description": ""
+    },
+    {
+        "id": "exhibition-2010-grand",
+        "type": "group",
+        "year": "2010",
+        "title": "Group exhibition at the Grand Hotel",
+        "location": "Ho Chi Minh City, Vietnam",
+        "description": ""
+    },
+    {
+        "id": "exhibition-2005-present",
+        "type": "group",
+        "year": "2005",
+        "title": "Selected solo and group exhibitions",
+        "location": "Ho Chi Minh City and Hanoi, Vietnam",
+        "description": "Ongoing exhibition program from 2005 to present"
+    },
+    {
+        "id": "exhibition-1773560367455",
+        "year": 2022,
+        "type": "solo",
+        "title": "test Exhibition solo Title *",
+        "location": "test Exhibition solo Location",
+        "description": "test Exhibition solo Description"
+    }
+]

@@ -9,7 +9,71 @@ let artistsData = [];
 document.addEventListener('DOMContentLoaded', () => {
     loadArtworks();
     loadArtistsForDropdown();
+    initArtworkImagePicker();
 });
+
+/**
+ * Chọn ảnh từ máy: mở file picker, upload lên server, điền path vào ô Image Path
+ */
+function initArtworkImagePicker() {
+    const input = document.getElementById('artworkImageFile');
+    const btn = document.getElementById('artworkImageBrowse');
+    const pathInput = document.getElementById('artworkImage');
+    if (!input || !btn || !pathInput) return;
+
+    btn.addEventListener('click', () => {
+        const artistId = document.getElementById('artworkArtist')?.value;
+        const seriesYear = document.getElementById('artworkSeries')?.value;
+        if (!artistId) {
+            showNotification('Vui lòng chọn Artist trước.', 'warning');
+            return;
+        }
+        if (!seriesYear) {
+            showNotification('Vui lòng nhập Series Year (năm) trước.', 'warning');
+            return;
+        }
+        input.click();
+    });
+
+    input.addEventListener('change', async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const artistId = document.getElementById('artworkArtist').value;
+        const seriesYear = document.getElementById('artworkSeries').value || new Date().getFullYear();
+
+        btn.disabled = true;
+        btn.textContent = 'Đang tải lên...';
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('artistId', artistId);
+            formData.append('seriesYear', seriesYear);
+
+            const response = await fetch('api/upload.php', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.status === 401) {
+                await handleUnauthorized();
+                return;
+            }
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.error || 'Upload thất bại');
+            }
+            pathInput.value = result.path || result.file?.path;
+            showNotification('Đã tải ảnh lên thành công.');
+        } catch (err) {
+            console.error(err);
+            showNotification(err.message || 'Lỗi khi tải ảnh lên.', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Chọn ảnh từ máy';
+            input.value = '';
+        }
+    });
+}
 
 /**
  * Load all artworks
@@ -106,10 +170,11 @@ function renderArtworksTable(data = artworksData) {
     
     tbody.innerHTML = data.map(artwork => {
         const artist = artistsData.find(a => a.id === artwork.artistId);
+        const imgSrc = (artwork.imagePath && !artwork.imagePath.startsWith('../') && !artwork.imagePath.startsWith('http')) ? '../' + artwork.imagePath : artwork.imagePath;
         return `
             <tr>
                 <td>
-                    <img src="${artwork.imagePath}" 
+                    <img src="${imgSrc}" 
                          alt="${artwork.code}" 
                          class="image-preview"
                          onerror="this.src='../images/assets/placeholder.jpg'">

@@ -17,55 +17,32 @@ const CMS_DATA_PATH = './cms/data/';
  */
 async function loadArtistsFromCMS() {
     try {
-        console.log('[CMS Integration] Loading artists...');
         const response = await fetch(CMS_DATA_PATH + 'artists.json');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: Cannot load artists.json`);
-        }
-        
         const artists = await response.json();
-        console.log('[CMS Integration] Loaded', artists.length, 'artists');
         
-        // Render artist list - matches artists.html structure
-        const listContainer = document.querySelector('.artists-grid.artists-grid-2x5');
+        // Render artist list
+        const listContainer = document.querySelector('.artist-list-grid');
         if (listContainer) {
             listContainer.innerHTML = artists.map(artist => `
-                <a href="artists/${artist.slug}.html" class="artist-name">${artist.nameDisplay}</a>
-            `).join('');
-            console.log('[CMS Integration] Rendered artist list');
-        }
-        
-        // Render artist thumbnails - matches artists.html structure
-        const thumbContainer = document.querySelector('.thumbnails-grid');
-        if (thumbContainer) {
-            thumbContainer.innerHTML = artists.map(artist => `
-                <a href="artists/${artist.slug}.html" class="artist-thumb">
-                    <div class="artist-thumb-image">
-                        <img src="${artist.thumbnailImage}" alt="${artist.nameDisplay}">
-                    </div>
-                    <span class="artist-thumb-name">${artist.nameDisplay}</span>
+                <a href="artists/${artist.slug}.html" class="artist-name-link">
+                    ${artist.nameDisplay}
                 </a>
             `).join('');
-            console.log('[CMS Integration] Rendered artist thumbnails');
+        }
+        
+        // Render artist thumbnails
+        const thumbContainer = document.querySelector('.artist-thumbnails');
+        if (thumbContainer) {
+            thumbContainer.innerHTML = artists.map(artist => `
+                <a href="artists/${artist.slug}.html" class="artist-thumbnail-item">
+                    <img src="${artist.thumbnailImage}" alt="${artist.name}">
+                </a>
+            `).join('');
         }
         
         return artists;
     } catch (error) {
-        console.error('[CMS Integration] Error loading artists:', error);
-        
-        // Show error in UI
-        const listContainer = document.querySelector('.artists-grid.artists-grid-2x5');
-        if (listContainer) {
-            listContainer.innerHTML = `
-                <div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #f44336;">
-                    <strong>Error loading artists from CMS</strong><br>
-                    <small>${error.message}</small><br>
-                    <small>Check console for details</small>
-                </div>
-            `;
-        }
-        
+        console.error('Error loading artists from CMS:', error);
         return [];
     }
 }
@@ -117,19 +94,12 @@ async function loadArtworksByCMS(artistId, seriesYear = null) {
 }
 
 /**
- * Load exhibitions and render to page
+ * Load exhibitions
  */
 async function loadExhibitionsFromCMS(type = null) {
     try {
-        console.log('[CMS Integration] Loading exhibitions...');
         const response = await fetch(CMS_DATA_PATH + 'exhibitions.json');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: Cannot load exhibitions.json`);
-        }
-        
         let exhibitions = await response.json();
-        console.log('[CMS Integration] Loaded', exhibitions.length, 'exhibitions');
         
         // Filter by type if provided
         if (type) {
@@ -139,79 +109,10 @@ async function loadExhibitionsFromCMS(type = null) {
         // Sort by year descending
         exhibitions.sort((a, b) => b.year - a.year);
         
-        // Render if container exists
-        renderExhibitionsToPage(exhibitions);
-        
         return exhibitions;
     } catch (error) {
-        console.error('[CMS Integration] Error loading exhibitions:', error);
+        console.error('Error loading exhibitions from CMS:', error);
         return [];
-    }
-}
-
-/**
- * Render exhibitions to exhibitions.html page
- */
-function renderExhibitionsToPage(exhibitions) {
-    // Group by type
-    const awards = exhibitions.filter(e => e.type === 'award');
-    const history = exhibitions.filter(e => e.type === 'group' || e.type === 'solo');
-    const collaborations = exhibitions.filter(e => e.type === 'art-fair');
-    
-    // Render awards section
-    const awardsContainer = document.querySelector('.exhibitions-history-block:nth-of-type(1) .exhibitions-history-list');
-    if (awardsContainer && awards.length > 0) {
-        awardsContainer.innerHTML = `
-            <div class="exhibitions-history-year-group">
-                <p class="exhibitions-year">&nbsp;</p>
-                <ul class="exhibitions-history-items">
-                    ${awards.map(ex => `<li>${ex.title}, ${ex.location}, ${ex.year}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-        console.log('[CMS Integration] Rendered', awards.length, 'awards');
-    }
-    
-    // Render exhibition history
-    const historyContainer = document.querySelector('.exhibitions-history-block:nth-of-type(2) .exhibitions-history-list');
-    if (historyContainer && history.length > 0) {
-        // Group by year
-        const byYear = {};
-        history.forEach(ex => {
-            if (!byYear[ex.year]) byYear[ex.year] = [];
-            byYear[ex.year].push(ex);
-        });
-        
-        historyContainer.innerHTML = Object.keys(byYear)
-            .sort((a, b) => b - a)
-            .map(year => `
-                <div class="exhibitions-history-year-group">
-                    <p class="exhibitions-year">${year}</p>
-                    <ul class="exhibitions-history-items">
-                        ${byYear[year].map(ex => `<li>${ex.title} — ${ex.location}</li>`).join('')}
-                    </ul>
-                </div>
-            `).join('');
-        console.log('[CMS Integration] Rendered', history.length, 'exhibitions');
-    }
-    
-    // Render collaborations
-    const collabContainer = document.querySelector('.exhibitions-history-block:nth-of-type(3) .exhibitions-history-list');
-    if (collabContainer && collaborations.length > 0) {
-        collabContainer.innerHTML = `
-            <div class="exhibitions-history-year-group">
-                <p class="exhibitions-year">&nbsp;</p>
-                <ul class="exhibitions-history-items">
-                    ${collaborations.map(ex => `
-                        <li>
-                            ${ex.title} — ${ex.location}<br>
-                            ${ex.description ? `<span class="exhibitions-note">${ex.description}</span>` : ''}
-                        </li>
-                    `).join('')}
-                </ul>
-            </div>
-        `;
-        console.log('[CMS Integration] Rendered', collaborations.length, 'collaborations');
     }
 }
 

@@ -44,11 +44,7 @@
             <div class="cms-actions">
                 <button class="btn-primary" onclick="openAddArtistModal()">+ Add New Artist</button>
                 <button class="btn-secondary" onclick="loadArtists()">Refresh</button>
-                <button class="btn-secondary" onclick="generateArtistPages()" style="background: #4caf50; color: white;">🔄 Generate Artist Pages</button>
             </div>
-            
-            <!-- Generation Status -->
-            <div id="generation-status" style="display: none; margin: 16px 0; padding: 16px; border-radius: 8px;"></div>
 
             <!-- Artists Table -->
             <div class="cms-table">
@@ -117,12 +113,21 @@
                     
                     <div class="form-group">
                         <label for="artistFeaturedImage">Featured Image Path</label>
-                        <input type="text" id="artistFeaturedImage" name="featuredImage" placeholder="../images/artists/...">
+                        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <input type="text" id="artistFeaturedImage" name="featuredImage" placeholder="../images/artists/..." style="flex: 1; min-width: 200px;">
+                            <input type="file" id="artistFeaturedImageFile" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" style="display: none;">
+                            <button type="button" class="btn-secondary" id="artistFeaturedImageBrowse">Chọn ảnh từ máy</button>
+                        </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="artistThumbnail">Thumbnail Image Path</label>
-                        <input type="text" id="artistThumbnail" name="thumbnailImage" placeholder="images/artists/...">
+                        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <input type="text" id="artistThumbnail" name="thumbnailImage" placeholder="images/artists/..." style="flex: 1; min-width: 200px;">
+                            <input type="file" id="artistThumbnailFile" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" style="display: none;">
+                            <button type="button" class="btn-secondary" id="artistThumbnailBrowse">Chọn ảnh từ máy</button>
+                        </div>
+                        <small style="color: #666;">Nhập tên Artist ở trên trước khi chọn ảnh để lưu đúng thư mục.</small>
                     </div>
                     
                     <div class="form-group">

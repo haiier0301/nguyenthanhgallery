@@ -1,5 +1,5 @@
 /**
- * Nguyen Thanh Gallery
+ * Nguyen Thanh Gallery aaa
  * Main JavaScript
  */
 
@@ -137,20 +137,17 @@ function initLightbox() {
     const lightboxCaptionTitle = overlay.querySelector('.lightbox-caption-title');
     const lightboxCaptionMedium = overlay.querySelector('.lightbox-caption-medium');
 
-    function openLightbox(src, alt, caption, size) {
+    function openLightbox(src, alt, title, medium, size) {
         lightboxImg.src = src;
         lightboxImg.alt = alt || '';
         
         // Parse and display caption
-        if (caption) {
-            lightboxCaptionTitle.textContent = caption.split(' - ')[0] || '';
-            const medium = caption.split(' - ')[1] || '';
-            
-            // Include size if available (currently hidden by CSS)
+        if (title || medium) {
+            lightboxCaptionTitle.textContent = title || '';
             if (size) {
-                lightboxCaptionMedium.innerHTML = `${medium.toUpperCase()}<span class="lightbox-size">${size}</span>`;
+                lightboxCaptionMedium.innerHTML = `${(medium || '').toUpperCase()}<span class="lightbox-size">${size}</span>`;
             } else {
-                lightboxCaptionMedium.textContent = medium.toUpperCase();
+                lightboxCaptionMedium.textContent = (medium || '').toUpperCase();
             }
         } else {
             lightboxCaptionTitle.textContent = '';
@@ -194,8 +191,10 @@ function initLightbox() {
             
             // Get caption and size from adjacent elements
             const artworkItem = img.closest('.artwork-item, .exhibition-item');
-            let caption = '';
+            let title = '';
+            let medium = '';
             let size = '';
+            const dataSize = (img.getAttribute('data-size') || '').trim();
             
             if (artworkItem) {
                 const captionEl = artworkItem.querySelector('.artwork-caption, .exhibition-caption');
@@ -207,13 +206,22 @@ function initLightbox() {
                         size = sizeSpan.textContent.trim();
                         sizeSpan.remove();
                     }
-                    caption = captionClone.textContent.trim();
+                    const caption = captionClone.textContent.trim();
+                    const parts = caption.split(' - ').map(part => part.trim()).filter(Boolean);
+                    title = parts[0] || '';
+                    medium = parts[1] || '';
+                    if (!size && parts.length > 2) {
+                        size = parts.slice(2).join(' - ');
+                    }
                 } else {
-                    caption = '';
+                    title = alt;
                 }
             }
+            if (!size && dataSize) {
+                size = dataSize;
+            }
             
-            openLightbox(src, alt, caption, size);
+            openLightbox(src, alt, title, medium, size);
         });
     });
 }

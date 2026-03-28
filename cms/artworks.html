@@ -131,7 +131,12 @@
                     
                     <div class="form-group">
                         <label for="artworkImage">Image Path *</label>
-                        <input type="text" id="artworkImage" name="imagePath" required placeholder="../images/artists/...">
+                        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <input type="text" id="artworkImage" name="imagePath" required placeholder="../images/artists/..." style="flex: 1; min-width: 200px;">
+                            <input type="file" id="artworkImageFile" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" style="display: none;">
+                            <button type="button" class="btn-secondary" id="artworkImageBrowse">Chọn ảnh từ máy</button>
+                        </div>
+                        <small style="color: #666;">Chọn Artist và Series Year trước, sau đó bấm "Chọn ảnh từ máy" để upload.</small>
                     </div>
                     
                     <div class="form-group">

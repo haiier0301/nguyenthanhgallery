@@ -1,0 +1,23 @@
+[2026-03-25 15:49:43] AUTH_LOGIN: User admin logged in
+[2026-03-25 15:49:43] CMS_SAVE: User admin saved media.json
+[2026-03-25 15:51:17] AUTH_LOGIN: User admin logged in
+[2026-03-25 15:57:26] CMS_SAVE: User admin saved artworks.json
+[2026-03-25 15:58:21] CMS_UPLOAD: User admin uploaded images/art-fair/1vIpYe1.jpeg
+[2026-03-25 15:58:35] CMS_SAVE: User admin saved art-fairs.json
+[2026-03-25 16:02:53] CMS_SAVE: User admin saved art-fairs.json
+[2026-03-25 16:02:55] CMS_SAVE: User admin saved art-fairs.json
+[2026-03-25 16:20:20] CMS_SAVE: User admin saved exhibitions.json
+[2026-03-25 16:20:24] CMS_SAVE: User admin saved exhibitions.json
+[2026-03-25 16:24:50] CMS_UPLOAD: User admin uploaded images/artists/Tran Ngoc Duc/2022/1vIpYe1.jpeg
+[2026-03-25 16:24:54] CMS_SAVE: User admin saved artworks.json
+[2026-03-25 16:34:30] CMS_SAVE: User admin saved artworks.json
+[2026-03-25 16:35:46] CMS_SAVE: User admin saved artworks.json
+[2026-03-25 16:36:44] AUTH_LOGIN: User admin logged in
+[2026-03-25 16:36:44] CMS_SAVE: User admin saved media.json
+[2026-03-25 16:36:45] AUTH_LOGOUT: User admin logged out
+[2026-03-25 16:37:00] AUTH_LOGIN: User admin logged in
+[2026-03-25 16:37:00] CMS_UPLOAD: User admin uploaded images/qa-test/thay.jpg
+[2026-03-25 16:37:00] CMS_DELETE_MEDIA: User admin deleted images/qa-test/thay.jpg
+[2026-03-28 10:52:53] AUTH_LOGIN: User admin logged in
+[2026-03-28 11:00:11] CMS_DELETE_MEDIA: User admin deleted images/art-fair/z7582056740427_101d4e93779797e582544914d2747a9b.jpg
+[2026-03-28 11:00:11] CMS_SAVE: User admin saved media.json

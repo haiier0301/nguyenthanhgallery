@@ -123,14 +123,25 @@
         <main class="cms-main">
             <div class="cms-header">
                 <h1>Media Library</h1>
-                <p>Upload and manage images for artworks, artists, and exhibitions</p>
+                <p>Upload, catalog, and delete images used across the website</p>
             </div>
 
             <!-- Upload Area -->
             <div class="upload-area" id="uploadArea">
                 <div class="upload-icon">📁</div>
                 <h3>Drag & Drop Images Here</h3>
-                <p style="color: var(--color-text-light); margin-top: 8px;">or click to browse</p>
+                <p style="color: var(--color-text-light); margin-top: 8px;">or click Upload to browse files</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-top: 16px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    <select id="uploadFolder">
+                        <option value="artists">artists</option>
+                        <option value="exhibitions">exhibitions</option>
+                        <option value="art-fair">art-fair</option>
+                        <option value="assets">assets</option>
+                        <option value="uploads" selected>uploads</option>
+                    </select>
+                    <input type="text" id="uploadSubfolder" placeholder="Optional subfolder, e.g. nguyen-thanh/2026">
+                    <button id="uploadBtn" class="btn-primary" type="button">Upload</button>
+                </div>
                 <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
             </div>
 
@@ -142,6 +153,7 @@
                     <option value="exhibitions">Exhibitions</option>
                     <option value="art-fair">Art Fairs</option>
                     <option value="assets">Assets</option>
+                    <option value="uploads">Uploads</option>
                 </select>
             </div>
 

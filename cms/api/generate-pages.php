@@ -4,6 +4,9 @@
  * Generates HTML pages from JSON data
  */
 
+require_once __DIR__ . '/_auth.php';
+$currentUser = require_cms_auth();
+
 // Load JSON data
 function loadJSON($file) {
     $filepath = __DIR__ . '/../data/' . $file;
@@ -98,6 +101,8 @@ HTML;
     </footer>
 
     <script src="../../script.js"></script>
+
+   
 </body>
 </html>
 HTML;
@@ -132,6 +137,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'generate-all') {
         'message' => 'Pages generated successfully',
         'files' => $generated
     ]);
+    logActivity('CMS_GENERATE_PAGES', "User {$currentUser} generated " . count($generated) . " legacy pages");
 } else {
     echo '<h1>CMS Page Generator</h1>';
     echo '<p><a href="?action=generate-all">Generate All Pages</a></p>';

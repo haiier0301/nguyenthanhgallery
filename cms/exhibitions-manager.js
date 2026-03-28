@@ -48,8 +48,7 @@ function renderExhibitionsTable() {
         const typeColors = {
             'solo': '#2196f3',
             'group': '#4caf50',
-            'award': '#ff9800',
-            'art-fair': '#9c27b0'
+            'award': '#ff9800'
         };
         
         return `

@@ -9,182 +9,237 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMediaFiles();
 });
 
-/**
- * Initialize media upload
- */
 function initMediaUpload() {
     const uploadArea = document.getElementById('uploadArea');
     const fileInput = document.getElementById('fileInput');
-    
-    // Click to upload
-    uploadArea.addEventListener('click', () => fileInput.click());
-    
-    // Drag and drop
-    uploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadArea.classList.add('dragover');
-    });
-    
-    uploadArea.addEventListener('dragleave', () => {
-        uploadArea.classList.remove('dragover');
-    });
-    
-    uploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadArea.classList.remove('dragover');
-        
-        const files = Array.from(e.dataTransfer.files);
-        handleFiles(files);
-    });
-    
-    // File input change
-    fileInput.addEventListener('change', (e) => {
-        const files = Array.from(e.target.files);
-        handleFiles(files);
-    });
+    const uploadBtn = document.getElementById('uploadBtn');
+
+    if (uploadArea && fileInput) {
+        uploadArea.addEventListener('click', (e) => {
+            if (e.target.closest('button') || e.target.closest('select') || e.target.closest('input')) {
+                return;
+            }
+            fileInput.click();
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', async (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files || []);
+            await handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files || []);
+            await handleFiles(files);
+            fileInput.value = '';
+        });
+    }
+
+    if (uploadBtn && fileInput) {
+        uploadBtn.addEventListener('click', () => fileInput.click());
+    }
 }
 
-/**
- * Handle uploaded files
- */
-function handleFiles(files) {
-    const imageFiles = files.filter(file => file.type.startsWith('image/'));
-    
+async function loadMediaFiles() {
+    try {
+        mediaFiles = await loadJSON('data/media.json');
+        if (!Array.isArray(mediaFiles)) mediaFiles = [];
+    } catch (error) {
+        console.warn('media.json missing or invalid, using empty list', error);
+        mediaFiles = [];
+    }
+    renderMediaGrid();
+}
+
+async function persistMedia() {
+    await saveJSON('data/media.json', mediaFiles);
+}
+
+function getUploadFolder() {
+    const folderSelect = document.getElementById('uploadFolder');
+    const customSubfolder = document.getElementById('uploadSubfolder');
+    const folder = folderSelect?.value || 'uploads';
+    const subfolderRaw = (customSubfolder?.value || '').trim();
+    const sanitizedSubfolder = subfolderRaw.replace(/[^a-zA-Z0-9/_-]/g, '').replace(/\/{2,}/g, '/').replace(/^\/|\/$/g, '');
+    return sanitizedSubfolder ? `${folder}/${sanitizedSubfolder}` : folder;
+}
+
+async function handleFiles(files) {
+    const imageFiles = files.filter((file) => file.type.startsWith('image/'));
     if (imageFiles.length === 0) {
         showNotification('Please select image files only', 'error');
         return;
     }
-    
-    imageFiles.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newFile = {
-                id: `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-                name: file.name,
-                path: `../images/uploads/${file.name}`,
-                dataUrl: e.target.result,
-                size: formatFileSize(file.size),
-                type: file.type,
+
+    const folder = getUploadFolder();
+    const uploadArea = document.getElementById('uploadArea');
+    if (uploadArea) uploadArea.style.opacity = '0.7';
+
+    let successCount = 0;
+    for (const file of imageFiles) {
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('folder', folder);
+
+            const response = await fetch('api/upload.php', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.status === 401) {
+                await handleUnauthorized();
+                return;
+            }
+            const result = await response.json();
+            if (!response.ok || !result.success) {
+                throw new Error(result.error || 'Upload failed');
+            }
+
+            const item = {
+                id: `media-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+                name: result.file?.name || file.name,
+                path: result.path || result.file?.path || '',
+                folder: folder.split('/')[0],
+                size: formatFileSize(Number(result.file?.size || file.size || 0)),
+                type: result.file?.type || file.type,
                 uploadedAt: new Date().toISOString()
             };
-            
-            mediaFiles.push(newFile);
-            renderMediaGrid();
-            showNotification(`${file.name} uploaded successfully (demo)`);
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-/**
- * Load existing media files
- */
-function loadMediaFiles() {
-    // In production, this would fetch from backend
-    // For demo, show existing images from the project
-    mediaFiles = [
-        {
-            id: 'demo-1',
-            name: 'Nguyen Thanh - 2002_1.png',
-            path: '../images/artists/Nguyen Thanh/2002/2002_1.png',
-            folder: 'artists',
-            size: '2.5 MB'
-        },
-        {
-            id: 'demo-2',
-            name: 'Ngo Dang Hiep_1.jpg',
-            path: '../images/artists/Ngo Dang Hiep/Ngo Dang Hiep_1.jpg',
-            folder: 'artists',
-            size: '261 KB'
+            mediaFiles.unshift(item);
+            successCount += 1;
+        } catch (error) {
+            console.error('Upload error:', error);
+            showNotification(`${file.name}: ${error.message || 'Upload failed'}`, 'error');
         }
-    ];
-    
+    }
+
+    await persistMedia();
     renderMediaGrid();
+
+    if (uploadArea) uploadArea.style.opacity = '';
+    if (successCount > 0) {
+        showNotification(`Uploaded ${successCount} image(s) successfully`);
+    }
 }
 
-/**
- * Render media grid
- */
 function renderMediaGrid(data = mediaFiles) {
     const grid = document.getElementById('mediaGrid');
-    
-    if (!data || data.length === 0) {
+    if (!grid) return;
+
+    if (!Array.isArray(data) || data.length === 0) {
         grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--color-text-light);">No images found</div>';
         return;
     }
-    
-    grid.innerHTML = data.map(file => `
+
+    grid.innerHTML = data.map((file) => {
+        const imageSrc = toCmsImagePath(file.path);
+        return `
         <div class="media-item" onclick="showImageDetail('${file.id}')">
-            <img src="${file.dataUrl || file.path}" alt="${file.name}" class="media-thumbnail">
+            <img src="${imageSrc}" alt="${escapeHtml(file.name || 'media')}" class="media-thumbnail" onerror="this.style.display='none'">
             <div class="media-info">
-                <div class="media-name">${file.name}</div>
-                <div class="media-size">${file.size}</div>
+                <div class="media-name">${escapeHtml(file.name || '')}</div>
+                <div class="media-size">${escapeHtml(file.size || '')}</div>
             </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
 }
 
-/**
- * Filter media
- */
 function filterMedia() {
-    const selectedFolder = document.getElementById('filterFolder').value;
-    
+    const selectedFolder = document.getElementById('filterFolder')?.value || '';
     if (!selectedFolder) {
         renderMediaGrid(mediaFiles);
         return;
     }
-    
-    const filtered = mediaFiles.filter(f => f.folder === selectedFolder);
+    const filtered = mediaFiles.filter((f) => f.folder === selectedFolder || (f.path || '').includes(`images/${selectedFolder}/`));
     renderMediaGrid(filtered);
 }
 
-/**
- * Show image detail modal
- */
 function showImageDetail(fileId) {
-    const file = mediaFiles.find(f => f.id === fileId);
+    const file = mediaFiles.find((f) => f.id === fileId);
     if (!file) return;
-    
-    document.getElementById('modalImage').src = file.dataUrl || file.path;
-    document.getElementById('modalImagePath').value = file.path;
-    document.getElementById('modalImageName').textContent = file.name;
-    
-    // Store current file id for actions
+
+    document.getElementById('modalImage').src = toCmsImagePath(file.path);
+    document.getElementById('modalImagePath').value = file.path || '';
+    document.getElementById('modalImageName').textContent = `${file.name || ''} (${file.size || ''})`;
     window.currentImageId = fileId;
-    
     showModal('imageModal');
 }
 
-/**
- * Copy image path
- */
-function copyPath() {
-    const pathInput = document.getElementById('modalImagePath');
-    pathInput.select();
-    document.execCommand('copy');
-    showNotification('Path copied to clipboard');
+async function copyPath() {
+    const path = document.getElementById('modalImagePath').value;
+    if (!path) return;
+    try {
+        await navigator.clipboard.writeText(path);
+        showNotification('Path copied to clipboard');
+    } catch (error) {
+        console.error(error);
+        showNotification('Could not copy path', 'error');
+    }
 }
 
-/**
- * Delete image
- */
-function deleteImage() {
+async function deleteImage() {
+    const item = mediaFiles.find((f) => f.id === window.currentImageId);
+    if (!item) return;
     if (!confirm('Are you sure you want to delete this image?')) return;
-    
-    mediaFiles = mediaFiles.filter(f => f.id !== window.currentImageId);
+
+    try {
+        const response = await fetch('api/delete-media.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ path: item.path })
+        });
+        if (response.status === 401) {
+            await handleUnauthorized();
+            return;
+        }
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+            throw new Error(result.error || 'Delete failed');
+        }
+    } catch (error) {
+        console.error(error);
+        showNotification(error.message || 'Delete failed', 'error');
+        return;
+    }
+
+    mediaFiles = mediaFiles.filter((f) => f.id !== window.currentImageId);
+    await persistMedia();
     renderMediaGrid();
     hideModal('imageModal');
     showNotification('Image deleted successfully');
 }
 
-/**
- * Format file size
- */
+function toCmsImagePath(path) {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('../')) {
+        return path;
+    }
+    return `../${path.replace(/^\//, '')}`;
+}
+
 function formatFileSize(bytes) {
-    if (bytes === 0) return '0 B';
+    if (!Number.isFinite(bytes) || bytes <= 0) return '0 B';
     const k = 1024;
     const sizes = ['B', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }

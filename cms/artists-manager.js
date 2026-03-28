@@ -7,7 +7,63 @@ let artistsData = [];
 // Load artists on page load
 document.addEventListener('DOMContentLoaded', () => {
     loadArtists();
+    initArtistImagePickers();
 });
+
+/**
+ * Chọn ảnh từ máy cho Featured Image và Thumbnail Image (form Artists)
+ */
+function initArtistImagePickers() {
+    const artistName = () => document.getElementById('artistName')?.value?.trim() || 'Other';
+
+    function setupPicker(fileInputId, btnId, pathInputId, fieldLabel) {
+        const input = document.getElementById(fileInputId);
+        const btn = document.getElementById(btnId);
+        const pathInput = document.getElementById(pathInputId);
+        if (!input || !btn || !pathInput) return;
+
+        btn.addEventListener('click', () => input.click());
+
+        input.addEventListener('change', async (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const name = artistName();
+            btn.disabled = true;
+            btn.textContent = 'Đang tải lên...';
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('folder', 'artists/' + name);
+
+                const response = await fetch('api/upload.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (response.status === 401) {
+                    await handleUnauthorized();
+                    return;
+                }
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.error || 'Upload thất bại');
+                }
+                pathInput.value = result.path || result.file?.path;
+                showNotification(fieldLabel + ' đã tải lên thành công.');
+            } catch (err) {
+                console.error(err);
+                showNotification(err.message || 'Lỗi khi tải ảnh lên.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Chọn ảnh từ máy';
+                input.value = '';
+            }
+        });
+    }
+
+    setupPicker('artistFeaturedImageFile', 'artistFeaturedImageBrowse', 'artistFeaturedImage', 'Featured Image');
+    setupPicker('artistThumbnailFile', 'artistThumbnailBrowse', 'artistThumbnail', 'Thumbnail');
+}
 
 /**
  * Load all artists
@@ -43,10 +99,13 @@ function renderArtistsTable() {
         return;
     }
     
-    tbody.innerHTML = artistsData.map(artist => `
+    tbody.innerHTML = artistsData.map(artist => {
+        const imgPath = artist.thumbnailImage || artist.featuredImage;
+        const imgSrc = (imgPath && !imgPath.startsWith('../') && !imgPath.startsWith('http')) ? '../' + imgPath : imgPath;
+        return `
         <tr>
             <td>
-                <img src="${artist.thumbnailImage || artist.featuredImage}" 
+                <img src="${imgSrc}" 
                      alt="${artist.name}" 
                      class="image-preview"
                      onerror="this.src='../images/assets/placeholder.jpg'">
@@ -68,7 +127,8 @@ function renderArtistsTable() {
                 </div>
             </td>
         </tr>
-    `).join('');
+    `;
+    }).join('');
 }
 
 /**
@@ -126,7 +186,9 @@ function viewArtist(artistId) {
     const artist = artistsData.find(a => a.id === artistId);
     if (!artist) return;
     
-    window.open(`../artists/${artist.slug}.html`, '_blank');
+    const slug = (artist.slug || '').replace(/^artist-/, '');
+    const path = slug ? `../artists/${slug}` : `../artists/${artist.id}`;
+    window.open(path, '_blank');
 }
 
 /**
@@ -179,73 +241,4 @@ function generateSlug(text) {
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
-}
-
-/**
- * Generate individual artist HTML pages
- */
-async function generateArtistPages() {
-    const statusDiv = document.getElementById('generation-status');
-    statusDiv.style.display = 'block';
-    statusDiv.style.background = '#fff3cd';
-    statusDiv.style.borderLeft = '4px solid #ff9800';
-    statusDiv.innerHTML = '<strong>⏳ Generating artist pages...</strong><p>Please wait...</p>';
-    
-    try {
-        console.log('[Generate Pages] Starting generation...');
-        
-        const response = await fetch('api/generate-artist-pages.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
-        const result = await response.json();
-        console.log('[Generate Pages] Result:', result);
-        
-        if (result.success) {
-            statusDiv.style.background = '#d4edda';
-            statusDiv.style.borderLeft = '4px solid #28a745';
-            statusDiv.innerHTML = `
-                <strong>✅ Success! Generated ${result.generated} artist pages</strong>
-                <p>Created pages:</p>
-                <ul style="margin: 8px 0; padding-left: 20px;">
-                    ${result.pages.map(page => `<li><a href="../artists/${page}.html" target="_blank">${page}.html</a></li>`).join('')}
-                </ul>
-                ${result.errors.length > 0 ? `<p style="color: #d32f2f;">Failed: ${result.errors.join(', ')}</p>` : ''}
-                <p style="margin-top: 12px;"><small>You can now navigate to these pages on your website.</small></p>
-            `;
-            
-            showNotification(`Generated ${result.generated} artist pages`);
-            
-            // Auto-hide after 10 seconds
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 10000);
-        } else {
-            throw new Error(result.message || 'Generation failed');
-        }
-        
-    } catch (error) {
-        console.error('[Generate Pages] Error:', error);
-        statusDiv.style.background = '#f8d7da';
-        statusDiv.style.borderLeft = '4px solid #dc3545';
-        statusDiv.innerHTML = `
-            <strong>❌ Error generating pages</strong>
-            <p>${error.message}</p>
-            <p><small>Make sure:</small></p>
-            <ul style="margin: 8px 0; padding-left: 20px; font-size: 13px;">
-                <li>PHP is installed and configured</li>
-                <li>api/generate-artist-pages.php exists</li>
-                <li>artists/ folder has write permissions (755)</li>
-                <li>data/artists.json and data/artworks.json exist</li>
-            </ul>
-            <p><small>Check browser console (F12) for details.</small></p>
-        `;
-    }
 }

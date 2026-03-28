@@ -1,0 +1,29 @@
+[
+    {
+        "id": "art-fair-red-dot-miami-2025",
+        "year": 2025,
+        "title": "Red Dot Miami Art Fair",
+        "location": "Miami, USA",
+        "link": "https:\/\/redwoodartgroup.com\/rave\/nguyen-thanh-gallery-703\/",
+        "imagePath": "images\/assets\/NGUYEN-THANH-1536x1104.jpg",
+        "description": "International presentation of Nguyen Thanh Gallery artists."
+    },
+    {
+        "id": "art-fair-promenarts-2024",
+        "year": 2024,
+        "title": "Promenarts Gallery Collaboration",
+        "location": "France",
+        "link": "",
+        "imagePath": "",
+        "description": "Ongoing gallery collaboration (since 2024)."
+    },
+    {
+        "id": "art-fair-1774429115309",
+        "year": 2019,
+        "title": "test",
+        "location": "tetst Location",
+        "link": "http:\/\/localhost:8000\/cms\/art-fairs.html",
+        "imagePath": "images\/art-fair\/1vIpYe1.jpeg",
+        "description": "tsst"
+    }
+]

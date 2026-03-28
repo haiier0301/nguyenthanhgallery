@@ -22,6 +22,8 @@ define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'webp']);
 // Security
 define('SESSION_TIMEOUT', 8 * 60 * 60); // 8 hours
 define('ENABLE_BACKUP', true);
+define('CMS_ADMIN_USERNAME', getenv('CMS_ADMIN_USERNAME') ?: 'admin');
+define('CMS_ADMIN_PASSWORD', getenv('CMS_ADMIN_PASSWORD') ?: 'admin123');
 
 // Gallery settings
 define('GALLERY_NAME', 'NGUYEN THANH GALLERIE');
