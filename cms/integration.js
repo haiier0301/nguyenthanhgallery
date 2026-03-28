@@ -13,6 +13,91 @@
 const CMS_DATA_PATH = './cms/data/';
 
 /**
+ * Load series data from CMS
+ */
+async function loadSeriesFromCMS(artistId = null) {
+    try {
+        console.log('[CMS Integration] Loading series...');
+        const response = await fetch(CMS_DATA_PATH + 'series.json');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: Cannot load series.json`);
+        }
+        
+        let series = await response.json();
+        console.log('[CMS Integration] Loaded', series.length, 'series');
+        
+        // Filter by artist if provided
+        if (artistId) {
+            series = series.filter(s => s.artistId === artistId && (s.published !== false));
+        }
+        
+        // Sort by year descending
+        series.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+        
+        return series;
+    } catch (error) {
+        console.error('[CMS Integration] Error loading series:', error);
+        return [];
+    }
+}
+
+/**
+ * Render artist series list on artist overview page
+ */
+async function renderArtistSeries(artistId, artistSlug) {
+    try {
+        const series = await loadSeriesFromCMS(artistId);
+        
+        if (series.length === 0) {
+            console.log('[CMS Integration] No series found for artist:', artistId);
+            return;
+        }
+        
+        console.log('[CMS Integration] Rendering', series.length, 'series for', artistId);
+        
+        // Find or create series container
+        let seriesContainer = document.querySelector('.artist-series-list');
+        
+        if (!seriesContainer) {
+            // Create container if doesn't exist
+            const bioSection = document.querySelector('.artist-bio');
+            if (bioSection) {
+                seriesContainer = document.createElement('section');
+                seriesContainer.className = 'artist-series-list';
+                bioSection.after(seriesContainer);
+            } else {
+                console.warn('[CMS Integration] No .artist-bio section found');
+                return;
+            }
+        }
+        
+        // Build series HTML
+        const seriesHtml = `
+            <div class="series-section">
+                <h2>SERIES & THEMES</h2>
+                <div class="series-grid">
+                    ${series.map(s => `
+                        <a href="${artistSlug}/${s.slug}.html" class="series-item">
+                            <div class="series-year">${s.year}</div>
+                            <div class="series-title">${s.title}</div>
+                            <div class="series-theme">${s.theme}</div>
+                            <div class="series-count">${s.artworkCount || 0} artworks</div>
+                        </a>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        
+        seriesContainer.innerHTML = seriesHtml;
+        console.log('[CMS Integration] Series rendered successfully');
+        
+    } catch (error) {
+        console.error('[CMS Integration] Error rendering series:', error);
+    }
+}
+
+/**
  * Load artists and render to page
  */
 async function loadArtistsFromCMS() {

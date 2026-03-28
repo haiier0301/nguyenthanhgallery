@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\Artist;
 use App\Models\Artwork;
+use App\Models\Series;
 
 class ArtistController extends Controller
 {
@@ -15,13 +16,24 @@ class ArtistController extends Controller
             echo '404 Artist not found';
             return;
         }
-        $seriesYears = Artist::getSeriesYears($artist['id']);
+        
+        // Load series data from CMS
+        $seriesData = Series::getByArtist($artist['id']);
+        $seriesYears = array_column($seriesData, 'year');
+        
+        // Fallback to artwork years if no series data
+        if (empty($seriesYears)) {
+            $seriesYears = Artist::getSeriesYears($artist['id']);
+        }
+        
         $artworks = Artwork::byArtist($artist['id']);
+        
         $this->view('artist', [
             'pageTitle' => $artist['nameDisplay'] . ' - Nguyen Thanh Gallery',
             'bodyClass' => 'page-artist-detail',
             'currentPage' => 'artists',
             'artist' => $artist,
+            'series' => $seriesData,
             'seriesYears' => $seriesYears,
             'artworks' => $artworks,
         ]);
@@ -37,14 +49,20 @@ class ArtistController extends Controller
             echo '404 Artist not found';
             return;
         }
+        
+        // Load series info from CMS
+        $seriesInfo = Series::findByArtistYear($artist['id'], $year);
+        
         $artworks = Artwork::byArtistAndYear($artist['id'], $year);
         $seriesYears = Artist::getSeriesYears($artist['id']);
+        
         $this->view('artist-series', [
             'pageTitle' => $year . ' - ' . $artist['nameDisplay'] . ' - Nguyen Thanh Gallery',
             'bodyClass' => 'page-artist-detail',
             'currentPage' => 'artists',
             'artist' => $artist,
             'year' => $year,
+            'series' => $seriesInfo,
             'artworks' => $artworks,
             'seriesYears' => $seriesYears,
         ]);

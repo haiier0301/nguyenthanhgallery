@@ -19,11 +19,15 @@ $nameDisplay = $artist['nameDisplay'] ?? $artist['name'] ?? '';
                 <div class="artist-intro-block">
                     <div class="theme-name">
                         <h3>THEME</h3>
-                        <h2>"In Full Bloom"</h2>
+                        <h2><?= htmlspecialchars($series['theme'] ?? '"' . strtoupper($series['title'] ?? $year) . '"') ?></h2>
                     </div>
                     <div class="artist-bio">
-                        <p>With a rich diversity of themes and an unrelenting dedication over his 25-year artistic journey, <strong><?= htmlspecialchars($artist['name'] ?? '') ?></strong> has continuously explored, learned, and reinvented himself, creating ever-new, distinctive bodies of work that captivate viewers and lead them from one emotional state to another.</p>
-                        <p>Through these concerns and contemplations, the artist persistently sends out messages of tranquility — stories of a green world and a vision of peace for humankind.</p>
+                        <?php if (!empty($series['description'])): ?>
+                            <?= $series['description'] ?>
+                        <?php else: ?>
+                            <p>With a rich diversity of themes and an unrelenting dedication over his 25-year artistic journey, <strong><?= htmlspecialchars($artist['name'] ?? '') ?></strong> has continuously explored, learned, and reinvented himself, creating ever-new, distinctive bodies of work that captivate viewers and lead them from one emotional state to another.</p>
+                            <p>Through these concerns and contemplations, the artist persistently sends out messages of tranquility — stories of a green world and a vision of peace for humankind.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

@@ -3654,10 +3654,95 @@ img {
 
 .artist-series-subtitle {
     font-size: 16px;
-
     font-weight: 500;
     letter-spacing: 0.15em;
     color: var(--color-text-muted);
     margin-top: 8px;
     text-transform: uppercase;
+}
+
+/* Series List/Grid (CMS Integration) */
+.artist-series-list {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 40px;
+}
+
+.series-section h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--color-text-dark);
+}
+
+.series-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.series-item {
+    display: block;
+    padding: 24px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.series-item:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(45, 95, 63, 0.1);
+    transform: translateY(-2px);
+}
+
+.series-item .series-year {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.series-item .series-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 6px;
+}
+
+.series-item .series-theme {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.series-item .series-count {
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .artist-series-list {
+        padding: 0 20px;
+        margin: 40px auto;
+    }
+    
+    .series-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .series-section h2 {
+        font-size: 20px;
+        margin-bottom: 24px;
+    }
 }

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>Series Management - CMS</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2d5f3f;
+            box-shadow: 0 0 0 3px rgba(45, 95, 63, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.6;
+        }
+        
+        .form-group small {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cms-dashboard">
+        <!-- Sidebar -->
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>NGUYEN THANH GALLERY</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav>
+                <ul class="cms-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="artists.html">Artists</a></li>
+                    <li><a href="series.html" class="active">Series</a></li>
+                    <li><a href="artworks.html">Artworks</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="art-fairs.html">Art Fairs</a></li>
+                    <li><a href="media.html">Media Library</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cms-logout">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1>Series/Themes Management</h1>
+                <p>Manage artist series, themes, and collections by year</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="cms-actions">
+                <button class="btn-primary" onclick="openAddSeriesModal()">+ Add New Series</button>
+                <button class="btn-secondary" onclick="loadSeries()">Refresh</button>
+                <button class="btn-secondary" onclick="generateSeriesPages()" style="background: #4caf50; color: white;">🔄 Generate Series Pages</button>
+            </div>
+            
+            <!-- Generation Status -->
+            <div id="generation-status" style="display: none; margin: 16px 0; padding: 16px; border-radius: 8px;"></div>
+
+            <!-- Series Table -->
+            <div class="cms-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Preview</th>
+                            <th>Artist</th>
+                            <th>Year</th>
+                            <th>Title/Theme</th>
+                            <th>Artworks</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="seriesTableBody">
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 40px;">
+                                Loading series...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Series Modal -->
+    <div id="seriesModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close" onclick="hideModal('seriesModal')">&times;</span>
+            <h2 id="modalTitle">Add New Series</h2>
+            
+            <form id="seriesForm">
+                <input type="hidden" id="seriesId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artistId">Artist *</label>
+                        <select id="artistId" required>
+                            <option value="">Select Artist</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="year">Year *</label>
+                        <input type="text" id="year" placeholder="2020" required pattern="[0-9]{4}" maxlength="4">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Series Title *</label>
+                    <input type="text" id="title" placeholder="In Full Bloom" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="theme">Theme (for display)</label>
+                    <input type="text" id="theme" placeholder="&quot;IN FULL BLOOM&quot;">
+                    <small>Use quotes for display formatting</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="slug">URL Slug *</label>
+                    <input type="text" id="slug" placeholder="2020" required>
+                    <small>URL-friendly identifier (e.g., "2020" or "in-full-bloom")</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description/Bio</label>
+                    <textarea id="description" rows="8" placeholder="Enter series description (HTML allowed)"></textarea>
+                    <small>Supports HTML tags: &lt;p&gt;, &lt;strong&gt;, &lt;em&gt;, etc.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="featuredImage">Featured Image Path</label>
+                    <input type="text" id="featuredImage" placeholder="../../images/artists/Artist Name/2020/image.png">
+                    <small>Relative path from series page location</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="displayOrder">Display Order</label>
+                        <input type="number" id="displayOrder" placeholder="1" min="0" value="0">
+                        <small>Lower number = shown first</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="published">
+                            Published (visible on website)
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Series</button>
+                    <button type="button" class="btn-secondary" onclick="hideModal('seriesModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+    <script src="series-manager.js"></script>
+</body>
+</html>

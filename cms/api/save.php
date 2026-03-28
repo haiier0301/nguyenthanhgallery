@@ -32,10 +32,10 @@ $file = $data['file'];
 $content = $data['content'];
 
 // Validate file path (security check)
-$allowedFiles = ['artists.json', 'artworks.json', 'exhibitions.json', 'art-fairs.json', 'media.json'];
+$allowedFiles = ['artists.json', 'artworks.json', 'series.json', 'exhibitions.json', 'art-fairs.json', 'media.json'];
 if (!in_array($file, $allowedFiles)) {
     http_response_code(403);
-    echo json_encode(['error' => 'Invalid file']);
+    echo json_encode(['error' => 'Invalid file: ' . $file . '. Allowed: ' . implode(', ', $allowedFiles)]);
     exit;
 }
 

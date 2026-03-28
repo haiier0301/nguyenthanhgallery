@@ -110,16 +110,19 @@ function initDashboard() {
 async function loadDashboardStats() {
     try {
         const artists = await loadJSONSafe('data/artists.json');
+        const series = await loadJSONSafe('data/series.json');
         const artworks = await loadJSONSafe('data/artworks.json');
         const exhibitions = await loadJSONSafe('data/exhibitions.json');
         const artFairs = await loadJSONSafe('data/art-fairs.json');
 
         const artistCount = document.getElementById('artistCount');
+        const seriesCount = document.getElementById('seriesCount');
         const artworkCount = document.getElementById('artworkCount');
         const exhibitionCount = document.getElementById('exhibitionCount');
         const artFairCount = document.getElementById('artFairCount');
 
         if (artistCount) artistCount.textContent = Array.isArray(artists) ? artists.length : 0;
+        if (seriesCount) seriesCount.textContent = Array.isArray(series) ? series.length : 0;
         if (artworkCount) artworkCount.textContent = Array.isArray(artworks) ? artworks.length : 0;
         if (exhibitionCount) exhibitionCount.textContent = Array.isArray(exhibitions) ? exhibitions.length : 0;
         if (artFairCount) artFairCount.textContent = Array.isArray(artFairs) ? artFairs.length : 0;

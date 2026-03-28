@@ -45,4 +45,12 @@ class Artwork
         });
         return $out;
     }
+
+    /**
+     * Alias for byArtistAndYear (for consistency with Series model)
+     */
+    public static function getByArtistSeries(string $artistId, string $year): array
+    {
+        return self::byArtistAndYear($artistId, $year);
+    }
 }
