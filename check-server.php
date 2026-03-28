@@ -197,7 +197,18 @@ $checks[] = [
         : 'cms/data/ directory NOT FOUND (WARNING - CMS won\'t work)',
 ];
 
-// 8. Check JSON data files
+// 8. Check for physical artists/ directory (CRITICAL - causes 403!)
+$physicalArtistsExists = is_dir(__DIR__ . '/artists');
+$checks[] = [
+    'title' => 'Physical artists/ Directory',
+    'status' => $physicalArtistsExists ? 'error' : 'success',
+    'message' => $physicalArtistsExists 
+        ? '❌ CRITICAL: Physical artists/ folder found - This BLOCKS MVC routing and causes 403! Move it to legacy/artists/' 
+        : '✅ No physical artists/ folder - MVC routing will work',
+];
+if ($physicalArtistsExists) $allPassed = false;
+
+// 9. Check JSON data files
 if ($cmsDataExists) {
     $requiredFiles = ['artists.json', 'artworks.json', 'series.json', 'exhibitions.json'];
     $missingFiles = [];
@@ -215,7 +226,7 @@ if ($cmsDataExists) {
     ];
 }
 
-// 9. Check file permissions
+// 10. Check file permissions
 $permissions = [];
 if ($htaccessExists) {
     $perms = substr(sprintf('%o', fileperms(__DIR__ . '/.htaccess')), -3);
@@ -248,7 +259,7 @@ $checks[] = [
     'details' => $permissions
 ];
 
-// 10. Check if we can read artists.json
+// 11. Check if we can read artists.json
 if (file_exists(__DIR__ . '/cms/data/artists.json')) {
     $jsonContent = @file_get_contents(__DIR__ . '/cms/data/artists.json');
     $jsonData = @json_decode($jsonContent, true);
@@ -331,6 +342,34 @@ Current User: <?= get_current_user() ?><br>
 </div>
 
 <h2 style="margin-top: 30px; margin-bottom: 15px;">🔧 Quick Fixes</h2>
+
+<?php if ($physicalArtistsExists): ?>
+<div class="check-item error">
+    <h3>🔥 CRITICAL FIX: Remove Physical artists/ Folder</h3>
+    <p><strong>This is causing your 403 error!</strong></p>
+    <p style="margin-top: 10px;">The physical <code>artists/</code> folder is blocking MVC routing. Apache tries to serve it as a directory, but there's no index file, so it returns 403 Forbidden.</p>
+    
+    <h4 style="margin-top: 15px; margin-bottom: 10px;">Fix via cPanel:</h4>
+    <ol style="margin-left: 20px;">
+        <li>File Manager → public_html/</li>
+        <li>Find folder: <code>artists/</code></li>
+        <li>Right-click → <strong>Move</strong></li>
+        <li>Destination: <code>public_html/legacy/artists/</code></li>
+        <li>Click: Move</li>
+    </ol>
+    
+    <h4 style="margin-top: 15px; margin-bottom: 10px;">Fix via SSH:</h4>
+    <div class="code">
+cd ~/public_html<br>
+mv artists legacy/artists<br>
+echo "Done! Folder moved."
+    </div>
+    
+    <p style="margin-top: 10px; color: #ef4444; font-weight: 600;">
+        After moving, refresh this page and test /artists URL!
+    </p>
+</div>
+<?php endif; ?>
 
 <div class="check-item">
     <h3>Fix File Permissions (via SSH)</h3>
