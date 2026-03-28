@@ -40,3 +40,7 @@
 [2026-03-28 14:49:33] CMS_SAVE: User admin saved series.json
 [2026-03-28 14:50:21] AUTH_LOGOUT: User admin logged out
 [2026-03-28 14:50:25] AUTH_LOGIN: User admin logged in
+[2026-03-28 16:14:20] AUTH_FAILED: Failed login for user admin
+[2026-03-28 16:14:23] AUTH_LOGIN: User admin logged in
+[2026-03-28 16:14:45] CMS_SAVE: User admin saved settings.json
+[2026-03-28 16:14:47] CMS_SAVE: User admin saved settings.json

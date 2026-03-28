@@ -119,12 +119,10 @@
     </div>
 
     <script src="admin-script.js"></script>
+    <script src="settings-manager.js"></script>
     <script>
-        // Settings form handler
-        document.getElementById('settingsForm')?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            showNotification('Settings saved successfully');
-        });
+        // Password form is still handled here (not in settings-manager.js)
+        // Settings form is now handled by settings-manager.js
 
         // Password form handler
         document.getElementById('passwordForm')?.addEventListener('submit', (e) => {

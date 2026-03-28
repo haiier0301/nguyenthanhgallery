@@ -34,12 +34,27 @@
 
     <?= $content ?? '' ?>
 
+    <?php
+    // Load settings from CMS for dynamic footer
+    use App\Models\Settings;
+    $settings = Settings::all();
+    $phone1 = $settings['contactPhone1'] ?? '+84 (028) 3823 8754';
+    $phone2 = $settings['contactPhone2'] ?? '+84 (0) 919 268 83';
+    $address = $settings['contactAddress'] ?? '139 Dong Khoi Street, Sai Gon Ward, Ho Chi Minh City, Vietnam';
+    $email = $settings['contactEmail'] ?? 'nguyenthanhgallerie@gmail.com';
+    ?>
+
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-contact">
-                <p>139 Dong Khoi Street, Sai Gon Ward, Ho Chi Minh City, Vietnam</p>
-                <p><a href="tel:+84918091859">+84 918 045 794</a> - <a href="tel:+84918091859">+84 918 091 859</a></p>
-                <p><a href="mailto:nguyenthanhgallery@gmail.com">nguyenthanhgallery@gmail.com</a></p>
+                <p><?= htmlspecialchars($address) ?></p>
+                <p>
+                    <a href="tel:<?= str_replace([' ', '(', ')', '-'], '', $phone1) ?>"><?= htmlspecialchars($phone1) ?></a>
+                    <?php if ($phone2): ?>
+                     - <a href="tel:<?= str_replace([' ', '(', ')', '-'], '', $phone2) ?>"><?= htmlspecialchars($phone2) ?></a>
+                    <?php endif; ?>
+                </p>
+                <p><a href="mailto:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a></p>
                 <p><a href="mailto:tnguyentrangartist78@gmail.com">tnguyentrangartist78@gmail.com</a></p>
             </div>
             <div class="footer-social">

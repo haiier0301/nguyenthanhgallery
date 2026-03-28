@@ -22,17 +22,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
-if (!$data || !isset($data['file']) || !isset($data['content'])) {
+if (!$data || !isset($data['file'])) {
     http_response_code(400);
     echo json_encode(['error' => 'Missing required fields']);
     exit;
 }
 
 $file = $data['file'];
-$content = $data['content'];
+// Support both 'content' and 'data' keys for backward compatibility
+$content = $data['content'] ?? $data['data'] ?? null;
+
+if ($content === null) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Missing content or data field']);
+    exit;
+}
 
 // Validate file path (security check)
-$allowedFiles = ['artists.json', 'artworks.json', 'series.json', 'exhibitions.json', 'art-fairs.json', 'media.json'];
+$allowedFiles = ['artists.json', 'artworks.json', 'series.json', 'exhibitions.json', 'art-fairs.json', 'media.json', 'settings.json'];
 if (!in_array($file, $allowedFiles)) {
     http_response_code(403);
     echo json_encode(['error' => 'Invalid file: ' . $file . '. Allowed: ' . implode(', ', $allowedFiles)]);
