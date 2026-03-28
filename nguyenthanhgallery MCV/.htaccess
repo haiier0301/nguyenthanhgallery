@@ -1,0 +1,27 @@
+# Nguyen Thanh Gallery - MVC
+# Route all requests to index.php unless file/directory exists
+# Plesk: nếu site nằm trong subfolder (vd. example.com/nguyenthanhgallery/),
+# đổi RewriteBase thành: RewriteBase /nguyenthanhgallery/
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirect old static HTML URLs to MVC routes (keep cms/*.html untouched)
+    RewriteRule ^index\.html$ ./ [R=301,L,NC]
+    RewriteRule ^(about|artists|exhibitions|art-fairs|contact)\.html$ $1 [R=301,L,NC]
+    RewriteRule ^artists/artist-([a-z0-9-]+)\.html$ artists/$1 [R=301,L,NC]
+    RewriteRule ^artists/([a-z0-9-]+)/([0-9]{4})\.html$ artists/$1/$2 [R=301,L,NC]
+
+    # If the request is for an existing file or directory, do not rewrite
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Send everything else to index.php
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Optional: prevent access to app folder (config, internal PHP)
+<IfModule mod_rewrite.c>
+    RewriteRule ^app/ - [F,L]
+</IfModule>

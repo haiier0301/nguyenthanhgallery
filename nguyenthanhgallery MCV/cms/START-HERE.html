@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>CMS Documentation Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 36px;
+            color: #2d5f3f;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 32px;
+        }
+        
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(45, 95, 63, 0.1) 0%, rgba(45, 95, 63, 0.05) 100%);
+            border-left: 4px solid #2d5f3f;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .hero-banner h2 {
+            font-size: 20px;
+            color: #2d5f3f;
+            margin-bottom: 12px;
+        }
+        
+        .hero-banner p {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .btn-large {
+            display: inline-block;
+            padding: 16px 32px;
+            background: #2d5f3f;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(45, 95, 63, 0.3);
+        }
+        
+        .btn-large:hover {
+            background: #1a3a28;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(45, 95, 63, 0.4);
+        }
+        
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .doc-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .doc-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #2d5f3f;
+        }
+        
+        .doc-card h3 {
+            font-size: 18px;
+            color: #2d5f3f;
+            margin-bottom: 12px;
+        }
+        
+        .doc-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        
+        .doc-card a {
+            color: #2d5f3f;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .doc-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 32px;
+            margin: 32px 0;
+            padding: 24px;
+            background: #f0f8f5;
+            border-radius: 8px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d5f3f;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .feature-item::before {
+            content: "✓";
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 24px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Nguyen Thanh Gallery CMS</h1>
+        <p class="subtitle">Content Management System - Complete & Ready</p>
+        
+        <div class="hero-banner">
+            <h2>🎉 CMS is Ready to Use!</h2>
+            <p>A complete content management system has been built for your gallery. Manage artists, artworks, exhibitions, and media through an easy-to-use admin interface. No coding required!</p>
+        </div>
+        
+        <div style="text-align: center; margin: 32px 0;">
+            <a href="index.html" class="btn-large">🚀 LOGIN TO CMS</a>
+            <a href="diagnostic-tools.html" class="btn-large" style="background: #ff9800;">🔧 Diagnostic Tools</a>
+        </div>
+        
+        <div style="background: #fff3cd; border-left: 4px solid #ff9800; padding: 16px; border-radius: 4px; margin: 24px 0;">
+            <strong>⚠️ Seeing "Loading artists..." errors?</strong>
+            <p style="margin-top: 8px; color: #856404;">Your data files might not be uploaded to the server yet. <a href="diagnostic-tools.html" style="color: #2d5f3f; font-weight: 600;">Run diagnostics</a> or <a href="FIX-404-NOW.md" style="color: #2d5f3f; font-weight: 600;">read the quick fix guide</a>.</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Artists</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">118</div>
+                <div class="stat-label">Artworks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Exhibitions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Complete</div>
+            </div>
+        </div>
+        
+        <h2 style="margin-top: 40px; margin-bottom: 20px; font-size: 24px;">✨ Key Features</h2>
+        
+        <div class="features-list">
+            <div class="feature-item">Artist Management (CRUD)</div>
+            <div class="feature-item">Artwork Catalog</div>
+            <div class="feature-item">Exhibition Tracking</div>
+            <div class="feature-item">Media Library & Upload</div>
+            <div class="feature-item">Secure Authentication</div>
+            <div class="feature-item">Data Export/Import</div>
+            <div class="feature-item">Mobile Responsive</div>
+            <div class="feature-item">Automatic Backups</div>
+            <div class="feature-item">PHP Backend API</div>
+            <div class="feature-item">Front-end Integration</div>
+            <div class="feature-item">Activity Logging</div>
+            <div class="feature-item">Page Generator</div>
+        </div>
+        
+        <h2 style="margin-top: 48px; margin-bottom: 20px; font-size: 24px;">📚 Documentation</h2>
+        
+        <div class="docs-grid">
+            <div class="doc-card">
+                <h3>⚡ Quick Start</h3>
+                <p>Get started in 3 easy steps. Perfect for first-time users.</p>
+                <a href="QUICK-START.md" target="_blank">Read Quick Start →</a>
+            </div>
+            
+            <div class="doc-card">
+                <h3>📖 User Manual</h3>
+                <p>Complete guide in Vietnamese. Learn how to use every feature.</p>
+                <a href="HOW-TO-USE.md" target="_blank">Hướng Dẫn Sử Dụng →</a>
+            </div>
+            
+            <div class="doc-card">
+                <h3>📋 Full Documentation</h3>
+                <p>Comprehensive README with all technical details.</p>
+                <a href="README.md" target="_blank">Read README →</a>
+            </div>
+            
+            <div class="doc-card">
+                <h3>🎯 Features List</h3>
+                <p>Complete list of all CMS capabilities and functions.</p>
+                <a href="FEATURES.md" target="_blank">View Features →</a>
+            </div>
+            
+            <div class="doc-card">
+                <h3>🚀 Deployment</h3>
+                <p>Server setup, security, and production deployment guide.</p>
+                <a href="DEPLOYMENT.md" target="_blank">Deployment Guide →</a>
+            </div>
+            
+            <div class="doc-card">
+                <h3>🔗 Integration</h3>
+                <p>Learn how to connect CMS data with your front-end pages.</p>
+                <a href="INTEGRATION-EXAMPLE.html" target="_blank">See Examples →</a>
+            </div>
+            
+            <div class="doc-card">
+                <h3>📊 Overview</h3>
+                <p>Executive summary, architecture, and comparison.</p>
+                <a href="CMS-OVERVIEW.md" target="_blank">Read Overview →</a>
+            </div>
+            
+            <div class="doc-card">
+                <h3>🌐 View Website</h3>
+                <p>See the public gallery website.</p>
+                <a href="../index.html" target="_blank">Open Website →</a>
+            </div>
+        </div>
+        
+        <h2 style="margin-top: 48px; margin-bottom: 20px; font-size: 24px;">🎯 Default Login</h2>
+        
+        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; border-radius: 4px;">
+            <p style="margin-bottom: 12px;"><strong>Default Credentials:</strong></p>
+            <p>Username: <code style="background: white; padding: 4px 8px; border-radius: 3px; font-family: monospace;">admin</code></p>
+            <p>Password: <code style="background: white; padding: 4px 8px; border-radius: 3px; font-family: monospace;">admin123</code></p>
+            <p style="margin-top: 12px; color: #856404; font-size: 14px;">⚠️ Change these credentials after first login!</p>
+        </div>
+        
+        <h2 style="margin-top: 48px; margin-bottom: 20px; font-size: 24px;">🛠️ Local Testing</h2>
+        
+        <div style="background: #f5f5f5; padding: 20px; border-radius: 4px;">
+            <p style="margin-bottom: 12px;"><strong>Start PHP server:</strong></p>
+            <pre style="background: #2d2d2d; color: #f8f8f2; padding: 16px; border-radius: 4px; overflow-x: auto; font-size: 14px;">cd cms
+php -S localhost:8000</pre>
+            <p style="margin-top: 12px;">Then open: <a href="http://localhost:8000/index.html" style="color: #2d5f3f; font-weight: 600;">http://localhost:8000/index.html</a></p>
+        </div>
+        
+        <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e0e0e0; text-align: center; color: #666;">
+            <p><strong>Nguyen Thanh Gallery CMS</strong></p>
+            <p style="font-size: 14px; margin-top: 8px;">Built February 2026 | Version 1.0</p>
+            <p style="font-size: 13px; margin-top: 16px;">
+                <a href="mailto:nguyenthanhgallerie@gmail.com" style="color: #2d5f3f; text-decoration: none;">Contact Support</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

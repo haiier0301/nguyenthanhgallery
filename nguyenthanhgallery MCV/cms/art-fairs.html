@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/assets/favicon.png">
+    <title>Art Fairs - CMS</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="cms-dashboard">
+        <!-- Sidebar -->
+        <aside class="cms-sidebar">
+            <div class="cms-logo">
+                <h2>NGUYEN THANH GALLERY</h2>
+                <p>Content Management</p>
+            </div>
+            
+            <nav>
+                <ul class="cms-nav">
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="artists.html">Artists</a></li>
+                    <li><a href="artworks.html">Artworks</a></li>
+                    <li><a href="exhibitions.html">Exhibitions</a></li>
+                    <li><a href="art-fairs.html" class="active">Art Fairs</a></li>
+                    <li><a href="media.html">Media Library</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cms-logout">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="cms-main">
+            <div class="cms-header">
+                <h1>Art Fairs Management</h1>
+                <p>Manage art fair events, links, images, and publication records.</p>
+            </div>
+
+            <div class="cms-actions">
+                <button class="btn-primary" onclick="openAddArtFairModal()">+ Add Art Fair</button>
+                <button class="btn-secondary" onclick="loadArtFairs()">Refresh</button>
+                <button class="btn-secondary" onclick="window.open('../art-fairs', '_blank')">View Art Fairs Page</button>
+            </div>
+
+            <div class="cms-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="artFairsTableBody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 40px;">Loading art fairs...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin-script.js"></script>
+    <script src="art-fairs-manager.js"></script>
+</body>
+</html>
