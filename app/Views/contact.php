@@ -5,7 +5,8 @@ $settings = Settings::all();
 $phone1 = $settings['contactPhone1'] ?? '+84 (028) 3823 8754';
 $phone2 = $settings['contactPhone2'] ?? '+84 (0) 919 268 83';
 $address = $settings['contactAddress'] ?? '139 Dong Khoi Street, Sai Gon Ward, Ho Chi Minh City, Vietnam';
-$email = $settings['contactEmail'] ?? 'nguyenthanhgallerie@gmail.com';
+$email1 = $settings['contactEmail'] ?? 'nguyenthanhgallerie@gmail.com';
+$email2 = $settings['contactEmail2'] ?? 'tnguyentrangartist78@gmail.com';
 $openingHours = $settings['openingHours'] ?? "Monday – Sunday\n9:00 AM – 7:00 PM";
 $mapUrl = $settings['socialLinks']['mapUrl'] ?? 'https://www.google.com/maps/search/139+Dong+Khoi+Street+Sai+Gon+Ward+Ho+Chi+Minh+City+Vietnam';
 
@@ -41,12 +42,14 @@ $addressDisplay = rtrim($addressDisplay, '<br>');
                 </div>
                 <div class="contact-block">
                     <h2 class="contact-heading">Contact</h2>
-                    <p><a href="mailto:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a></p>
-                    <p><a href="mailto:tnguyentrangartist78@gmail.com">tnguyentrangartist78@gmail.com</a></p>
+                    <p><a href="mailto:<?= htmlspecialchars($email1) ?>"><?= htmlspecialchars($email1) ?></a></p>
+                    <?php if ($email2): ?>
+                    <p><a href="mailto:<?= htmlspecialchars($email2) ?>"><?= htmlspecialchars($email2) ?></a></p>
+                    <?php endif; ?>
                     <p>Phone: <a href="tel:<?= str_replace([' ', '(', ')', '-'], '', $phone1) ?>"><?= htmlspecialchars($phone1) ?></a><?php if ($phone2): ?> - <a href="tel:<?= str_replace([' ', '(', ')', '-'], '', $phone2) ?>"><?= htmlspecialchars($phone2) ?></a><?php endif; ?></p>
                 </div>
                 <div class="contact-links">
-                    <a href="mailto:<?= htmlspecialchars($email) ?>" class="contact-link">
+                    <a href="mailto:<?= htmlspecialchars($email1) ?>" class="contact-link">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                         <span>JOIN THE MAILING LIST</span>
                     </a>

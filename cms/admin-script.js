@@ -41,9 +41,10 @@ async function initLogin() {
                 throw new Error(result.error || 'Invalid username or password');
             }
 
-            sessionStorage.setItem('cms_authenticated', 'true');
-            sessionStorage.setItem('cms_user', result.user || username);
-            sessionStorage.setItem('cms_login_time', Date.now().toString());
+            // Use localStorage for persistent login (survives browser close)
+            localStorage.setItem('cms_authenticated', 'true');
+            localStorage.setItem('cms_user', result.user || username);
+            localStorage.setItem('cms_login_time', Date.now().toString());
             window.location.href = 'dashboard.html';
         } catch (error) {
             loginError.textContent = error.message || 'Login failed';
@@ -56,11 +57,12 @@ async function initLogin() {
 }
 
 function isAuthenticated() {
-    const authenticated = sessionStorage.getItem('cms_authenticated');
-    const loginTime = Number(sessionStorage.getItem('cms_login_time') || 0);
+    // Check localStorage (persistent across browser sessions)
+    const authenticated = localStorage.getItem('cms_authenticated');
+    const loginTime = Number(localStorage.getItem('cms_login_time') || 0);
     if (authenticated !== 'true' || loginTime <= 0) return false;
     if ((Date.now() - loginTime) > AUTH_TTL_MS) {
-        sessionStorage.clear();
+        localStorage.clear();
         return false;
     }
     return true;
@@ -79,15 +81,14 @@ async function verifyServerSession() {
 }
 
 async function checkAuth() {
+    // Only check localStorage (no need to call server every time)
     if (!isAuthenticated()) {
+        localStorage.clear();
         window.location.href = 'index.html';
         return;
     }
-    const serverOk = await verifyServerSession();
-    if (!serverOk) {
-        sessionStorage.clear();
-        window.location.href = 'index.html';
-    }
+    // Session is valid based on localStorage check
+    // Server-side validation happens automatically on every API call
 }
 
 async function logout() {
@@ -96,7 +97,7 @@ async function logout() {
     } catch (error) {
         console.warn('Server logout failed:', error);
     } finally {
-        sessionStorage.clear();
+        localStorage.clear();
         window.location.href = 'index.html';
     }
 }
@@ -192,7 +193,7 @@ async function regenerateLegacyPages() {
 }
 
 async function handleUnauthorized() {
-    sessionStorage.clear();
+    localStorage.clear();
     showNotification('Session expired. Please login again.', 'error');
     setTimeout(() => {
         window.location.href = 'index.html';

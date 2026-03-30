@@ -41,7 +41,8 @@
     $phone1 = $settings['contactPhone1'] ?? '+84 (028) 3823 8754';
     $phone2 = $settings['contactPhone2'] ?? '+84 (0) 919 268 83';
     $address = $settings['contactAddress'] ?? '139 Dong Khoi Street, Sai Gon Ward, Ho Chi Minh City, Vietnam';
-    $email = $settings['contactEmail'] ?? 'nguyenthanhgallerie@gmail.com';
+    $email1 = $settings['contactEmail'] ?? 'nguyenthanhgallerie@gmail.com';
+    $email2 = $settings['contactEmail2'] ?? 'tnguyentrangartist78@gmail.com';
     ?>
 
     <footer class="footer">
@@ -54,8 +55,10 @@
                      - <a href="tel:<?= str_replace([' ', '(', ')', '-'], '', $phone2) ?>"><?= htmlspecialchars($phone2) ?></a>
                     <?php endif; ?>
                 </p>
-                <p><a href="mailto:<?= htmlspecialchars($email) ?>"><?= htmlspecialchars($email) ?></a></p>
-                <p><a href="mailto:tnguyentrangartist78@gmail.com">tnguyentrangartist78@gmail.com</a></p>
+                <p><a href="mailto:<?= htmlspecialchars($email1) ?>"><?= htmlspecialchars($email1) ?></a></p>
+                <?php if ($email2): ?>
+                <p><a href="mailto:<?= htmlspecialchars($email2) ?>"><?= htmlspecialchars($email2) ?></a></p>
+                <?php endif; ?>
             </div>
             <div class="footer-social">
                 <a href="mailto:thanhart2000@yahoo.com" aria-label="Email">

@@ -51,6 +51,7 @@ class Settings
         return [
             'siteName' => 'NGUYEN THANH GALLERIE',
             'contactEmail' => 'nguyenthanhgallerie@gmail.com',
+            'contactEmail2' => 'tnguyentrangartist78@gmail.com',
             'contactPhone1' => '+84 (028) 3823 8754',
             'contactPhone2' => '+84 (0) 919 268 83',
             'contactAddress' => '139 Dong Khoi Street, Sai Gon Ward, Ho Chi Minh City, Vietnam',

@@ -47,6 +47,7 @@ async function loadSettings() {
 function populateForm(settings) {
     document.getElementById('siteName').value = settings.siteName || '';
     document.getElementById('contactEmail').value = settings.contactEmail || '';
+    document.getElementById('contactEmail2').value = settings.contactEmail2 || '';
     document.getElementById('contactPhone1').value = settings.contactPhone1 || '';
     document.getElementById('contactPhone2').value = settings.contactPhone2 || '';
     document.getElementById('contactAddress').value = settings.contactAddress || '';
@@ -59,6 +60,7 @@ function getDefaultSettings() {
     return {
         siteName: 'NGUYEN THANH GALLERIE',
         contactEmail: 'nguyenthanhgallerie@gmail.com',
+        contactEmail2: 'tnguyentrangartist78@gmail.com',
         contactPhone1: '+84 (028) 3823 8754',
         contactPhone2: '+84 (0) 919 268 83',
         contactAddress: '139 Dong Khoi Street, Sai Gon Ward, Ho Chi Minh City, Vietnam',
@@ -91,6 +93,7 @@ async function handleSettingsSave(e) {
         // Validate inputs
         const siteName = document.getElementById('siteName').value.trim();
         const contactEmail = document.getElementById('contactEmail').value.trim();
+        const contactEmail2 = document.getElementById('contactEmail2').value.trim();
         const contactPhone1 = document.getElementById('contactPhone1').value.trim();
         const contactPhone2 = document.getElementById('contactPhone2').value.trim();
         const contactAddress = document.getElementById('contactAddress').value.trim();
@@ -101,7 +104,7 @@ async function handleSettingsSave(e) {
         }
         
         if (!contactEmail) {
-            alert('Please enter contact email');
+            alert('Please enter contact email 1');
             return;
         }
         
@@ -120,6 +123,7 @@ async function handleSettingsSave(e) {
             ...currentSettings,
             siteName,
             contactEmail,
+            contactEmail2,
             contactPhone1,
             contactPhone2,
             contactAddress,

@@ -6,8 +6,9 @@
 require_once __DIR__ . '/../config.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
+    // Session persists for 8 hours (even after closing browser)
     session_set_cookie_params([
-        'lifetime' => 0,
+        'lifetime' => SESSION_TIMEOUT, // 8 hours (28800 seconds)
         'path' => '/',
         'httponly' => true,
         'samesite' => 'Lax'
