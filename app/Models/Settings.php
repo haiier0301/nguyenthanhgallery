@@ -6,17 +6,17 @@ namespace App\Models;
  */
 class Settings
 {
-    private static ?array $cache = null;
+    // Cache removed - always load fresh to reflect CMS changes immediately
+    // private static ?array $cache = null;
 
     /**
      * Get all settings
+     * Note: Cache disabled to ensure fresh data after CMS updates
      */
     public static function all(): array
     {
-        if (self::$cache !== null) {
-            return self::$cache;
-        }
-
+        // ALWAYS load fresh from file (no cache)
+        // This ensures CMS changes appear immediately
         $filePath = DATA_PATH . 'settings.json';
         
         if (!file_exists($filePath)) {
@@ -30,7 +30,7 @@ class Settings
             return self::getDefaults();
         }
 
-        self::$cache = $data;
+        // Return fresh data without caching
         return $data;
     }
 
@@ -65,9 +65,11 @@ class Settings
 
     /**
      * Clear cache (call after settings update)
+     * Note: No longer needed since cache is disabled
      */
     public static function clearCache(): void
     {
-        self::$cache = null;
+        // Cache disabled - this method kept for backward compatibility
+        // No action needed
     }
 }
