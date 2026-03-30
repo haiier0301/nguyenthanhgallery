@@ -33,7 +33,7 @@ async function loadSettings() {
         
     } catch (error) {
         console.error('[Settings] Error loading:', error);
-        showNotification('Failed to load settings: ' + error.message, 'error');
+        showSettingsNotification('Failed to load settings: ' + error.message, 'error');
         
         // Use default values
         currentSettings = getDefaultSettings();
@@ -153,7 +153,7 @@ async function handleSettingsSave(e) {
         console.log('[Settings] Saved successfully:', result);
         currentSettings = updatedSettings;
         
-        showNotification('Settings saved successfully! ✅', 'success');
+        showSettingsNotification('Settings saved successfully! ✅', 'success');
         
         // Show additional message about frontend update
         setTimeout(() => {
@@ -162,15 +162,17 @@ async function handleSettingsSave(e) {
         
     } catch (error) {
         console.error('[Settings] Save error:', error);
-        showNotification('Error saving settings: ' + error.message, 'error');
+        showSettingsNotification('Error saving settings: ' + error.message, 'error');
         alert('Failed to save settings:\n' + error.message);
     }
 }
 
 /**
  * Show notification
+ * Uses global showNotification from admin-script.js
  */
-function showNotification(message, type = 'success') {
+function showSettingsNotification(message, type = 'success') {
+    // admin-script.js already defines window.showNotification
     if (typeof window.showNotification === 'function') {
         window.showNotification(message, type);
     } else {
