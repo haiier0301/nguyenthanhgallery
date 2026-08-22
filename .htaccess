@@ -6,6 +6,10 @@
     # Force HTTPS (optional, uncomment if you have SSL)
     # RewriteCond %{HTTPS} off
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Force MVC for /artists even if a physical artists/ folder exists
+    # (physical folder + Options -Indexes causes 403 otherwise)
+    RewriteRule ^artists(/.*)?$ index.php [L]
     
     # Allow direct access to static files
     RewriteCond %{REQUEST_FILENAME} -f [OR]
