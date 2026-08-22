@@ -6,10 +6,10 @@
 </section>
 <section class="home-intro">
     <div class="home-intro-container">
-        <p class="home-intro-established">Established 2000+</p>
+        <p class="home-intro-established">Established in 2000</p>
         <div class="home-intro-text">
-            <p><strong class="strong-text-highlight">NGUYEN THANH GALLERY</strong> is a contemporary art gallery based in Vietnam, focusing on abstract and contemporary painting. The gallery works with artists through long-term artistic practice, emphasizing the development of cohesive series and sustained visual language.</p>
-            <p>Through exhibitions and international art fairs, <strong class="strong-text-highlight">NGUYEN THANH GALLERY</strong> presents artistic practices rooted in everyday life, nature, human experience, and the contemporary urban environment, with a focus on calm, balance, and peace within daily life.</p>
+            <p><strong class="strong-text-highlight">Nguyen Thanh Gallery</strong> is a contemporary art gallery based in Ho Chi Minh City, Vietnam. Since its founding in 2000, the gallery has been committed to presenting and supporting contemporary Vietnamese art through thoughtfully curated exhibitions, publications, and participation in international art fairs.</p>
+            <p>Working with a carefully selected roster of contemporary Vietnamese artists, <strong class="strong-text-highlight">Nguyen Thanh Gallery</strong> encourages long-term artistic development while fostering meaningful connections between artists, collectors, curators, and cultural institutions. Through professional representation and sustained collaboration, the gallery seeks to contribute to the growing international presence of Vietnamese contemporary art.</p>
         </div>
     </div>
 </section>
