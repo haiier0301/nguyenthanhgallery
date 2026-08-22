@@ -68,6 +68,11 @@ Options -Indexes
         Header set Access-Control-Allow-Origin "*"
     </If>
     
+    # Allow robots.txt for crawlers
+    <ElseIf "%{REQUEST_URI} =~ m#^/robots\.txt$#">
+        Require all granted
+    </ElseIf>
+    
     # Block all other sensitive files
     <Else>
         Require all denied
